@@ -4,6 +4,6 @@ $array_cars = [
   "Volkswagen" => ["Beetle","Jetta","Golf"],
   "Pontiac" => ["Sunfire", "GTO","Firebird"],
   "Ssangyong" => ["Korando","Musso","Rexton"],
-  "Lada" => ["Niva", "Granta", "Vesta"],
+  "Lada" => ["Niva", "Granta", "Largus"],
 ];
 ?>
