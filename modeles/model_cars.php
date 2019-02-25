@@ -8,9 +8,9 @@ $array_brandAndModel = [
 ];
 
 $array_volkswagenJetta = [
-  "Model1" => ["Beetle","Jetta","Golf"],
-  "Model2" => ["Sunfire", "GTO","Firebird"],
-  "Model3" => ["Korando","Musso","Rexton"],
+  "Car1" => ["Beetle","Jetta","Golf"],
+  "Car2" => ["Sunfire", "GTO","Firebird"],
+  "Car3" => ["Korando","Musso","Rexton"],
 ];
 
 
