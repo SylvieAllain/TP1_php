@@ -63,7 +63,7 @@ if(!empty($submit_brand)){
 if(!empty($submit)){
   try{
     validate_car($model);
-    include_once "vues/manger.php";
+    include_once "vues/selection.php";
     header("location:vues/selection.php?car=$model");
 
   }
