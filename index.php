@@ -7,9 +7,9 @@ $submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : nu
 $model = (!empty($_POST['model'])) ? ($_POST['model']) : null;
 $submit = (!empty($_POST['submit'])) ? ($_POST['submit']) : null;
 
-function createSelectCategory($array_cars, $brand){
+function createSelectCategory($array_brandAndModel, $brand){
   echo '<select name='.'"'.'brand'.'"'.'>';
-  foreach($array_cars as $key=>$value){
+  foreach($array_brandAndModel as $key=>$value){
     if ($brand == $key){
       echo "<option selected value="."\""."$key"."\"".">" . "$key" . "</option>";
     }
@@ -20,12 +20,12 @@ function createSelectCategory($array_cars, $brand){
   echo "</select>";
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "ok". "\"". ">";
 }
-$arrayLength = sizeOf($array_cars[$brand]);
+$arrayLength = sizeOf($array_brandAndModel[$brand]);
 
-function selectedCarModel($array_cars,$brand,$model){
+function selectedCarModel($array_brandAndModel,$brand,$model){
   echo '<select name='.'"'.'model'.'"'.'>';
-  foreach($array_cars[$brand] as $key=> $value){
-    if($array_cars[$brand][$key] == $model){
+  foreach($array_brandAndModel[$brand] as $key=> $value){
+    if($array_brandAndModel[$brand][$key] == $model){
       echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
     }
     else{
