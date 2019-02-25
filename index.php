@@ -1,5 +1,5 @@
-<?php echo "hello"
-echo "World!"
+<?php echo "hello";
+echo "World!";
 
 
 function nnnn() {
