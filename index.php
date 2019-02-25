@@ -2,15 +2,15 @@
 
 include "modeles/model_cars.php";
 
-$cat_cars = (!empty($_POST['catCars'])) ? ($_POST['catCars']) : null;
-$submit_cat = (!empty($_POST['submit_cat'])) ? ($_POST['submit_cat']) : null;
-$car = (!empty($_POST['car'])) ? ($_POST['car']) : null;
+$brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : null;
+$submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : null;
+$model = (!empty($_POST['model'])) ? ($_POST['model']) : null;
 $submit = (!empty($_POST['submit'])) ? ($_POST['submit']) : null;
 
-function createSelectCategory($array_cars, $cat_cars){
-  echo '<select name='.'"'.'catCars'.'"'.'>';
+function createSelectCategory($array_cars, $brand){
+  echo '<select name='.'"'.'brand'.'"'.'>';
   foreach($array_cars as $key=>$value){
-    if ($cat_cars == $key){
+    if ($brand == $key){
       echo "<option selected value="."\""."$key"."\"".">" . "$key" . "</option>";
     }
     else{
@@ -18,14 +18,14 @@ function createSelectCategory($array_cars, $cat_cars){
     }
   }
   echo "</select>";
-  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_cat" . "\"". "value=" . "\"" . "envoyer". "\"". ">";
+  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "ok". "\"". ">";
 }
-$arrayLength = sizeOf($array_cars[$cat_cars]);
+$arrayLength = sizeOf($array_cars[$brand]);
 
-function selectedCarModel($array_cars,$cat_cars,$car){
-  echo '<select name='.'"'.'car'.'"'.'>';
-  foreach($array_cars[$cat_cars] as $key=> $value){
-    if($array_cars[$cat_cars][$key] == $car){
+function selectedCarModel($array_cars,$brand,$model){
+  echo '<select name='.'"'.'model'.'"'.'>';
+  foreach($array_cars[$brand] as $key=> $value){
+    if($array_cars[$brand][$key] == $model){
       echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
     }
     else{
@@ -36,14 +36,14 @@ function selectedCarModel($array_cars,$cat_cars,$car){
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit" . "\"". "value=" . "\"" . "envoyer". "\"". ">";
 }
 
-function validate_cat_car($cat_cars){
-  if(empty($cat_cars)){
+function validate_cat_car($brand){
+  if(empty($brand)){
     throw new Exception ("Vous devez sélectionner une catégorie de voiture");
   }
 }
 
-function validate_car($car){
-  if(empty($car)){
+function validate_car($model){
+  if(empty($model)){
     throw new Exception ("Vous devez sélectionner un modèle de voiture");
   }
 }
@@ -51,9 +51,9 @@ function validate_car($car){
 
 include_once 'vues/accueil.php';
 
-if(!empty($submit_cat)){
+if(!empty($submit_brand)){
   try{
-    validate_cat_car($cat_cars);
+    validate_cat_car($brand);
   }
   catch(Exception $e){
     echo "Erreur : " . $e->getMessage();
@@ -62,9 +62,9 @@ if(!empty($submit_cat)){
 
 if(!empty($submit)){
   try{
-    validate_car($car);
+    validate_car($model);
     include_once "vues/manger.php";
-    header("location:vues/selection.php?car=$car");
+    header("location:vues/selection.php?car=$model");
 
   }
   catch(Exception $e){
