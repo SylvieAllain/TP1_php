@@ -9,3 +9,8 @@
 
   </body>
 </html>
+
+<?php
+echo "Hello World";
+
+ ?>
