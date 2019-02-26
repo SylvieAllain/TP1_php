@@ -31,6 +31,7 @@ $array_ladaNiva = [
   "car3" => ["imageSrc" => "../images/lada/niva/niva1997.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"niva", "description" =>"1997. Le meilleur du Jet Set moskovite.", "price" => "1000.00$", ],
 ];
 
+
 /*-----Pontiac-----*/
 
 //Firebird
