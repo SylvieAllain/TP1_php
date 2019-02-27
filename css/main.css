@@ -1,1 +1,18 @@
 /*doc css*/
+
+footer {
+    padding-top: 1em;
+    text-align:center;
+    background-color: rgb(51, 51, 51);
+    height:100%;
+}
+
+.footerFont{
+  color: rgb(255,255,255,0.7);
+  vertical-align: center;
+  font-size:12px;
+}
+
+.underline{
+  text-decoration: underline;
+}

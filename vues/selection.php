@@ -29,8 +29,12 @@
       }
         ?>
       </div>
-
-    <footer>Aucuns retours ou garanties possibles après achat</footer>
+      <footer>
+      <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
+          Copyright © Sylvie Allain et Cyrice Paradis <br>
+          2019
+      </p>
+      </footer>
   </body>
 </html>
 
