@@ -5,7 +5,7 @@
     <title></title>
   </head>
   <body>
-    <h1>Voiture aVariée</h1>
+    <h1>Voiture @Variée</h1>
       <h2>La plus grande sélection de citrons à travers tous les continents, sauf l'Afrique...</h2>
   </body>
 </html>
