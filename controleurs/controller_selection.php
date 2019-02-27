@@ -106,7 +106,9 @@ function createTable($array_pictures){
     echo "</div>";
   }
 }
+
 include_once '../vues/banner.php';
+createTable($array_pictures);
 include_once "../vues/selection.php";
 
 
