@@ -1,3 +1,4 @@
+
 <?php
 
 $model = "patate";
@@ -67,7 +68,7 @@ switch ($model){
       }
     break;
   case "Jetta":
-    foreach($array_volkswagenGolf as $key => $value){
+    foreach($array_volkswagenJetta as $key => $value){
       $array_pictures[$key] = $value;
       }
     break;
@@ -75,11 +76,11 @@ switch ($model){
 
 function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   $img_source = imagecreatefromjpeg($imageSrc);
-  $img_destination = imagecreatetruecolor(120,120);
+  $img_destination = imagecreatetruecolor(180,120);
 
   $largeur_src = imagesx($img_source);
   $hauteur_src = imagesy($img_source);
-  $largeur_destination = 120;
+  $largeur_destination = 180;
   $hauteur_destination = 120;
 
   //créer la miniature
@@ -96,19 +97,19 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
 
 function createTable($array_pictures){
   foreach($array_pictures as $key => $value){
-    echo "<div class=\"main\">";
+    echo "<div class=\"row\">";
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    echo "<div>". createMiniPhoto($imageSrc,$miniSrc,$nameMini). "</div>";
-    echo "<span class=\"description\">" . $array_pictures[$key]["description"]. " ";
-    echo $array_pictures[$key]["price"]. "</span>";
+    echo "<div class=\"col-2\">";
+    echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
+    echo "<div class=\"col-5\">" . $array_pictures[$key]["description"]. " </div>";
+    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing\"" . ">" . $array_pictures[$key]["price"]. "</a> </div>";
     echo "</div>";
   }
 }
 
 include_once '../vues/banner.php';
-createTable($array_pictures);
 include_once "../vues/selection.php";
 
 

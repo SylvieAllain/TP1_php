@@ -6,7 +6,7 @@
   </head>
   <body>
     <?php
-      if(empty($_GET["car"])) {
+      if(empty($_GET["model"])) {
         echo "<img src=\"images/banner.jpg\" alt=\"Bel auto citron.\">";
       }
       else {

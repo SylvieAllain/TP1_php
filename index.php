@@ -18,7 +18,7 @@ function createSelectCategory($array_brandAndModel, $brand){
     }
   }
   echo "</select>";
-  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "ok". "\"". ">";
+  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "Ok". "\"". ">";
 }
 $arrayLength = sizeOf($array_brandAndModel[$brand]);
 
@@ -33,7 +33,7 @@ function selectedCarModel($array_brandAndModel,$brand,$model){
     }
   }
   echo "</select>";
-  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit" . "\"". "value=" . "\"" . "envoyer". "\"". ">";
+  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit" . "\"". "value=" . "\"" . "Envoyer". "\"". ">";
 }
 
 function validate_cat_car($brand){
