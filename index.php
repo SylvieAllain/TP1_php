@@ -51,25 +51,25 @@ function validate_car($model){
 
 include_once 'vues/accueil.php';
 
-if(!empty($submit_brand)){
-  try{
-    validate_cat_car($brand);
-  }
-  catch(Exception $e){
-    echo "Erreur : " . $e->getMessage();
-  }
-}
-
-if(!empty($submit)){
-  try{
-    validate_car($model);
-    include_once "vues/selection.php";
-    header("location:vues/selection.php?car=$model");
-
-  }
-  catch(Exception $e){
-    echo "Erreur : " . $e->getMessage();
-  }
-}
+// if(!empty($submit_brand)){
+//   try{
+//     validate_cat_car($brand);
+//   }
+//   catch(Exception $e){
+//     echo "Erreur : " . $e->getMessage();
+//   }
+// }
+//
+// if(!empty($submit)){
+//   try{
+//     validate_car($model);
+//     include_once "vues/selection.php";
+//     header("location:vues/selection.php?car=$model");
+//
+//   }
+//   catch(Exception $e){
+//     echo "Erreur : " . $e->getMessage();
+//   }
+// }
 
 ?>

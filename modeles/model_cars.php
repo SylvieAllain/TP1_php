@@ -12,21 +12,21 @@ $array_brandAndModel = [
 
 //Granta
 $array_ladaGranta = [
-  "car1" => ["imageSrc" => "../images/lada/granta/granta2017.jpeg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"granta", "description" =>"2017. Attention ne pas dire non à l'homme au volant", "price" => "999999.99$", ],
-  "car2" => ["imageSrc" => "../images/lada/granta/granta2018.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"granta", "description" =>"2018. Même couleur que l'année précédente", "price" => "29999.90$", ],
-  "car3" => ["imageSrc" => "../images/lada/granta/granta2019.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"granta", "description" =>"2019. Encore bourgogne, car seule couleur de la compagnie." , "price" => "10000.99$", ],
+  "car1" => ["imageSrc" => "../images/lada/granta/granta2017.jpeg","miniSrc" =>"../images/lada/granta/mini-granta2017.jpeg", "nameMini" => "mini-granta2017","brand" =>"lada", "model" =>"granta", "description" =>"2017. Attention ne pas dire non à l'homme au volant", "price" => "999999.99$", ],
+  "car2" => ["imageSrc" => "../images/lada/granta/granta2018.jpg","miniSrc" =>"../images/lada/granta/mini-granta2018.jpg", "nameMini" => "mini-granta2018","brand" =>"lada", "model" =>"granta", "description" =>"2018. Même couleur que l'année précédente", "price" => "29999.90$", ],
+  "car3" => ["imageSrc" => "../images/lada/granta/granta2019.jpg","miniSrc" =>"../images/lada/granta/mini-granta2019.jpg", "nameMini" => "mini-granta2019","brand" =>"lada", "model" =>"granta", "description" =>"2019. Encore bourgogne, car seule couleur de la compagnie." , "price" => "10000.99$", ],
 ];
 
 //Largus
 $array_ladaLargus = [
-  "car1" => ["imageSrc" => "../images/lada/largus/largus01.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"largus", "description" =>"Aucune donnée, à part le fais que tout est carré.", "price" => "1575.50$", ],
-  "car2" => ["imageSrc" => "../images/lada/largus/largus03.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"largus", "description" =>"Acune donnée à partager comme dans le temps du Pacte de Varsovie.", "price" => "25500.30$", ],
-  "car3" => ["imageSrc" => "../images/lada/largus/largus2017.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"largus", "description" =>"2017, mais pas les chars à l'arrière..." , "price" => "85501.99$", ],
+  "car1" => ["imageSrc" => "../images/lada/largus/largus01.jpg","miniSrc" =>"../images/lada/largus/mini-largus01.jpg", "nameMini" => "mini-largus01","brand" =>"lada", "model" =>"largus", "description" =>"Aucune donnée, à part le fais que tout est carré.", "price" => "1575.50$", ],
+  "car2" => ["imageSrc" => "../images/lada/largus/largus03.jpg","miniSrc" =>"../images/lada/largus/mini-largus03.jpg", "nameMini" => "mini-largus03","brand" =>"lada", "model" =>"largus", "description" =>"Acune donnée à partager comme dans le temps du Pacte de Varsovie.", "price" => "25500.30$", ],
+  "car3" => ["imageSrc" => "../images/lada/largus/largus2017.jpg","miniSrc" =>"../images/lada/largus/mini-largus2017.jpg", "nameMini" => "mini-largus2017","brand" =>"lada", "model" =>"largus", "description" =>"2017, mais pas les chars à l'arrière..." , "price" => "85501.99$", ],
 ];
 
 //Niva
 $array_ladaNiva = [
-  "car1" => ["imageSrc" => "../images/lada/niva/niva1981.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"niva", "description" =>"1981. À vu de meilleurs jours.", "price" => "100.00$", ],
+  "car1" => ["imageSrc" => "../images/lada/niva/niva1981.jpg","miniSrc" =>"../images/lada/niva/mini-niva1981.jpg", "nameMini" => "mini-niva1981","brand" =>"lada", "model" =>"niva", "description" =>"1981. À vu de meilleurs jours.", "price" => "100.00$", ],
   "car2" => ["imageSrc" => "../images/lada/niva/niva1992.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"niva", "description" =>"1992. Pour les nostalgique de la Perostroïka", "price" => "0.01$", ],
   "car3" => ["imageSrc" => "../images/lada/niva/niva1997.jpg","miniSrc" =>"", "nameMini" => "","brand" =>"lada", "model" =>"niva", "description" =>"1997. Le meilleur du Jet Set moskovite.", "price" => "1000.00$", ],
 ];
