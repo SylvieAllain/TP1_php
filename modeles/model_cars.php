@@ -8,6 +8,7 @@ $array_brandAndModel = [
 ];
 
 
+
 /*-----Lada-----*/
 
 //Granta
@@ -102,5 +103,42 @@ $array_volkswagenJetta = [
   "car3" => ["imageSrc" => "../images/volkswagen/jetta/jetta2019.jpg","miniSrc" =>"../images/volkswagen/jetta/mini-jetta2019.jpg", "nameMini" => "mini-jetta2019","brand" =>"volkswagen", "model" =>"jetta", "description" =>"2019" , "price" => "2501.99$", ],
 ];
 
+$array_randomPictures = [
+"images/lada/granta/granta2017.jpeg",
+"images/lada/granta/granta2018.jpg",
+"images/lada/granta/granta2019.jpg",
+"images/lada/largus/largus01.jpg",
+"images/lada/largus/largus2017.jpg",
+"images/lada/largus/largus03.jpg",
+"images/volkswagen/jetta/jetta2019.jpg",
+"images/volkswagen/jetta/jetta2018.jpg",
+"images/volkswagen/jetta/jetta1992.jpg",
+"images/volkswagen/golf/golfGTI.jpg",
+"images/volkswagen/golf/golf2018.jpg",
+"images/volkswagen/golf/golf2.jpg",
+"images/volkswagen/beetle/beetle3.jpg",
+"images/volkswagen/beetle/beetle2.jpg",
+"images/volkswagen/beetle/beetle1.jpg",
+"images/ssangyong/rexton/rexton2018.jpg",
+"images/ssangyong/rexton/rexton2010.jpg",
+"images/ssangyong/musso/musso2018.jpg",
+"images/ssangyong/musso/musso2016.jpg",
+"images/ssangyong/musso/musso2007.jpg",
+"images/ssangyong/korando/korando2018.jpg",
+"images/ssangyong/korando/korando2012.jpg",
+"images/ssangyong/korando/korando2000.jpg",
+"images/pontiac/sunfire/sunfire1999.jpg",
+"images/pontiac/sunfire/sunfire1996.jpg",
+"images/pontiac/sunfire/sunfire2005.jpg",
+"images/pontiac/gto/gto1968.jpg",
+"images/pontiac/gto/gto1967.jpg",
+"images/pontiac/gto/gto1966.jpg",
+"images/pontiac/firebird/firebird1999.jpg",
+"images/pontiac/firebird/firebird1978.jpg",
+"images/pontiac/firebird/firebird1974.jpg",
+"images/lada/niva/niva1997.jpg",
+"images/lada/niva/niva1992.jpg",
+"images/lada/niva/niva1981.jpg"
+];
 
 ?>
