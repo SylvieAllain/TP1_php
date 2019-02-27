@@ -10,7 +10,7 @@
     <h1 class="chat">Nos voitures</h1>
       <h2>Faites votre choix</h2>
         <h3>Nos modèles sont exempts de toutes garanties et viennent avec les meilleurs lots de problèmes de toute l'industrie !</h3>
-        <div id="patate">
+        <div id="patate" class="container">
           <div class="row">
             <div class="col-2">
               <h4> Photos </h4>
