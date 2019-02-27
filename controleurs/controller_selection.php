@@ -97,7 +97,7 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
 
 function createTable($array_pictures){
   foreach($array_pictures as $key => $value){
-    echo "<div class=\"row\">";
+    echo "<div class=\"row\" id=\"carDisplayRow\">";
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
