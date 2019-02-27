@@ -26,7 +26,7 @@
         try{
           validate_car($model);
           include_once "vues/selection.php";
-          header("location:controleurs/controller_selection.php?car=$model");
+          header("location:controleurs/controller_selection.php?model=$model");
 
         }
         catch(Exception $e){
