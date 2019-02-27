@@ -1,5 +1,5 @@
 <?php
-
+include_once 'vues/banner.php';
 include "modeles/model_cars.php";
 
 $brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : null;
