@@ -104,7 +104,7 @@ function createTable($array_pictures){
     echo "<div class=\"col-2\">";
     echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
     echo "<div class=\"col-5\">" . $array_pictures[$key]["description"]. " </div>";
-    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing\"" . ">" . $array_pictures[$key]["price"]. "</a> </div>";
+    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "\"" . ">" . $array_pictures[$key]["price"]. "</a> </div>";
     echo "</div>";
   }
 }

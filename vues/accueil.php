@@ -68,7 +68,7 @@
       if(!empty($submit)){
         try{
           validate_car($model);
-          include_once "vues/selection.php";
+          //include_once "vues/selection.php"; Pas nécessaire de je crois CP
           header("location:controleurs/controller_selection.php?model=$model");
 
         }

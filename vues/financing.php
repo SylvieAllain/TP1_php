@@ -8,6 +8,8 @@
     <title></title>
   </head>
   <body>
+    <img src="<?php $_GET["pic"]; ?>" alt="automobile">
+    <?php echo $_GET["pic"]; ?>
     <p>C'est le temps de passer aux choses sérieuses!</p>
     <p>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</p>
     <footer>
