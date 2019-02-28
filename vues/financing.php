@@ -8,15 +8,24 @@
     <title></title>
   </head>
   <body>
-    <img src="<?php $_GET["pic"]; ?>" alt="automobile">
-    <?php echo $_GET["pic"]; ?>
+    <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
     <p>C'est le temps de passer aux choses sérieuses!</p>
     <p>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</p>
+    <form class="" action="" method="post">
+      <label for="termsSelect">Durée: </label>
+      <select name="termsSelect" required>
+        <?php  createTermsSelector() ?>
+      </select>
+      <label for="$depositInput">Accompte (facultatif): </label>
+      <input type="number" name="$depositInput" value="">
+      <button type="submit" name="termsButton">Valider</button>
+    </form>
+
     <footer>
-    <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
+      <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
         Copyright © Sylvie Allain et Cyrice Paradis <br>
         2019
-    </p>
+      </p>
     </footer>
   </body>
 </html>
