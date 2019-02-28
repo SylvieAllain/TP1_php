@@ -8,15 +8,16 @@
     <title></title>
   </head>
   <body>
-    <h1 class="chat">Nos voitures</h1>
-      <h2>Faites votre choix</h2>
-        <h3>Nos modèles sont exempts de toutes garanties et viennent avec les meilleurs lots de problèmes de toute l'industrie !</h3>
+    <div id="almostBody">
+    <h1 id="firstTitle">Nos voitures</h1>
+      <h2 id="secondTitle">Faites votre choix</h2>
+        <h3 id="thirdTitle">Nos modèles sont exempts de toutes garanties et viennent avec les meilleurs lots de problèmes de toute l'industrie !</h3>
         <div class="container">
           <div class="row">
-            <div class="col-2">
+            <div class="col-3 offset-1">
               <h4> Photos </h4>
             </div>
-            <div class="col-5">
+            <div class="col-3">
               <h4> Description <h4>
             </div>
             <div class="col-5">
@@ -29,6 +30,7 @@
       }
         ?>
       </div>
+    </div>
       <footer>
       <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
           Copyright © Sylvie Allain et Cyrice Paradis <br>

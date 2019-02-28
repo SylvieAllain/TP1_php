@@ -41,7 +41,7 @@
     <form name="formulaire" action="" method="post">
       <div class="row">
         <div class="col-3 offset-3">
-        <label for="brand"></span>Marque: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
+        <label for="brand">Marque: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
       </div>
       <div class="col-6 ">
         <label for="model">Modèle: </label><?php selectedCarModel($array_brandAndModel,$brand,$model)?>

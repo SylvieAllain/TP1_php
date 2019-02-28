@@ -1,10 +1,30 @@
 /*doc css*/
 
+.carousel-inner{
+  width: 80%;
+  height: 30em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* .item img {
+    position: absolute;
+    object-fit:cover;
+    top: 0;
+    left: 0;
+    width: 300px;
+} */
 label {
   margin-top: 2em;
 }
 
 .container {
   border-style: solid;
+  border-width:thick;
+  border-left-color: #7AA55E;
+  border-top-color: #7AA55E;
+  border-right-color: #AAC9A0;
+  border-bottom-color: #AAC9A0;
   margin-bottom: 3em;
+  background-color: #FBFCB5;
 }
