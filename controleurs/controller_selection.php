@@ -103,8 +103,8 @@ function createTable($array_pictures){
     $nameMini = $array_pictures[$key]["nameMini"];
     echo "<div class=\"col-3 offset-1\">";
     echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
-    echo "<div class=\"col-3\">" . $array_pictures[$key]["description"]. " </div>";
-    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "\"" . ">" . $array_pictures[$key]["price"]. "</a> </div>";
+    echo "<div class=\"col-5\">" . $array_pictures[$key]["description"]. " </div>";
+    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
     echo "</div>";
   }
 }
