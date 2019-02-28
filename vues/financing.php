@@ -14,7 +14,7 @@
     <form class="" action="" method="post">
       <label for="termsSelect">Durée: </label>
       <select name="termsSelect" required>
-        <?php  createTermsSelector() ?>
+        <?php  createTermsSelector(); ?>
       </select>
       <label for="$depositInput">Accompte (facultatif): </label>
       <input type="number" name="$depositInput" value="">
