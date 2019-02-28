@@ -17,8 +17,8 @@
         <?php  createTermsSelector(); ?>
       </select>
       <label for="$depositInput">Accompte (facultatif): </label>
-      <input type="number" name="$depositInput" value="">
-      <button type="submit" name="termsButton">Valider</button>
+      <input type="number" name="depositInput" value="">
+      <input type="submit" name="termsButton" value="envoyer">Valider</input>
     </form>
 
     <footer>

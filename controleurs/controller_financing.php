@@ -56,7 +56,7 @@ function createFinancingResume() {
   $interest = determineInterest($sumToFinance, $totalWithInterest);
 }
 echo "QQchose";
-
+echo $submit;
 if(!empty($_POST["termsButton"])) {
 
   echo "Ça fonctionne!";
