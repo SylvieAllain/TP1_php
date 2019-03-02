@@ -8,18 +8,28 @@
     <title></title>
   </head>
   <body>
-    <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
-    <p>C'est le temps de passer aux choses sérieuses!</p>
-    <p>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</p>
-    <form class="" action="" method="post">
-      <label for="termsSelect">Durée: </label>
-      <select name="termsSelect" required>
-        <?php  createTermsSelector(); ?>
-      </select>
-      <label for="$depositInput">Accompte (facultatif): </label>
-      <input type="number" name="depositInput" value="">
-      <input type="submit" name="termsButton" value="envoyer">Valider</input>
-    </form>
+    <h1>C'est le temps de passer aux choses sérieuses!</h1>
+      <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
+      <div class="row" id="carDisplayRowFinancing">
+        <div class="col-2 offset-1">
+          <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
+        </div>
+        <div class="col-4">
+          <?php echo strtoupper($_GET['model']); ?>
+        </div>
+        <div class="col-1">
+          <?php echo $_GET['price']; ?>
+        </div>
+      </div>
+      <form class="" action="" method="post">
+        <label for="termsSelect">Intérêt: </label>
+        <select name="termsSelect" required>
+          <?php  createTermsSelector($priceInDisplay); ?>
+        </select>
+        <label for="$depositInput">Accompte (facultatif): $</label>
+        <input type="number" name="depositInput" value="0.0">
+        <input type="submit" name="termsButton" value="Calculer"></input>
+      </form>
 
     <footer>
       <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
