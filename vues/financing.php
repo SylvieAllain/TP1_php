@@ -30,7 +30,6 @@
         <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
         <input type="submit" name="termsButton" value="Calculer"></input>
       </form>
-      <?php echo  $priceInDisplay;?>
 <!--
     <footer>
       <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>

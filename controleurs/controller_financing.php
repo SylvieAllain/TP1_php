@@ -5,10 +5,6 @@
 // TODO: - choisir quoi faire avec footer
 // TODO: - Faire beau et intégrer le CSS
 
-include_once "../modeles/model_cars.php";
-include_once "../modeles/model_financing.php";
-include_once '../vues/banner.php';
-
 /*---Fonctions---*/
 
 //Pour le traitement de la page
@@ -65,7 +61,7 @@ function determineMonthlyPayment($totalWithInterest) {
   return $totalWithInterest/PERIODICITY;
 }
 
-//Pour affichage
+//Pour affichage des variables dans un tableau responsive
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
   <div id=\"resumeFinancing\">
@@ -147,14 +143,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
   ";
 }
 
-
-
-//Variables POST
-$priceInDisplay = (float)$_GET["price"];
-$submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
-$deposit = (isset($_POST["depositInput"])) ? round(($_POST["depositInput"]),2) : (float)0.00;
-
-//Variables globale pour traitement des fonctions
+//Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $deposit) {
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,FINANCING_RATE_INTEREST[$term]);
@@ -170,12 +159,23 @@ function createFinancingResume($priceInDisplay, $deposit) {
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
 }
 
+/*---Affichage---*/
+
+//Variables POST
+$priceInDisplay = (float)$_GET["price"];
+$submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
+$deposit = (isset($_POST["depositInput"])) ? round(($_POST["depositInput"]),2) : (float)0.00;
+
+//Affichages des différentes vues
+include_once "../modeles/model_cars.php";
+include_once "../modeles/model_financing.php";
+include_once '../vues/banner.php';
+include_once "../vues/financing.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   createFinancingResume($priceInDisplay, $deposit);
 }
 
-include_once "../vues/financing.php";
 include_once '../vues/footer.php';
 
  ?>
