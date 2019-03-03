@@ -8,14 +8,13 @@
 include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
 include_once '../vues/banner.php';
-include_once "../vues/financing.php";
 
 /*---Fonctions---*/
 
 //Pour le traitement de la page
 
 function determineInterestRate($price, $value) {
-  if ($price >= MIN_FOR_BEST_RATE) {
+  if ($price <= MIN_FOR_BEST_RATE) {
     $interestRate = $value[BEST_RATE_INDEX];
   }
   else {
@@ -26,7 +25,7 @@ function determineInterestRate($price, $value) {
 
 function createTermsSelector($priceInDisplay) {
   foreach (FINANCING_RATE_INTEREST as $key => $value) {
-      $interestRate = determineInterestRate ($price, $value);
+      $interestRate = determineInterestRate ($priceInDisplay, $value);
       if ($key == DEFAULT_MONTHLY_RATE_ONLOAD) {
         echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
       }
@@ -54,16 +53,16 @@ function determineSumToFinance($deposit, $priceInDisplayWithTaxes) {
   return $priceInDisplayWithTaxes - $deposit;
 }
 
-function determineMonthlyPayment($sumToFinance, $interestRate, $term) {
-  return ($sumToFinance / $term) * $interestRate;
+function determineInterest($sumToFinance, $interestRate) {
+  return $sumToFinance * ($interestRate/100);
 }
 
-function determineTotalWithInterest($monthlyPayment, $term) {
-  return $monthlyPayment * $term;
+function determineTotalWithInterest($sumToFinance, $interest) {
+  return $sumToFinance + $interest;
 }
 
-function determineInterest($sumToFinance, $totalWithInterest) {
-  return $totalWithInterest - $sumToFinance;
+function determineMonthlyPayment($totalWithInterest) {
+  return $totalWithInterest/PERIODICITY;
 }
 
 //Pour affichage
@@ -153,6 +152,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 //Variables POST
 $priceInDisplay = (float)$_GET["price"];
 $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
+$deposit = (isset($_POST["depositInput"])) ? round(($_POST["depositInput"]),2) : (float)0.00;
 
 //Variables globale pour traitement des fonctions
 function createFinancingResume($priceInDisplay, $deposit) {
@@ -162,10 +162,10 @@ function createFinancingResume($priceInDisplay, $deposit) {
   $taxes = round(determineTaxes($priceInDisplay),2);
   $priceInDisplayWithTaxes = deteriminepriceInDisplayWithTaxes($priceInDisplay, $taxes);
 
-  $sumToFinance = determineSumToFinance($deposit, $priceInDisplayWithTaxes);
-  $monthlyPayment = round(determineMonthlyPayment($sumToFinance, $interestRate, $term),2);
-  $totalWithInterest = determineTotalWithInterest($monthlyPayment, $term);
-  $interest = determineInterest($sumToFinance, $totalWithInterest);
+  $sumToFinance = round(determineSumToFinance($deposit, $priceInDisplayWithTaxes),2);
+  $interest = round(determineInterest($sumToFinance, $interestRate),2);
+  $totalWithInterest = determineTotalWithInterest($sumToFinance, $interest);
+  $monthlyPayment = round(determineMonthlyPayment($totalWithInterest),2);
 
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
 }
@@ -175,6 +175,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   createFinancingResume($priceInDisplay, $deposit);
 }
 
+include_once "../vues/financing.php";
 include_once '../vues/footer.php';
 
  ?>

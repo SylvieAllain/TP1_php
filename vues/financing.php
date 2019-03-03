@@ -1,4 +1,3 @@
-<?php $deposit = (isset($_POST["depositInput"])) ? ($_POST["depositInput"]) : (float)0.00; ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
@@ -28,9 +27,10 @@
           <?php  createTermsSelector($priceInDisplay); ?>
         </select>
         <label for="$depositInput">Accompte (facultatif): $</label>
-        <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="any">
+        <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
         <input type="submit" name="termsButton" value="Calculer"></input>
       </form>
+      <?php echo  $priceInDisplay;?>
 <!--
     <footer>
       <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
