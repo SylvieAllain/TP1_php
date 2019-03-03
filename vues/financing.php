@@ -30,12 +30,13 @@
         <input type="number" name="depositInput" value="0.0">
         <input type="submit" name="termsButton" value="Calculer"></input>
       </form>
-
+<!--
     <footer>
       <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
         Copyright © Sylvie Allain et Cyrice Paradis <br>
         2019
       </p>
     </footer>
+  -->
   </body>
 </html>

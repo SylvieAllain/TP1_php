@@ -178,4 +178,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   createFinancingResume($priceInDisplay, $deposit);
 }
 
+include_once '../vues/footer.php';
+
  ?>
