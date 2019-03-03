@@ -71,79 +71,77 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
   echo "
   <div id=\"resumeFinancing\">
     <div class=\"row\">
-      <div class=\"col-2\">
+      <div class=\"col\">
         <strong>Détails</strong>
       </div>
-      <div class=\"col-4\">
-        <strong>Description</strong>
+      <div class=\"col\">
+        <strong>Montant</strong>
       </div>
     </div>
     <div class=\"row\">
-      <div class=\"col-2\">
+      <div class=\"col\">
         <p>Prix de vente affiché: </p>
       </div>
-      <div class=\"col-4\">
+      <div class=\"col\">
         <p>$priceInDisplay</p>
       </div>
     </div>
     <div class=\"row\">
-      <div class=\"col-2\">
+      <div class=\"col\">
         <p>Acompte: </p>
       </div>
-      <div class=\"col-4\">
+      <div class=\"col\">
         <p>$deposit</p>
       </div>
     </div>
     <div class=\"row\">
-      <div class=\"col-2\">
+      <div class=\"col\">
         <p>Taxes: </p>
       </div>
-      <div class=\"col-4\">
+      <div class=\"col\">
         <p>$taxes</p>
       </div>
     </div>
     <div class=\"row\">
-      <div class=\"col-2\">
+      <div class=\"col\">
         <p>Prix total: </p>
       </div>
-      <div class=\"col-4\">
+      <div class=\"col\">
         <p>$priceInDisplayWithTaxes</p>
       </div>
     </div>
+    <div class=\"row\">
+      <div class=\"col\">
+        <p>Montant à financer: </p>
+      </div>
+      <div class=\"col\">
+        <p>$sumToFinance</p>
+      </div>
   </div>
   <div class=\"row\">
-    <div class=\"col-2\">
-      <p>Montant à financer: </p>
+    <div class=\"col\">
+      <p>Intérêts: </p>
     </div>
-    <div class=\"col-4\">
-      <p>$sumToFinance</p>
+    <div class=\"col\">
+      <p>$interest</p>
     </div>
   </div>
-</div>
-<div class=\"row\">
-  <div class=\"col-2\">
-    <p>Intérêts: </p>
+  <div class=\"row\">
+    <div class=\"col\">
+      <p>Montant avec intérêts: </p>
+    </div>
+    <div class=\"col\">
+      <p>$totalWithInterest</p>
+    </div>
   </div>
-  <div class=\"col-4\">
-    <p>$interest</p>
+  <div class=\"row\">
+    <div class=\"col\">
+      <p>Paiement mensuel: </p>
+    </div>
+    <div class=\"col\">
+      <p>$monthlyPayment</p>
+    </div>
   </div>
-</div>
-<div class=\"row\">
-  <div class=\"col-2\">
-    <p>Montant avec intérêts: </p>
-  </div>
-  <div class=\"col-4\">
-    <p>$totalWithInterest</p>
-  </div>
-</div>
-<div class=\"row\">
-  <div class=\"col-2\">
-    <p>Paiement mensuel: </p>
-  </div>
-  <div class=\"col-4\">
-    <p>$monthlyPayment</p>
-  </div>
-</div>
 </div>
 
 
@@ -154,7 +152,6 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 
 //Variables POST
 $priceInDisplay = (float)$_GET["price"];
-$deposit = (isset($_POST["depositInput"])) ? ($_POST["depositInput"]) : 0;
 $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 
 //Variables globale pour traitement des fonctions
