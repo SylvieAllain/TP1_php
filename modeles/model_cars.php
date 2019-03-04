@@ -1,4 +1,8 @@
 <?php
+
+// TODO: -Faire couleur, km, État
+// TODO:  -Séparer année et description
+//// TODO: Faire sort et par défaut
 $array_brandAndModel = [
   "Volkswagen" => ["Beetle","Jetta","Golf"],
   "Pontiac" => ["Sunfire", "GTO","Firebird"],
