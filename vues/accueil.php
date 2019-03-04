@@ -70,12 +70,6 @@ if(!empty($submit)){
       </div>
     </div>
       <br><br>
-      <div class="row">
-        <div class="col-8 offset-4">
-      <label for="searchBar">Rechercher: </label>
-      <input type="text" name="searchBar" value="">
-        </div>
-      </div>
     </form>
   </div>
   <?php include_once 'footer.php'; ?>

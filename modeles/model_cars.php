@@ -1,11 +1,14 @@
 <?php
 $array_brandAndModel = [
-  null => [null],
   "Volkswagen" => ["Beetle","Jetta","Golf"],
   "Pontiac" => ["Sunfire", "GTO","Firebird"],
   "Ssangyong" => ["Korando","Musso","Rexton"],
   "Lada" => ["Niva", "Granta", "Largus"],
 ];
+ ksort($array_brandAndModel);
+ foreach($array_brandAndModel as $key => $value){
+   asort($array_brandAndModel[$key]);
+ }
 
 
 

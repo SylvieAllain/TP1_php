@@ -2,7 +2,7 @@
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
 
-$brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : null;
+$brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : "Lada";
 $submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : null;
 $model = (!empty($_POST['model'])) ? ($_POST['model']) : null;
 $submit = (!empty($_POST['submit'])) ? ($_POST['submit']) : null;
