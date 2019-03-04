@@ -22,6 +22,3 @@
       <h2>La plus grande sélection de citrons provenant de tous les continents, sauf de l'Afrique...</h2>
   </body>
 </html>
-
-<?php
- ?>

@@ -1,3 +1,25 @@
+<?php
+if(!empty($submit_brand)){
+  try{
+    validate_cat_car($brand);
+  }
+  catch(Exception $e){
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+
+if(!empty($submit)){
+  try{
+    validate_car($model);
+    header("location:controleurs/controller_selection.php?model=$model");
+
+  }
+  catch(Exception $e){
+    echo "Erreur : " . $e->getMessage();
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
@@ -54,40 +76,8 @@
       <input type="text" name="searchBar" value="">
         </div>
       </div>
-
-      <?php
-      if(!empty($submit_brand)){
-        try{
-          validate_cat_car($brand);
-        }
-        catch(Exception $e){
-          echo "Erreur : " . $e->getMessage();
-        }
-      }
-
-      if(!empty($submit)){
-        try{
-          validate_car($model);
-          //include_once "vues/selection.php"; Pas nécessaire de je crois CP
-          header("location:controleurs/controller_selection.php?model=$model");
-
-        }
-        catch(Exception $e){
-          echo "Erreur : " . $e->getMessage();
-        }
-      }
-      ?>
-
     </form>
   </div>
   <?php include_once 'footer.php'; ?>
-  <!--
-    <footer>
-      <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
-          Copyright © Sylvie Allain et Cyrice Paradis <br>
-          2019
-      </p>
-    </footer>
-  -->
   </body>
 </html>
