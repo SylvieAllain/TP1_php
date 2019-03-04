@@ -5,6 +5,7 @@ include_once "../modeles/model_financing.php";
 
 // TODO: - fiabilité des fonctions de financing
 // TODO: - Faire beau et intégrer le CSS
+// TODO: mettre Trim acompte, valider si acompte <, 
 
 /*---Fonctions---*/
 
