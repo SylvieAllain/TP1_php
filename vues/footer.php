@@ -3,6 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      footer {
+        background-color: #44613F;    
+      }
+    </style>
   </head>
   <body>
     <footer>

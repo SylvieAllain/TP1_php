@@ -1,8 +1,9 @@
 <?php
 
+include_once "../modeles/model_cars.php";
+include_once "../modeles/model_financing.php";
+
 // TODO: - fiabilité des fonctions de financing
-// TODO: - réparer le menu déroulant (tjs le plus petit)
-// TODO: - choisir quoi faire avec footer
 // TODO: - Faire beau et intégrer le CSS
 
 /*---Fonctions---*/
@@ -167,8 +168,6 @@ $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(($_POST["depositInput"]),2) : (float)0.00;
 
 //Affichages des différentes vues
-include_once "../modeles/model_cars.php";
-include_once "../modeles/model_financing.php";
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 
