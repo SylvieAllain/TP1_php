@@ -1,19 +1,23 @@
 /*doc css*/
 
 .carousel-inner{
-  width: 80%;
-  height: 30em;
+  width: 45%;
+  height: 18em;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* .item img {
-    position: absolute;
-    object-fit:cover;
-    top: 0;
-    left: 0;
-    width: 300px;
-} */
+img{
+  max-width: 80%;
+}
+
+.carousel-control-next{
+  width: 80%;
+}
+
+.carousel-control-prev{
+  width: 60%;
+}
 label {
   margin-top: 2em;
 }
@@ -27,4 +31,6 @@ label {
   border-bottom-color: #AAC9A0;
   margin-bottom: 3em;
   background-color: #FBFCB5;
+  margin-top: 2em;
+  width:70%;
 }
