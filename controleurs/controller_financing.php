@@ -11,12 +11,12 @@ include_once "../modeles/model_financing.php";
 
 //Pour le traitement de la page
 
-function determineInterestRate($price, $value) {
+function determineInterestRate($price, $term) {
   if ($price <= MIN_FOR_BEST_RATE) {
-    $interestRate = $value[BEST_RATE_INDEX];
+    $interestRate =  FINANCING_RATE_INTEREST[$term][BEST_RATE_INDEX];
   }
   else {
-    $interestRate = $value[HIGHER_RATE_INDEX];
+    $interestRate =  FINANCING_RATE_INTEREST[$term][HIGHER_RATE_INDEX];
   }
   return $interestRate;
 }
@@ -59,8 +59,8 @@ function determineTotalWithInterest($sumToFinance, $interest) {
   return $sumToFinance + $interest;
 }
 
-function determineMonthlyPayment($totalWithInterest) {
-  return $totalWithInterest/PERIODICITY;
+function determineMonthlyPayment($totalWithInterest, $periodicity) {
+  return $totalWithInterest/$periodicity;
 }
 
 //De validation
@@ -159,7 +159,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 //Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $deposit) {
   $term = $_POST["termsSelect"];
-  $interestRate = determineInterestRate($priceInDisplay,FINANCING_RATE_INTEREST[$term]);
+  $interestRate = determineInterestRate($priceInDisplay,$term);
 
   $taxes = round(determineTaxes($priceInDisplay),2);
   $priceInDisplayWithTaxes = deteriminepriceInDisplayWithTaxes($priceInDisplay, $taxes);
@@ -168,7 +168,7 @@ function createFinancingResume($priceInDisplay, $deposit) {
   $sumToFinance = round(determineSumToFinance($deposit, $priceInDisplayWithTaxes),2);
   $interest = round(determineInterest($sumToFinance, $interestRate),2);
   $totalWithInterest = determineTotalWithInterest($sumToFinance, $interest);
-  $monthlyPayment = round(determineMonthlyPayment($totalWithInterest),2);
+  $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
 
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
 }
