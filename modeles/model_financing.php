@@ -2,7 +2,7 @@
 
 <?php
 define("FED_TAXE", 5);
-define("PROV_TAXE", 9.75);
+define("PROV_TAXE", 9.975);
 
 define("PERIODICITY", 12); //12 mois dans une année
 
