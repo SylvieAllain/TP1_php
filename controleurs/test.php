@@ -1,4 +1,5 @@
 <?php
+//NOTE:Les test vont apparaitre tout en bas de la page du navigateur, soit sous les codes d'erreurs.
 include_once("controller_financing.php");
 
  ?>
