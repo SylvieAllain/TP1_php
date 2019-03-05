@@ -1,11 +1,5 @@
 <?php
 include_once("controller_financing.php");
-// TODO: Faire un shitload de test
-
-//Test de la fonction determineInterestRate
-/*
-determineInterestRate($priceInDisplay,FINANCING_RATE_INTEREST[$term]);
-*/
 
  ?>
 <!DOCTYPE html>
