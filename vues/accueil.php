@@ -8,15 +8,18 @@ if(!empty($submit_brand)){
   }
 }
 
-if(!empty($submit)){
+if(!empty($submit_model)){
   try{
     validate_car($model);
-    header("location:controleurs/controller_selection.php?model=$model");
 
   }
   catch(Exception $e){
     echo "Erreur : " . $e->getMessage();
   }
+}
+
+if(!empty($search)){
+  header("location:controleurs/controller_selection.php?model=$model");
 }
 ?>
 
@@ -69,7 +72,20 @@ if(!empty($submit)){
         <label for="model">Modèle: </label><?php selectedCarModel($array_brandAndModel,$brand,$model)?>
       </div>
     </div>
-      <br><br>
+    <div class="row">
+      <div class=" offset-1 col-3">
+        <label for="color">Couleur : </label> <?php selectedCarColors($array_modelColors);?>
+      </div>
+      <div class = "col-4">
+        <label for="builtYear"> Année : </label> <?php selectedCarBuiltYear($array_modelBuiltYear); ?>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="offset-5 col-7">
+      <input type="submit" name="search" value="Rechercher"> </input>
+    </div>
+  </div>
     </form>
   </div>
   <?php include_once 'footer.php'; ?>
