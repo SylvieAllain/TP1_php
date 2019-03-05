@@ -5,18 +5,18 @@ include_once "../modeles/model_financing.php";
 
 // TODO: - fiabilité des fonctions de financing
 // TODO: - Faire beau et intégrer le CSS
-// TODO: mettre Trim acompte, valider si acompte <, 
+// TODO: - Valider si prix et model corresponde
 
 /*---Fonctions---*/
 
 //Pour le traitement de la page
 
-function determineInterestRate($price, $value) {
+function determineInterestRate($price, $term) {
   if ($price <= MIN_FOR_BEST_RATE) {
-    $interestRate = $value[BEST_RATE_INDEX];
+    $interestRate =  FINANCING_RATE_INTEREST[$term][BEST_RATE_INDEX];
   }
   else {
-    $interestRate = $value[HIGHER_RATE_INDEX];
+    $interestRate =  FINANCING_RATE_INTEREST[$term][HIGHER_RATE_INDEX];
   }
   return $interestRate;
 }
@@ -59,8 +59,19 @@ function determineTotalWithInterest($sumToFinance, $interest) {
   return $sumToFinance + $interest;
 }
 
-function determineMonthlyPayment($totalWithInterest) {
-  return $totalWithInterest/PERIODICITY;
+function determineMonthlyPayment($totalWithInterest, $periodicity) {
+  return $totalWithInterest/$periodicity;
+}
+
+//De validation
+
+function validateDeposit($priceInDisplayWithTaxes, $deposit) {
+  if ($deposit > $priceInDisplayWithTaxes) {
+    throw new Exception("L'accompte est supérieur au montant du véhicule. Nous comme toutefois ouverts à augmenter le prix de vente si vous vous voulez payer plus.");
+  }
+  if ($deposit < 0) {
+    throw new Exception("Pas question qu'on paye pour vous l'accompte !");
+  }
 }
 
 //Pour affichage des variables dans un tableau responsive
@@ -148,15 +159,16 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 //Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $deposit) {
   $term = $_POST["termsSelect"];
-  $interestRate = determineInterestRate($priceInDisplay,FINANCING_RATE_INTEREST[$term]);
+  $interestRate = determineInterestRate($priceInDisplay,$term);
 
   $taxes = round(determineTaxes($priceInDisplay),2);
   $priceInDisplayWithTaxes = deteriminepriceInDisplayWithTaxes($priceInDisplay, $taxes);
+  validateDeposit($priceInDisplayWithTaxes, $deposit);
 
   $sumToFinance = round(determineSumToFinance($deposit, $priceInDisplayWithTaxes),2);
   $interest = round(determineInterest($sumToFinance, $interestRate),2);
   $totalWithInterest = determineTotalWithInterest($sumToFinance, $interest);
-  $monthlyPayment = round(determineMonthlyPayment($totalWithInterest),2);
+  $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
 
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
 }
@@ -166,14 +178,19 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 //Variables POST
 $priceInDisplay = (float)$_GET["price"];
 $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
-$deposit = (isset($_POST["depositInput"])) ? round(($_POST["depositInput"]),2) : (float)0.00;
+$deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
 //Affichages des différentes vues
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  createFinancingResume($priceInDisplay, $deposit);
+  try{
+    createFinancingResume($priceInDisplay, $deposit);
+  }
+  catch (Exception $e) {
+    echo "Message : ",  $e->getMessage(), "\n";
+  }
 }
 
 include_once '../vues/footer.php';
