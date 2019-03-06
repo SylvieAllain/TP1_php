@@ -43,515 +43,143 @@ function selectedCarModel($array_brandAndModel,$brand,$model){
 
 $array_modelColors = [];
 $array_modelBuiltYear = [];
+// $array_choosedModel = [];
 
-// $array = [
-//   "car1" => ["color1" => "rouge", "color2" => null],
-//   "car2" => ["color1" => null, "color2" => null],
-//   "car3" => ["color1" => null, "color2" => null]
-// ];
-
-// function createArrayModelColors($array,$array_modelColors){
-//   foreach ($array as $key1 => $value){
-//       foreach($array[$key1] as $key2 => $value){
-//         if($key2 == "color1"){
-//         $isInArray = false;
-//         $arraySize = sizeof($array_modelColors);
-//           foreach($array_modelColors as $value){
-//               if ($value == $array[$key1]["color1"] || $value == null){
-//               $isInArray = true;
-//               }
-//           }
-//           if (!$isInArray){
-//             $array_modelColors[] = $array[$key1]["color1"];
-//           }
-//         }
-//         if($key2 == "color2"){
-//           $isInArray = false;
-//           $arraySize = sizeof($array_modelColors);
-//             foreach($array_modelColors as $value){
-//                 if ($value == $array[$key1]["color2"] || $value == null){
-//                 $isInArray = true;
-//                 }
-//             }
-//             if (!$isInArray){
-//               $array_modelColors[] = $array[$key1]["color2"];
-//             }
-//         }
-//       }
-//   }
-//   return $array_modelColors;
-// }
+$array_choosedModel = [
+  "car1" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null ],
+  "car2" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null],
+  "car3" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null]
+];
 
 
-switch($model){
-  case "Granta":
-    foreach ($array_ladaGranta as $key1 => $value){
-        foreach($array_ladaGranta[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ladaGranta[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ladaGranta[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ladaGranta[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ladaGranta[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Largus":
-    foreach ($array_ladaLargus as $key1 => $value){
-        foreach($array_ladaLargus[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ladaLargus[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ladaLargus[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ladaLargus[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ladaLargus[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Niva":
-    foreach ($array_ladaNiva as $key1 => $value){
-        foreach($array_ladaNiva[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ladaNiva[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ladaNiva[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ladaNiva[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ladaNiva[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Firebird":
-    foreach ($array_pontiacFirebird as $key1 => $value){
-        foreach($array_pontiacFirebird[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_pontiacFirebird[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_pontiacFirebird[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_pontiacFirebird[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_pontiacFirebird[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "GTO":
-    foreach ($array_pontiacGTO as $key1 => $value){
-        foreach($array_pontiacGTO[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_pontiacGTO[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_pontiacGTO[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_pontiacGTO[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_pontiacGTO[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Sunfire":
-    foreach ($array_pontiacSunfire as $key1 => $value){
-        foreach($array_pontiacSunfire[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_pontiacSunfire[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_pontiacSunfire[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_pontiacSunfire[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_pontiacSunfire[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Korando":
-    foreach ($array_ssangyongKorando as $key1 => $value){
-        foreach($array_ssangyongKorando[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ssangyongKorando[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ssangyongKorando[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ssangyongKorando[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ssangyongKorando[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Musso":
-    foreach ($array_ssangyongMusso as $key1 => $value){
-        foreach($array_ssangyongMusso[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ssangyongMusso[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ssangyongMusso[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ssangyongMusso[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ssangyongMusso[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Rexton":
-    foreach ($array_ssangyongRexton as $key1 => $value){
-        foreach($array_ssangyongRexton[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_ssangyongRexton[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_ssangyongRexton[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_ssangyongRexton[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_ssangyongRexton[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Beetle":
-    foreach ($array_volkswagenBeetle as $key1 => $value){
-        foreach($array_volkswagenBeetle[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_volkswagenBeetle[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_volkswagenBeetle[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_volkswagenBeetle[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_volkswagenBeetle[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Golf":
-    foreach ($array_volkswagenGolf as $key1 => $value){
-        foreach($array_volkswagenGolf[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_volkswagenGolf[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_volkswagenGolf[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_volkswagenGolf[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_volkswagenGolf[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-  case "Jetta":
-    foreach ($array_volkswagenJetta as $key1 => $value){
-        foreach($array_volkswagenJetta[$key1] as $key2 => $value){
-          if($key2 == "color1"){
-          $isInArray = false;
-            foreach($array_modelColors as $value){
-                if ($value == $array_volkswagenJetta[$key1]["color1"] || $value == null){
-                $isInArray = true;
-                }
-            }
-            if (!$isInArray){
-              $array_modelColors[] = $array_volkswagenJetta[$key1]["color1"];
-            }
-          }
-          if($key2 == "color2"){
-            $isInArray = false;
-              foreach($array_modelColors as $value){
-                  if ($value == $array_volkswagenJetta[$key1]["color2"] || $value == null){
-                  $isInArray = true;
-                  }
-              }
-              if (!$isInArray){
-                $array_modelColors[] = $array_volkswagenJetta[$key1]["color2"];
-              }
-          }
-        }
-    }
-    break;
-}
+
 
 switch($model){
   case "Granta":
     foreach($array_ladaGranta as $key1 => $value){
       foreach($array_ladaGranta[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ladaGranta[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Largus":
     foreach($array_ladaLargus as $key1 => $value){
       foreach($array_ladaLargus[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ladaLargus[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Niva":
     foreach($array_ladaNiva as $key1 => $value){
       foreach($array_ladaNiva[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ladaNiva[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Firebird":
     foreach($array_pontiacFirebird as $key1 => $value){
       foreach($array_pontiacFirebird[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_pontiacFirebird[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "GTO":
     foreach($array_pontiacGTO as $key1 => $value){
       foreach($array_pontiacGTO[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_pontiacGTO[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Sunfire":
     foreach($array_pontiacSunfire as $key1 => $value){
       foreach($array_pontiacSunfire[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_pontiacSunfire[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
     }
+    break;
   case "Korando":
     foreach($array_ssangyongKorando as $key1 => $value){
       foreach($array_ssangyongKorando[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ssangyongKorando[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Musso":
     foreach($array_ssangyongMusso as $key1 => $value){
       foreach($array_ssangyongMusso[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ssangyongMusso[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
     }
+    break;
   case "Rexton":
     foreach($array_ssangyongRexton as $key1 => $value){
       foreach($array_ssangyongRexton[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_ssangyongRexton[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Beetle":
     foreach($array_volkswagenBeetle as $key1 => $value){
       foreach($array_volkswagenBeetle[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_volkswagenBeetle[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
     }
+    break;
   case "Golf":
     foreach($array_volkswagenGolf as $key1 => $value){
       foreach($array_volkswagenGolf[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_volkswagenGolf[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
   case "Jetta":
     foreach($array_volkswagenJetta as $key1 => $value){
       foreach($array_volkswagenJetta[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          $array_modelBuiltYear[] = $array_volkswagenJetta[$key1]["builtYear"];
-        }
+        $array_choosedModel[$key1][$key2] = $value;
       }
-    };
+    }
     break;
 }
 
-function selectedCarColors($array_modelColors){
+function selectedCarColors($array_choosedModel,$builtYear){
   echo '<select name='.'"'.'color'.'"'.'>';
-  foreach($array_modelColors as $key=>$value){
-    if ($color == $value){
-      echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-    }
-    else{
-      echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+  foreach($array_choosedModel as $key1=>$value){
+    foreach ($array_choosedModel[$key1] as $key2=>$value){
+      if ($key2 == "color1" || $key2 == "color2"){
+        if(!in_array($value,$array_modelColors) && $value != null){
+          if ($color == $value){
+            echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+            $array_modelColors[] = $value;
+          }
+          else{
+            echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+            $array_modelColors[] = $value;
+          }
+        }
+      }
     }
   }
   echo "</select>";
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_color" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-function selectedCarBuiltYear($array_modelBuiltYear){
+function selectedCarBuiltYear($array_choosedModel){
+  $array_modelBuiltYear = [];
   echo '<select name='.'"'.'builtYear'.'"'.'>';
-  foreach($array_modelBuiltYear as $key=>$value){
-    if ($color == $value){
-      echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-    }
-    else{
-      echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+  foreach($array_choosedModel as $key1=>$value){
+      foreach($array_choosedModel[$key1] as $key2 => $value){
+        if($key2 == "builtYear"){
+          if(!in_array($value,$array_modelColors) && $value != null){
+            if ($color == $value){
+              echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+              $array_modelBuiltYear[] = $value;
+            }
+            else{
+              echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+              $array_modelBuiltYear[] = $value;
+            }
+        }
+      }
     }
   }
   echo "</select>";
