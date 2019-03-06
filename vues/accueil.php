@@ -74,10 +74,10 @@ if(!empty($search)){
     </div>
     <div class="row">
       <div class=" offset-1 col-3">
-        <label for="color">Couleur : </label> <?php selectedCarColors($array_choosedModel);?>
+        <label for="color">Couleur : </label> <?php selectedCarColors($array_choosedModel,$builtYear);?>
       </div>
       <div class = "col-4">
-        <label for="builtYear"> Année : </label> <?php selectedCarBuiltYear($array_choosedModel); ?>
+        <label for="builtYear"> Année : </label> <?php selectedCarBuiltYear($array_choosedModel,$color); ?>
     </div>
   </div>
   <br>

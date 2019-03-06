@@ -144,16 +144,18 @@ switch($model){
 function selectedCarColors($array_choosedModel,$builtYear){
   echo '<select name='.'"'.'color'.'"'.'>';
   foreach($array_choosedModel as $key1=>$value){
-    foreach ($array_choosedModel[$key1] as $key2=>$value){
-      if ($key2 == "color1" || $key2 == "color2"){
-        if(!in_array($value,$array_modelColors) && $value != null){
-          if ($color == $value){
-            echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-            $array_modelColors[] = $value;
-          }
-          else{
-            echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-            $array_modelColors[] = $value;
+    if ($builtYear != null && $array_choosedModel[$key1]["builtYear"] == $builtYear){
+      foreach ($array_choosedModel[$key1] as $key2=>$value){
+        if ($key2 == "color1" || $key2 == "color2"){
+          if(!in_array($value,$array_modelColors) && $value != null){
+            if ($color == $value){
+              echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+              $array_modelColors[] = $value;
+            }
+            else{
+              echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+              $array_modelColors[] = $value;
+            }
           }
         }
       }
@@ -163,21 +165,25 @@ function selectedCarColors($array_choosedModel,$builtYear){
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_color" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-function selectedCarBuiltYear($array_choosedModel){
+function selectedCarBuiltYear($array_choosedModel,$color){
   $array_modelBuiltYear = [];
   echo '<select name='.'"'.'builtYear'.'"'.'>';
   foreach($array_choosedModel as $key1=>$value){
-      foreach($array_choosedModel[$key1] as $key2 => $value){
-        if($key2 == "builtYear"){
-          if(!in_array($value,$array_modelColors) && $value != null){
-            if ($color == $value){
-              echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-              $array_modelBuiltYear[] = $value;
+    if ($color != null){
+      if ($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color){
+        foreach($array_choosedModel[$key1] as $key2 => $value){
+          if($key2 == "builtYear"){
+            if(!in_array($value,$array_modelColors) && $value != null){
+              if ($color == $value){
+                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelBuiltYear[] = $value;
+              }
+              else{
+                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelBuiltYear[] = $value;
+              }
             }
-            else{
-              echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-              $array_modelBuiltYear[] = $value;
-            }
+          }
         }
       }
     }
