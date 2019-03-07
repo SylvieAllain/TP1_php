@@ -7,10 +7,18 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
 <?php
 
-$model = "patate";
+$model = null;
+$color = null;
+$builtYear= null;
 
 if(isset($_GET["model"])){
   $model = $_GET["model"];
+}
+if(isset($_GET["color"])){
+  $color = $_GET["color"];
+}
+if(isset($_GET["builtYear"])){
+  $builtYear = $_GET["builtYear"];
 }
 
 
@@ -38,18 +46,30 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   imagedestroy($img_source);
   imagedestroy($img_destination);
 }
-
-function createTable($array_pictures){
+echo $builtYear; echo $color;
+function createTable($array_pictures,$color,$builtYear){
   foreach($array_pictures as $key => $value){
-    echo "<div class=\"row\" id=\"carDisplayRow\">";
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    echo "<div class=\"col-3\">";
-    echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
-    echo "<div class=\"col-4\">" . $array_pictures[$key]["description"]. " </div>";
-    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
-    echo "</div>";
+    if($array_pictures[$key]["color1"] == $color || $array_pictures[$key]["color2"] == $color || $color == null){
+      if($array_pictures[$key]["builtYear"] == $builtYear || $builtYear == null){
+        echo "<div class=\"row\" id=\"carDisplayRow\">";
+        echo "<div class=\"col-3\">";
+        echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
+        echo "<div class=\"col-4\">" .
+              "<p class=\"carDescriptionTitle\">Année de fabrication : </p>" . $array_pictures[$key]["builtYear"]. "<br>".
+              "<p class=\"carDescriptionTitle\"> Couleur(s) disponible(s) : </p>" . $array_pictures[$key]["color1"];
+        if ($array_pictures[$key]["color2"] != null){
+          echo ", " . $array_pictures[$key]["color2"];
+        }
+        echo "<br>" .
+              "<p class=\"carDescriptionTitle\"> Autres informations : </p>" . $array_pictures[$key]["description"] .
+              " </div>";
+        echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
+        echo "</div>";
+      }
+    }
   }
 }
 
