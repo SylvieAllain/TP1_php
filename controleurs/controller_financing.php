@@ -2,6 +2,7 @@
 
 include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
+include "fonction.php";
 
 // TODO: - fiabilité des fonctions de financing
 // TODO: - Faire beau et intégrer le CSS
@@ -66,11 +67,33 @@ function determineMonthlyPayment($totalWithInterest, $periodicity) {
 //De validation
 
 function validateDeposit($priceInDisplayWithTaxes, $deposit) {
-  if ($deposit > $priceInDisplayWithTaxes) {
-    throw new Exception("L'accompte est supérieur au montant du véhicule. Nous comme toutefois ouverts à augmenter le prix de vente si vous vous voulez payer plus.");
+  if (is_Numeric($deposit)){
+    if ($deposit > $priceInDisplayWithTaxes) {
+      throw new Exception("L'accompte est supérieur au montant du véhicule. Nous comme toutefois ouverts à augmenter le prix de vente si vous vous voulez payer plus.");
+    }
+    if ($deposit < 0) {
+      throw new Exception("Pas question qu'on paye pour vous l'accompte !");
+    }
   }
-  if ($deposit < 0) {
-    throw new Exception("Pas question qu'on paye pour vous l'accompte !");
+  else {
+    throw new Exception("Un accompte se compte en chiffre pas en lettre !");
+    }
+}
+
+function validatePrice($price, $model){
+  if (!is_Numeric($price)){
+    throw new Exception ("Bravo! Tu as mis des lettres dans l'URL du prix");
+  }
+
+  $carsInModel = determineCarsByModel(ucfirst($model));
+  $priceCheck = false;
+  foreach ($carsInModel as $value => $key) {
+    if ($price == $key["price"]) {
+      $priceCheck = true;
+    }
+  }
+  if (!$priceCheck){
+    throw new Exception ("Tu te prends pour un hacker en modifiant les informations dans l'URL. Fais un retour.");
   }
 }
 
@@ -157,7 +180,8 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 }
 
 //Fonction principale appelant toutes les autres
-function createFinancingResume($priceInDisplay, $deposit) {
+function createFinancingResume($priceInDisplay, $model,  $deposit) {
+  validatePrice($priceInDisplay, $model);
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
 
@@ -177,6 +201,7 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 
 //Variables POST
 $priceInDisplay = (float)$_GET["price"];
+$model = $_GET["model"];
 $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
@@ -186,7 +211,7 @@ include_once "../vues/financing.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try{
-    createFinancingResume($priceInDisplay, $deposit);
+    createFinancingResume($priceInDisplay, $model, $deposit);
   }
   catch (Exception $e) {
     echo "Message : ",  $e->getMessage(), "\n";
