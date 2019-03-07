@@ -19,7 +19,7 @@ if(!empty($submit_model)){
 }
 
 if(!empty($search)){
-  header("location:controleurs/controller_selection.php?model=$model");
+  header("location:controleurs/controller_selection.php?model=$model&color=$color&builtYear=$builtYear");
 }
 ?>
 

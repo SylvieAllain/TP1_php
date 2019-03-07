@@ -45,3 +45,9 @@
   font-size: 64px;
   margin-top : 0.5em;
 }
+
+.carDescriptionTitle{
+  font-weight: bold;
+  margin-bottom: -0.5em;
+  margin-top:1em;
+}

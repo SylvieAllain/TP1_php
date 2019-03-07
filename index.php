@@ -1,4 +1,6 @@
 <?php
+//TODO // ajouter fonction selectedCarMileage et selectedCarState
+//TODO // réusiner le code pour qu'il ait moins de DRY
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
 
@@ -142,20 +144,40 @@ switch($model){
 }
 
 function selectedCarColors($array_choosedModel,$builtYear){
+  $array_modelColors = [];
   echo '<select name='.'"'.'color'.'"'.'>';
+  echo "<option value=". $_POST["color"] . ">" . $_POST["color"] . "</option>";
   foreach($array_choosedModel as $key1=>$value){
-    if ($builtYear != null && $array_choosedModel[$key1]["builtYear"] == $builtYear){
+    if ($builtYear != null){
+      if ($array_choosedModel[$key1]["builtYear"] == $builtYear){
+        foreach ($array_choosedModel[$key1] as $key2=>$value){
+          if ($key2 == "color1" || $key2 == "color2"){
+            if(!in_array($value,$array_modelColors) && $value != null){
+              if ($color == $value){
+                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelColors[] = $value;
+              }
+              else{
+                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelColors[] = $value;
+              }
+            }
+          }
+        }
+      }
+    }
+    else {
       foreach ($array_choosedModel[$key1] as $key2=>$value){
         if ($key2 == "color1" || $key2 == "color2"){
           if(!in_array($value,$array_modelColors) && $value != null){
-            if ($color == $value){
-              echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-              $array_modelColors[] = $value;
-            }
-            else{
+            // if ($color == $value){
+            //   echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+            //   $array_modelColors[] = $value;
+            // }
+            // else{
               echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
               $array_modelColors[] = $value;
-            }
+            // }
           }
         }
       }
@@ -168,12 +190,13 @@ function selectedCarColors($array_choosedModel,$builtYear){
 function selectedCarBuiltYear($array_choosedModel,$color){
   $array_modelBuiltYear = [];
   echo '<select name='.'"'.'builtYear'.'"'.'>';
+  echo "<option value=". $_POST["builtYear"] . ">". $_POST["builtYear"] . "</option>";
   foreach($array_choosedModel as $key1=>$value){
     if ($color != null){
       if ($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color){
         foreach($array_choosedModel[$key1] as $key2 => $value){
           if($key2 == "builtYear"){
-            if(!in_array($value,$array_modelColors) && $value != null){
+            if(!in_array($value,$array_modelBuiltYear) && $value != null){
               if ($color == $value){
                 echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
                 $array_modelBuiltYear[] = $value;
@@ -187,14 +210,29 @@ function selectedCarBuiltYear($array_choosedModel,$color){
         }
       }
     }
-  }
+      else{
+        foreach($array_choosedModel[$key1] as $key2 => $value){
+          if($key2 == "builtYear"){
+            if(!in_array($value,$array_modelBuiltYear)){
+              if ($color == $value){
+                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelColors[] = $value;
+              }
+              else{
+                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
+                $array_modelBuiltYear[] = $value;
+              }
+            }
+          }
+        }
+      }
+    }
   echo "</select>";
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_builtYear" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-
-
 function validate_cat_car($brand){
+  $isModelInBrandSelection = false;
   if(empty($brand)){
     throw new Exception ("Vous devez sélectionner une catégorie de voiture");
   }
@@ -205,8 +243,7 @@ function validate_car($model){
     throw new Exception ("Vous devez sélectionner un modèle de voiture");
   }
 }
-
-
+echo $color;
 include_once 'vues/accueil.php';
 
 // if(!empty($submit_brand)){

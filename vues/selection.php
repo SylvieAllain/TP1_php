@@ -25,8 +25,8 @@
             </div>
           </div>
         <?php
-        if(isset($_GET["model"])){
-        createTable($array_pictures);
+        if(isset($_GET["model"]) && isset($_GET["color"]) && isset($_GET["builtYear"])){
+        createTable($array_pictures,$color,$builtYear);
       }
         ?>
       </div>

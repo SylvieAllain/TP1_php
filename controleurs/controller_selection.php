@@ -1,77 +1,114 @@
 
 <?php
 
-$model = "patate";
+$model = null;
+$color = null;
+$builtYear= null;
 
 if(isset($_GET["model"])){
   $model = $_GET["model"];
 }
+if(isset($_GET["color"])){
+  $color = $_GET["color"];
+}
+if(isset($_GET["builtYear"])){
+  $builtYear = $_GET["builtYear"];
+}
 
 
 include_once "../modeles/model_cars.php";
-$array_pictures = [];
+$array_pictures = [
+  "car1" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null ],
+  "car2" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null],
+  "car3" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null]
+];
 
 switch ($model){
   case "Granta":
-    foreach($array_ladaGranta as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ladaGranta as $key1 => $value1){
+      foreach($array_ladaGranta[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
   break;
   case "Largus":
-    foreach($array_ladaLargus as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ladaLargus as $key1 => $value1){
+      foreach($array_ladaLargus[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Niva":
-    foreach($array_ladaNiva as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ladaNiva as $key1 => $value1){
+      foreach($array_ladaNiva[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-  break;
+      break;
   case "Firebird":
-    foreach($array_pontiacFirebird as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_pontiacFirebird as $key1 => $value1){
+      foreach($array_pontiacFirebird[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
+      break;
   break;
   case "GTO":
-    foreach($array_pontiacGTO as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_pontiacGTO as $key1 => $value1){
+      foreach($array_pontiacGTO[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-  break;
+      break;
   case "Sunfire":
-    foreach($array_pontiacSunfire as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_pontiacSunfire as $key1 => $value1){
+      foreach($array_pontiacSunfire[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Korando":
-    foreach($array_ssangyongKorando as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ssangyongKorando as $key1 => $value1){
+      foreach($array_ssangyongKorando[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Musso":
-    foreach($array_ssangyongMusso as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ssangyongMusso as $key1 => $value1){
+      foreach($array_ssangyongMusso[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-  break;
+      break;
   case "Rexton":
-    foreach($array_ssangyongRexton as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_ssangyongRexton as $key1 => $value1){
+      foreach($array_ssangyongRexton[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Beetle":
-    foreach($array_volkswagenBeetle as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_volkswagenBeetle as $key1 => $value1){
+      foreach($array_volkswagenBeetle[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Golf":
-    foreach($array_volkswagenGolf as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_volkswagenGolf as $key1 => $value1){
+      foreach($array_volkswagenGolf[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
   case "Jetta":
-    foreach($array_volkswagenJetta as $key => $value){
-      $array_pictures[$key] = $value;
+    foreach($array_volkswagenJetta as $key1 => $value1){
+      foreach($array_volkswagenJetta[$key1] as $key2 => $value2){
+        $array_pictures[$key1][$key2] = $value2;
+        }
       }
-    break;
+      break;
 }
 
 function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
@@ -94,18 +131,30 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   imagedestroy($img_source);
   imagedestroy($img_destination);
 }
-
-function createTable($array_pictures){
+echo $builtYear; echo $color;
+function createTable($array_pictures,$color,$builtYear){
   foreach($array_pictures as $key => $value){
-    echo "<div class=\"row\" id=\"carDisplayRow\">";
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    echo "<div class=\"col-3\">";
-    echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
-    echo "<div class=\"col-4\">" . $array_pictures[$key]["description"]. " </div>";
-    echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
-    echo "</div>";
+    if($array_pictures[$key]["color1"] == $color || $array_pictures[$key]["color2"] == $color || $color == null){
+      if($array_pictures[$key]["builtYear"] == $builtYear || $builtYear == null){
+        echo "<div class=\"row\" id=\"carDisplayRow\">";
+        echo "<div class=\"col-3\">";
+        echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
+        echo "<div class=\"col-4\">" .
+              "<p class=\"carDescriptionTitle\">Année de fabrication : </p>" . $array_pictures[$key]["builtYear"]. "<br>".
+              "<p class=\"carDescriptionTitle\"> Couleur(s) disponible(s) : </p>" . $array_pictures[$key]["color1"];
+        if ($array_pictures[$key]["color2"] != null){
+          echo ", " . $array_pictures[$key]["color2"];
+        }
+        echo "<br>" .
+              "<p class=\"carDescriptionTitle\"> Autres informations : </p>" . $array_pictures[$key]["description"] .
+              " </div>";
+        echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
+        echo "</div>";
+      }
+    }
   }
 }
 
