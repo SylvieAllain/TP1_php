@@ -1,3 +1,10 @@
+<!--
+Programmation Web II - TP1
+Projet : Voiture @Variée
+Hiver 2019
+Auteur: Sylvie Allain & Cyrice Paradis
+-->
+
 <?php
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";

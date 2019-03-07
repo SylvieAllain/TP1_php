@@ -1,3 +1,10 @@
+<!--
+Programmation Web II - TP1
+Projet : Voiture @Variée
+Hiver 2019
+Auteur: Sylvie Allain & Cyrice Paradis
+-->
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
   <head>
@@ -12,10 +19,10 @@
   <body>
     <?php
       if(empty($_GET["model"])) {
-        echo "<img src=\"images/banner.jpg\" alt=\"Belle auto citron.\">";
+        echo "<img src=\"images/banner.png\" alt=\"Belle auto citron.\">";
       }
       else {
-        echo "<img src=\"../images/banner.jpg\" alt=\"Belle auto citron.\">";
+        echo "<img src=\"../images/banner.png\" alt=\"Belle auto citron.\">";
       }
      ?>
     <h1>Voiture @Variée</h1>

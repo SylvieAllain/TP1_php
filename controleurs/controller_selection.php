@@ -1,3 +1,9 @@
+<!--
+Programmation Web II - TP1
+Projet : Voiture @Variée
+Hiver 2019
+Auteur: Sylvie Allain & Cyrice Paradis
+-->
 
 <?php
 
