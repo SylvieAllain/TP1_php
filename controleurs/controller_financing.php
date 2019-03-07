@@ -31,14 +31,14 @@ function determineInterestRate($price, $term) {
 
 function createTermsSelector($priceInDisplay) {
   foreach (FINANCING_RATE_INTEREST as $key => $value) {
-      $interestRate = determineInterestRate ($priceInDisplay, $value);
-      if ($key == DEFAULT_MONTHLY_RATE_ONLOAD) {
-        echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
-      }
-      else {
-        echo "<option value=\"$key\">" . $key . " mois - " . $interestRate . "%</option>";
-      }
+    $interestRate = determineInterestRate ($priceInDisplay, $key);
+    if ($key == DEFAULT_MONTHLY_RATE_ONLOAD) {
+      echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
     }
+    else {
+      echo "<option value=\"$key\">" . $key . " mois - " . $interestRate . "%</option>";
+    }
+  }
 }
 
 //Pour calculer du financement
