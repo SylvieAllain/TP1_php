@@ -46,7 +46,7 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   imagedestroy($img_source);
   imagedestroy($img_destination);
 }
-echo $builtYear; echo $color;
+
 function createTable($array_pictures,$color,$builtYear){
   foreach($array_pictures as $key => $value){
     $imageSrc = $array_pictures[$key]["imageSrc"];
