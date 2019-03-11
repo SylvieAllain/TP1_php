@@ -6,27 +6,10 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-if(!empty($submit_brand)){
-  try{
-    validate_cat_car($brand);
-  }
-  catch(Exception $e){
-    echo "Erreur : " . $e->getMessage();
-  }
-}
-
-if(!empty($submit_model)){
-  try{
-    validate_car($model);
-
-  }
-  catch(Exception $e){
-    echo "Erreur : " . $e->getMessage();
-  }
-}
 
 if(!empty($search)){
-  header("location:controleurs/controller_selection.php?model=$model&color=$color&builtYear=$builtYear");
+  $whatToSend = str_replace(" ","", $mileage);
+  header("location:controleurs/controller_selection.php?model=$model&color=$color&builtYear=$builtYear&mileage=$whatToSend");
 }
 ?>
 
@@ -76,16 +59,19 @@ if(!empty($search)){
         <label for="brand">Marque: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
       </div>
       <div class="col-6 ">
-        <label for="model">Modèle: </label><?php selectedCarModel($array_brandAndModel,$brand,$model)?>
+        <label for="model">Modèle: </label><?php createSelectedCarModel($array_brandAndModel,$brand,$model)?>
       </div>
     </div>
     <div class="row">
-      <div class=" offset-1 col-3">
-        <label for="color">Couleur : </label> <?php selectedCarColors($array_choosedModel,$builtYear);?>
+      <div class=" col-3">
+        <label for="color">Couleur : </label> <?php createSelectedCarColors($array_choosedModel,$array_modelColors,$builtYear,$mileage,$keyToGet);?>
       </div>
-      <div class = "col-4">
-        <label for="builtYear"> Année : </label> <?php selectedCarBuiltYear($array_choosedModel,$color); ?>
+      <div class = "col-2">
+        <label for="builtYear"> Année : </label> <?php createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$mileage,$keyToGet); ?>
     </div>
+    <div class = "col-6">
+      <label for="mileage"> Kilométrage : </label> <?php createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$builtYear); ?>
+  </div>
   </div>
   <br>
   <div class="row">

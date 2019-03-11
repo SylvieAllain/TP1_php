@@ -19,6 +19,8 @@ $color = (!empty($_POST['color'])) ? ($_POST['color']) : null;
 $submit_color = (!empty($_POST['submit_color'])) ? ($_POST['submit_color']) : null;
 $builtYear = (!empty($_POST['builtYear'])) ? ($_POST['builtYear']) : null;
 $submit_builtYear = (!empty($_POST['submit_builtYear'])) ? ($_POST['submit_builtYear']) : null;
+$mileage = (!empty($_POST['mileage'])) ? ($_POST['mileage']) : null;
+$submit_mileage = (!empty($_POST['submit_mileage'])) ? ($_POST['submit_mileage']) : null;
 $search = (!empty($_POST['search'])) ? ($_POST['search']) : null;
 
 function createSelectCategory($array_brandAndModel, $brand){
@@ -34,9 +36,8 @@ function createSelectCategory($array_brandAndModel, $brand){
   echo "</select>";
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "Ok". "\"". ">";
 }
-$arrayLength = sizeOf($array_brandAndModel[$brand]);
 
-function selectedCarModel($array_brandAndModel,$brand,$model){
+function createSelectedCarModel($array_brandAndModel,$brand,$model){
   echo '<select name='.'"'.'model'.'"'.'>';
   foreach($array_brandAndModel[$brand] as $key=> $value){
     if($array_brandAndModel[$brand][$key] == $model){
@@ -50,9 +51,6 @@ function selectedCarModel($array_brandAndModel,$brand,$model){
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_model" . "\"". "value=" . "\"" . "Ok". "\"". ">";
 }
 
-$array_modelColors = [];
-$array_modelBuiltYear = [];
-// $array_choosedModel = [];
 
 $array_choosedModel = [
   "car1" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null ],
@@ -150,43 +148,195 @@ switch($model){
     break;
 }
 
-function selectedCarColors($array_choosedModel,$builtYear){
-  $array_modelColors = [];
-  echo '<select name='.'"'.'color'.'"'.'>';
-  echo "<option value=". $_POST["color"] . ">" . $_POST["color"] . "</option>";
-  foreach($array_choosedModel as $key1=>$value){
-    if ($builtYear != null){
-      if ($array_choosedModel[$key1]["builtYear"] == $builtYear){
-        foreach ($array_choosedModel[$key1] as $key2=>$value){
-          if ($key2 == "color1" || $key2 == "color2"){
-            if(!in_array($value,$array_modelColors) && $value != null){
-              if ($color == $value){
-                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelColors[] = $value;
-              }
-              else{
-                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelColors[] = $value;
-              }
-            }
+$array_modelColors = [];
+$array_modelBuiltYear = [];
+$array_rangedMilageCarsFromChoosedModel = [];
+$indexOfTheCar = "car1";
+$keyToGet = "";
+
+function determinateRangeMileageForACar ($array_choosedModel,$array_rangeMilageCategory,$keyToGet){
+  global $array_choosedModel,$array_rangeMilageCategory;
+  $textToReturn = "";
+  foreach($array_choosedModel[$keyToGet] as $key => $valueMilage){
+    if($key == "mileage"){
+      foreach ($array_rangeMilageCategory as $key1 => $value1){
+        foreach($array_rangeMilageCategory[$key1] as $valueRange){
+          if ($valueMilage >= $array_rangeMilageCategory[8]["minRange"]){
+            $textToReturn = $array_rangeMilageCategory[8]["textRange"];
+          }
+          elseif ($valueMilage >= $array_rangeMilageCategory[$key1]["minRange"] && $valueMilage < $array_rangeMilageCategory[$key1]["maxRange"]){
+            $textToReturn = $array_rangeMilageCategory[$key1]["textRange"];
           }
         }
       }
     }
-    else {
-      foreach ($array_choosedModel[$key1] as $key2=>$value){
-        if ($key2 == "color1" || $key2 == "color2"){
-          if(!in_array($value,$array_modelColors) && $value != null){
-            // if ($color == $value){
-            //   echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-            //   $array_modelColors[] = $value;
-            // }
-            // else{
-              echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-              $array_modelColors[] = $value;
-            // }
+  }
+  return $textToReturn;
+}
+
+
+function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$builtYear,$color){
+  global $array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$indexOfTheCar,$builtYear,$color;
+  if($color != null && $builtYear != null){
+    foreach($array_choosedModel as $key1 => $value){
+      $keyToGet = $key1;
+      foreach($array_choosedModel[$key1] as $key2 => $value){
+        if($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color && $array_choosedModel[$key1]["builtYear"] == $builtYear){
+        $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$keyToGet);
+      }
+      if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
+        $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
+      }
+    }
+  }
+}
+  elseif($color != null && $builtYear == null){
+  foreach($array_choosedModel as $key1 => $value){
+  $indexOfTheCar = $key1;
+    foreach($array_choosedModel[$key1] as $key2 => $value){
+          if($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color){
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$indexOfTheCar);
           }
+        if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel)){
+          $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
         }
+      }
+    }
+  }
+  elseif($color == null && $builtYear != null){
+    foreach($array_choosedModel as $key1 => $value){
+    $indexOfTheCar = $key1;
+    foreach($array_choosedModel[$key1] as $key2 => $value){
+      if($array_choosedModel[$key1]["builtYear"] == $builtYear){
+      $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$indexOfTheCar);
+    }
+      if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel)){
+        $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
+      }
+    }
+  }
+}
+  else{
+    foreach($array_choosedModel as $key1 => $value){
+      $indexOfTheCar = $key1;
+      $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$indexOfTheCar);
+      if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel)){
+        $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
+      }
+    }
+  }
+}
+
+
+function addElementModelColor ($array_choosedModel, $keyToGet, $array_modelColors){
+  global $array_choosedModel, $array_modelColors, $keyToGet;
+  foreach($array_choosedModel[$keyToGet] as $key2 => $value){
+    if ($key2 == "color1" || $key2 == "color2"){
+      if(!in_array($value,$array_modelColors) && $value != null){
+        $array_modelColors[] = $value;
+      }
+    }
+  }
+}
+
+function addElementToModelBuiltYear($array_choosedModel,$keyToGet,$array_modelBuiltYear){
+  global $array_choosedModel,$keyToGet,$array_modelBuiltYear;
+  foreach($array_choosedModel[$keyToGet] as $key2 => $value){
+    if($key2 == "builtYear"){
+      if(!in_array($value,$array_modelBuiltYear) && $value != null){
+        $array_modelBuiltYear[] = $value;
+      }
+    }
+  }
+}
+
+function createArrayModelBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$keyToGet,$array_rangeMilageCategory,$milage){
+global $array_choosedModel,$array_modelBuiltYear,$color,$keyToGet,$mileage;
+  if ($color != null && $mileage != null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$keyToGet);
+      if($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color && $textToCompare == $mileage){
+          addElementToModelBuiltYear ($array_choosedModel,$keyToGet,$array_modelBuiltYear);
+        }
+    }
+  }
+  elseif ($color != null && $mileage == null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+      if($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color){
+        addElementToModelBuiltYear ($array_choosedModel,$keyToGet,$array_modelBuiltYear);
+      }
+    }
+  }
+  elseif ($color == null && $mileage != null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$keyToGet);
+      if($textToCompare == $mileage){
+        addElementToModelBuiltYear ($array_choosedModel,$keyToGet,$array_modelBuiltYear);
+      }
+    }
+  }
+  else{
+    foreach($array_choosedModel as $key1 => $value){
+      $keyToGet = $key1;
+      addElementToModelBuiltYear ($array_choosedModel,$keyToGet,$array_modelBuiltYear);
+    }
+  }
+}
+
+function createArrayModelColor($array_choosedModel,$array_modelColors,$builtYear,$keyToGet,$mileage){
+global $array_choosedModel,$array_modelColors,$builtYear,$keyToGet,$mileage;
+  if ($builtYear != null && $mileage != null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$keyToGet);
+      if($array_choosedModel[$key1]["builtYear"] == $builtYear && $textToCompare == $mileage){
+        addElementModelColor ($array_choosedModel,$keyToGet,$array_modelColors);
+      }
+    }
+  }
+  elseif ($builtYear != null && $mileage == null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+      if($array_choosedModel[$key1]["builtYear"] == $builtYear){
+        addElementModelColor ($array_choosedModel,$keyToGet,$array_modelColors);
+      }
+    }
+  }
+  elseif ($builtYear == null && $mileage != null){
+    foreach($array_choosedModel as $key1 => $value){
+    $keyToGet = $key1;
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_rangeMilageCategory,$keyToGet);
+      if($textToCompare == $mileage){
+        addElementModelColor ($array_choosedModel,$keyToGet,$array_modelColors);
+      }
+    }
+  }
+  else{
+    foreach($array_choosedModel as $key1 => $value){
+      $keyToGet = $key1;
+      addElementModelColor ($array_choosedModel,$keyToGet,$array_modelColors);
+    }
+  }
+}
+
+function createSelectedCarColors($array_choosedModel,$array_modelColors,$builtYear,$mileage,$keyToGet){
+  global $array_choosedModel,$array_modelColors,$builtYear,$color,$mileage,$keyToGet;
+  echo "<select name=color>";
+  echo "<option value=". null . "> </option>";
+  createArrayModelColor($array_choosedModel,$array_modelColors,$builtYear,$keyToGet,$array_rangeMilageCategory,$mileage);
+  foreach($array_modelColors as $value){
+    if($color == null){
+      echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+    }
+    else {
+      if($value == $color){
+        echo "<option selected value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+      }
+      else{
+        echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
       }
     }
   }
@@ -194,84 +344,50 @@ function selectedCarColors($array_choosedModel,$builtYear){
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_color" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-function selectedCarBuiltYear($array_choosedModel,$color){
-  $array_modelBuiltYear = [];
-  echo '<select name='.'"'.'builtYear'.'"'.'>';
-  echo "<option value=". $_POST["builtYear"] . ">". $_POST["builtYear"] . "</option>";
-  foreach($array_choosedModel as $key1=>$value){
-    if ($color != null){
-      if ($array_choosedModel[$key1]["color1"] == $color || $array_choosedModel[$key1]["color2"] == $color){
-        foreach($array_choosedModel[$key1] as $key2 => $value){
-          if($key2 == "builtYear"){
-            if(!in_array($value,$array_modelBuiltYear) && $value != null){
-              if ($color == $value){
-                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelBuiltYear[] = $value;
-              }
-              else{
-                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelBuiltYear[] = $value;
-              }
-            }
-          }
-        }
-      }
+function createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$mileage,$keyToGet){
+  global $array_choosedModel,$array_modelBuiltYear,$color,$mileage,$keyToGet,$builtYear;
+  echo "<select name=builtYear>";
+  echo "<option value=". null . "> </option>";
+  createArrayModelBuiltYear($array_choosedModel,$array_modelBuiltYear,$builtYear,$keyToGet,$array_rangeMilageCategory,$mileage);
+  foreach($array_modelBuiltYear as $value){
+    if($builtYear == null){
+      echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
     }
+    else {
+      if($value == $builtYear){
+        echo "<option selected value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+      }
       else{
-        foreach($array_choosedModel[$key1] as $key2 => $value){
-          if($key2 == "builtYear"){
-            if(!in_array($value,$array_modelBuiltYear)){
-              if ($color == $value){
-                echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelColors[] = $value;
-              }
-              else{
-                echo "<option value="."\""."$value"."\"".">" . "$value" . "</option>";
-                $array_modelBuiltYear[] = $value;
-              }
-            }
-          }
-        }
+        echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
       }
     }
+  }
   echo "</select>";
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_builtYear" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-function validate_cat_car($brand){
-  $isModelInBrandSelection = false;
-  if(empty($brand)){
-    throw new Exception ("Vous devez sélectionner une catégorie de voiture");
+function createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel, $array_rangeMilageCategory,$color,$builtYear){
+  global $array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$mileage;
+  echo "<select name=mileage>";
+  echo "<option value=". null . "> </option>";
+  createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$builtYear,$color);
+  foreach($array_rangedMilageCarsFromChoosedModel as $value){
+    if($mileage == null){
+      echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+    }
+    else {
+      if($value == $mileage && $value != null){
+        echo "<option selected value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+      }
+      else{
+      echo "<option value=" . "\"". $value . "\"" . ">" . $value . "</option>";
+      }
+    }
   }
+  echo "</select>";
+  echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_mileage" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-function validate_car($model){
-  if(empty($model)){
-    throw new Exception ("Vous devez sélectionner un modèle de voiture");
-  }
-}
-echo $color;
 include_once 'vues/accueil.php';
-
-// if(!empty($submit_brand)){
-//   try{
-//     validate_cat_car($brand);
-//   }
-//   catch(Exception $e){
-//     echo "Erreur : " . $e->getMessage();
-//   }
-// }
-//
-// if(!empty($submit)){
-//   try{
-//     validate_car($model);
-//     include_once "vues/selection.php";
-//     header("location:vues/selection.php?car=$model");
-//
-//   }
-//   catch(Exception $e){
-//     echo "Erreur : " . $e->getMessage();
-//   }
-// }
 
 ?>
