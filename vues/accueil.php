@@ -8,8 +8,9 @@ Auteur: Sylvie Allain & Cyrice Paradis
 <?php
 
 if(!empty($search)){
-  $whatToSend = str_replace(" ","", $mileage);
-  header("location:controleurs/controller_selection.php?model=$model&color=$color&builtYear=$builtYear&mileage=$whatToSend");
+  $mileageToSend = str_replace(" ","", $mileage);
+  $stateToSend = str_replace(" ", "", $state);
+  header("location:controleurs/controller_selection.php?model=$model&color=$color&builtYear=$builtYear&mileage=$mileageToSend&state=$stateToSend");
 }
 ?>
 
@@ -63,15 +64,20 @@ if(!empty($search)){
       </div>
     </div>
     <div class="row">
-      <div class=" col-3">
-        <label for="color">Couleur : </label> <?php createSelectedCarColors($array_choosedModel,$array_modelColors,$builtYear,$mileage,$keyToGet);?>
+      <div class=" offset-3 col-3">
+        <label for="color">Couleur : </label> <?php createSelectedCarColors($array_choosedModel,$array_modelColors,$color,$builtYear,$mileage,$state);?>
       </div>
-      <div class = "col-2">
-        <label for="builtYear"> Année : </label> <?php createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$mileage,$keyToGet); ?>
+      <div class = "col-6">
+        <label for="builtYear"> Année : </label> <?php createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$builtYear,$mileage,$state); ?>
+    </div>
+  </div>
+  <div class="row">
+    <div class = "offset-1 col-5">
+      <label for="mileage"> Kilométrage : </label> <?php createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$builtYear,$state); ?>
     </div>
     <div class = "col-6">
-      <label for="mileage"> Kilométrage : </label> <?php createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$builtYear); ?>
-  </div>
+      <label for="state"> État du véhicule : </label> <?php createSelectedCarState($array_choosedModel,$array_modelState,$builtYear,$mileage,$color,$state); ?>
+    </div>
   </div>
   <br>
   <div class="row">
