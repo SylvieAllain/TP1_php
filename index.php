@@ -9,7 +9,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 //TODO // réusiner le code pour qu'il ait moins de DRY. Tenter également de retirer tout les éléments globals.
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
-
+//Attribution des variables "POST".
 $brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : "Lada";
 $submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : null;
 $model = (!empty($_POST['model'])) ? ($_POST['model']) : "Granta";
@@ -24,6 +24,7 @@ $state = (!empty($_POST['state'])) ? ($_POST['state']) : null;
 $submit_state = (!empty($_POST['submit_state'])) ? ($_POST['submit_state']) : null;
 $search = (!empty($_POST['search'])) ? ($_POST['search']) : null;
 
+//Crée le menu déroulant pour les marques de voiture.
 function createSelectCategory($array_brandAndModel, $brand){
   echo '<select name='.'"'.'brand'.'"'.'>';
   foreach($array_brandAndModel as $key=>$value){
@@ -38,6 +39,7 @@ function createSelectCategory($array_brandAndModel, $brand){
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "Ok". "\"". ">";
 }
 
+//Crée le menu déroulant pour les modèles de voitures rattachés à la marque sélectionnée.
 function createSelectedCarModel($array_brandAndModel,$brand,$model){
   echo '<select name='.'"'.'model'.'"'.'>';
   foreach($array_brandAndModel[$brand] as $key=> $value){
@@ -52,7 +54,7 @@ function createSelectedCarModel($array_brandAndModel,$brand,$model){
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_model" . "\"". "value=" . "\"" . "Ok". "\"". ">";
 }
 
-
+//Array buffer.
 $array_choosedModel = [
   "car1" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null ],
   "car2" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null],
@@ -61,7 +63,7 @@ $array_choosedModel = [
 
 
 
-
+//Ce switch permet de transférer les données du tableau du modèle de voiture sélectionnées dans le tableau buffer.
 switch($model){
   case "Granta":
     foreach($array_ladaGranta as $key1 => $value){
@@ -156,6 +158,7 @@ $array_modelState = [];
 $indexOfTheCar = "";
 $keyToGet = "";
 
+//Récolte les valeurs du kilométrage d'une voitures du modèle sélectionnés, puis les convertis en une catégorie.
 function determinateRangeMileageForACar ($array_choosedModel,$array_rangeMilageCategory,$keyToGet){
   global $array_rangeMilageCategory;
   $textToReturn = "";
@@ -176,7 +179,7 @@ function determinateRangeMileageForACar ($array_choosedModel,$array_rangeMilageC
   return $textToReturn;
 }
 
-
+//Créer le tableau contenant les catégories de kilométrage selon le contenu des autres variables (année de construction,couleur et l'état du véhicule).
 function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$builtYear,$color,$state){
   global $array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$builtYear,$color,$state;
   if($color != null && $builtYear != null && $state != null){
@@ -281,7 +284,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rang
   }
 }
 
-
+//Permet d'ajouter un élément dans le tableau de couleurs disponibles.
 function addElementModelColor ($array_choosedModel, $keyToGet, $array_modelColors){
   global $array_modelColors;
   foreach($array_choosedModel[$keyToGet] as $key2 => $value){
@@ -293,6 +296,7 @@ function addElementModelColor ($array_choosedModel, $keyToGet, $array_modelColor
   }
 }
 
+//Permet d'ajouter un élément dans le tableau d'années de construction disponibles.
 function addElementToModelBuiltYear($array_choosedModel,$keyToGet,$array_modelBuiltYear){
   global $array_modelBuiltYear;
   foreach($array_choosedModel[$keyToGet] as $key2 => $value){
@@ -304,6 +308,7 @@ function addElementToModelBuiltYear($array_choosedModel,$keyToGet,$array_modelBu
   }
 }
 
+//Permet d'ajouter un élément dans le tableau d'états de véhicule disponibles.
 function addElementToModelState($array_choosedModel,$keyToGet,$array_modelState){
   global $array_modelState;
   foreach($array_choosedModel[$keyToGet] as $key2 => $value){
@@ -315,6 +320,7 @@ function addElementToModelState($array_choosedModel,$keyToGet,$array_modelState)
   }
 }
 
+//Créer le tableau contenant les années disponibles selon le contenu des autres variables (kilométrage,couleur et l'état du véhicule).
 function createArrayModelBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$array_rangeMilageCategory,$milage,$state){
 global $array_modelBuiltYear,$color,$mileage,$state;
   if ($color != null && $mileage != null && $state != null){
@@ -384,6 +390,7 @@ global $array_modelBuiltYear,$color,$mileage,$state;
   }
 }
 
+//Créer le tableau contenant les couleurs disponibles selon le contenu des autres variables (année de construction, le kilométrage et l'état du véhicule).
 function createArrayModelColor($array_choosedModel,$array_modelColors,$builtYear,$mileage,$state){
 global $array_modelColors,$builtYear,$color,$state;
   if ($builtYear != null && $mileage != null && $state != null){
@@ -456,6 +463,7 @@ global $array_modelColors,$builtYear,$color,$state;
   }
 }
 
+//Créer le tableau contenant les états du véhicule disponibles selon le contenu des autres variables (année de construction,couleur et le kilométrage).
 function createArrayModelState($array_choosedModel,$array_modelState,$color,$array_rangeMilageCategory,$milage,$builtYear){
 global $array_modelState,$color,$mileage,$builtYear;
   if ($color != null && $mileage != null && $builtYear != null){
@@ -518,6 +526,7 @@ global $array_modelState,$color,$mileage,$builtYear;
   }
 }
 
+// Création du menu déroulang contenant les couleurs disponibles selon les choix de l'utilisateur.
 function createSelectedCarColors($array_choosedModel,$array_modelColors,$color,$builtYear,$mileage,$state){
   global $array_modelColors;
   echo "<select name=color>";
@@ -540,6 +549,7 @@ function createSelectedCarColors($array_choosedModel,$array_modelColors,$color,$
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_color" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
+// Création du menu déroulang contenant les années de fabrication disponibles selon les choix de l'utilisateur.
 function createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$builtYear,$mileage,$state){
   global $array_modelBuiltYear/*,$color,$mileage,$builtYear,$state*/;
   echo "<select name=builtYear>";
@@ -562,6 +572,7 @@ function createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$c
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_builtYear" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
+// Création du menu déroulang contenant les écarts de kilométrage disponibles selon les choix de l'utilisateur.
 function createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel, $array_rangeMilageCategory,$color,$builtYear,$state){
   global $array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$mileage,$state;
   echo "<select name=mileage>";
@@ -584,6 +595,7 @@ function createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageC
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . "submit_mileage" . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
+// Création du menu déroulang contenant les états du véhicule disponibles selon les choix de l'utilisateur. 
 function createSelectedCarState($array_choosedModel,$array_modelState,$builtYear,$mileage,$color,$state){
   global $array_modelState,$builtYear,$color,$mileage,$color,$state;
   echo "<select name=state>";
