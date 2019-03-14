@@ -18,7 +18,7 @@ $rand_pictures = array_rand($array_randomPictures,3);
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src=<?php echo $array_randomPictures[$rand_pictures[0]];?> alt="firstSlide">
+          <img class="d-block w-100" class="imgCarousel" src=<?php echo $array_randomPictures[$rand_pictures[0]];?> alt="firstSlide">
         </div>
         <div class="carousel-item">
           <img class="d-block w-100" src=<?php echo $array_randomPictures[$rand_pictures[1]];?> alt="secondSlide">
@@ -36,9 +36,10 @@ $rand_pictures = array_rand($array_randomPictures,3);
         <span class="sr-only">Next</span>
       </a>
     </div>
-    <div class="container">
+    <div class="container" id="containerAccueil">
+      <h2> Faites votre choix de véhicule </h2>
     <form name="formulaire" action="" method="post">
-      <div class="row">
+      <div class="row rowAccueil">
         <div class="col-3 offset-3">
         <label for="brand">Marque: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
       </div>
@@ -46,15 +47,15 @@ $rand_pictures = array_rand($array_randomPictures,3);
         <label for="model">Modèle: </label><?php createSelectedCarModel($array_brandAndModel,$brand,$model)?>
       </div>
     </div>
-    <div class="row">
-      <div class=" offset-3 col-3">
+    <div class="row rowAccueil" >
+      <div class=" offset-3 col-3" >
         <label for="color">Couleur : </label> <?php createSelectedList($array_modelColors,$color, "color", "submit_color");?>
       </div>
       <div class = "col-6">
         <label for="builtYear"> Année : </label> <?php createSelectedList($array_modelBuiltYear,$builtYear, "builtYear", "submit_builtYear"); ?>
     </div>
   </div>
-  <div class="row">
+  <div class="row rowAccueil ">
     <div class = "offset-1 col-5">
       <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
     </div>
@@ -63,11 +64,11 @@ $rand_pictures = array_rand($array_randomPictures,3);
     </div>
   </div>
   <br>
-  <div class="row">
+  <div class="row rowAccueil">
     <div class="offset-5 col-7">
       <input type="submit" name="search" value="Rechercher"> </input>
     </div>
   </div>
     </form>
   </div>
-  <?php include_once 'footer.php'; ?>
+  <?php include_once 'vues/footer.php'; ?>
