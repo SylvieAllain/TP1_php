@@ -26,6 +26,11 @@ strong {
   padding-top: 0.8em;
 }
 
+#financingDescription {
+  margin-top: 1%;
+  padding-left: 3%;
+}
+
 #carFinancingRecap {
   font-size: 1.6em;
   background-color: #FBFCB5;
@@ -39,8 +44,25 @@ strong {
 }
 
 #termSelector {
-  padding:1%;
+  text-align: center;
   margin-bottom: 1%;
+  margin-right: 25%;
+  margin-left: 28%;
+}
+
+#termCol{
+  padding-left: 0% !important;
+  padding-right: 0% !important;
+  flex-grow: 0;
+}
+
+#termRow{
+background-color: #FBFCB5;
+background-image: url("../images/lemonsDrop_transparent.png");
+background-size: 10%;
+padding-left: 0%;
+padding-right: 0%;
+padding-top: 1em;
 }
 
 #resumeFinancing {

@@ -295,6 +295,7 @@ $email = (isset($_POST["carToEmail"])) ? ($_POST["carToEmail"]) : null;
 $submitCarToEmail = (isset($_POST["sumbitCarToEmail"])) ? ($_POST["sumbitCarToEmail"]) : null;
 
 //Affichages des différentes vues
+$pageTitle = "Financement";
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 

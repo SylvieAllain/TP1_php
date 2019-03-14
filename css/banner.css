@@ -14,4 +14,18 @@ Auteur: Sylvie Allain & Cyrice Paradis
 #rowBanner {
   border: #384F34;
   box-shadow: 3px 3px rgb(56, 79, 52);
+  margin-bottom: 0%;
+  line-height: 4em;
+}
+
+.offset-3 {
+  flex-grow: 0;
+}
+
+#nameSiteBanner {
+  font-size: 4em;
+}
+
+#undertitleSiteBanner{
+  text-align: center;
 }
