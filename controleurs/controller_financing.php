@@ -7,6 +7,11 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'C:\wamp64\vendor\autoload.php';
+require 'C:\wamp64\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+
 include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
 include "fonction.php";
@@ -50,70 +55,37 @@ function createTermsSelector($priceInDisplay,$termsSelect){
 
 //Pour envoyer un courriel contenant le résumé du financment
 function sendEmail($to, $model) {
-	$subject = "Votre soumission automobile!";
+  $mail = new PHPMailer(TRUE);
+   $mail->setFrom('voiture.a.variee@gmail.com', 'Voiture AVariée');
+   $mail->addAddress($to);
+   $mail->Subject = 'Votre soumission automobile' . $model;
+   $mail->Body = $model;
 
-	$message = "
-	<html>
-		<head>
-			<title>HTML email</title>
-		</head>
-		<body>
-			<h1>Voiture @Variée : la plus grande sélection de citron !</h1>
-				<h2>Votre soummission automobile</h2>
-					<h3>Ne réflechissez pas trop longtemps, nous avons le véhicule qu'il vous faut au prix qu'il nous faut. Ne cherchez pas plus longtemps.</h3>
-            <table>
-							<th><img src=\"\" alt=\"Votre voiture\"></th>
-							<th>$model</th>
-						</table>
-						<h4>Voici le le récapitulatif</h4>
-						<table>
-							<tr>
-								<th>Détail</th>
-								<th>Description</th>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Doe</td>
-							</tr>
-						</table>
-		</body>
-	</html>
-	";
-/*
-	// Always set content-type when sending HTML email
-	$headers = "MIME-Version: 1.0" . "\r\n";
-	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+   /* SMTP parameters. */
 
-	// More headers
-	$headers .= 'From: <voitureavariee@citron.com>' . "\r\n";
-*/
-	if(!mail($to,$subject,$message)) {
-    echo "Shits failed";
-  };
+   /* Tells PHPMailer to use SMTP. */
+   $mail->isSMTP();
+
+   /* SMTP server address. */
+   $mail->Host = 'smtp.gmail.com';
+
+   /* Use SMTP authentication. */
+   $mail->SMTPAuth = TRUE;
+
+   /* Set the encryption system. */
+   $mail->SMTPSecure = 'tsl';
+
+   /* SMTP authentication username. */
+   $mail->Username = 'voiture.a.variee@gmail.com';
+
+   /* SMTP authentication password. */
+   $mail->Password = '123456789abcd';
+
+   /* Set the SMTP port. */
+   $mail->Port = 587;
+
+   /* Finally send the mail. */
+   $mail->send();
 }
 
 
@@ -302,16 +274,14 @@ include_once "../vues/financing.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try{
     createFinancingResume($priceInDisplay, $model, $deposit, $isIndex);
-    //echo $email . 'email';
-    echo $submitCarToEmail . 'submit';
+
   }
   catch (Exception $e) {
     echo "Message : ",  $e->getMessage(), "\n";
   }
 }
 
-if(!empty($submitCarToEmail)) {
-    echo $submitCarToEmail . 'submit';
+if(empty($submitCarToEmail)) {
   sendEmail('cyrice.paradis@gmail.com', $model);
 }
 

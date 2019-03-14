@@ -6,7 +6,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-//TODO Tenter également de retirer tout les éléments globals. 
+//TODO Tenter également de retirer tout les éléments globals.
 $pageTitle = "Accueil";
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
