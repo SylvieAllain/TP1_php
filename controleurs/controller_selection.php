@@ -140,7 +140,7 @@ function createTable($array_pictures,$color,$builtYear,$mileage,$state){
     }
   }
 }
-
+$pageTitle = "Sélection";
 include_once '../vues/banner.php';
 include_once "../vues/selection.php";
 include_once '../vues/footer.php';
