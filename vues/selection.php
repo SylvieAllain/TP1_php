@@ -12,18 +12,18 @@ Auteur: Sylvie Allain & Cyrice Paradis
         <div class="container">
           <div class="row">
             <div class="col-3">
-              <h4> Photos </h4>
+              <h4 class="columnTitles"> Photos </h4>
             </div>
             <div class="col-6">
-              <h4> Description <h4>
+              <h4 class="columnTitles"> Description <h4>
             </div>
             <div class="col-3">
-              <h4> Prix (cliquer pour obtenir des détails) <h4>
+              <h4 class="columnTitles"> Prix <h4>
             </div>
           </div>
         <?php
         if(isset($_GET["model"]) && isset($_GET["color"]) && isset($_GET["builtYear"]) && isset($_GET["mileage"]) && isset($_GET["state"])){
-        createTable($array_pictures,$color,$builtYear,$mileage,$state);
+        createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex);
       }
         ?>
       </div>

@@ -12,6 +12,7 @@ $color = null;
 $builtYear = null;
 $mileage = null;
 $state = null;
+$isIndex = false;
 
 if(isset($_GET["model"])){
   $model = $_GET["model"];
@@ -33,7 +34,7 @@ if(isset($_GET["state"])){
 
 include_once "../modeles/model_cars.php";
 include_once "fonction.php";
-$array_pictures = determineCarsByModel($model);
+$array_pictures = determineCarsByModel($model,$isIndex);
 
 function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   $img_source = imagecreatefromjpeg($imageSrc);
@@ -56,27 +57,6 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   imagedestroy($img_destination);
 }
 
-
-function determinateRangeMileageForACar ($array_pictures,$array_rangeMilageCategory,$keyToGet){
-  $textToReturn = "";
-  foreach($array_pictures[$keyToGet] as $key => $valueMilage){
-    if($key == "mileage"){
-      foreach ($array_rangeMilageCategory as $key1 => $value1){
-        foreach($array_rangeMilageCategory[$key1] as $valueRange){
-          if ($valueMilage >= $array_rangeMilageCategory[8]["minRange"]){
-            $textToReturn = $array_rangeMilageCategory[8]["textRange"];
-          }
-          elseif ($valueMilage >= $array_rangeMilageCategory[$key1]["minRange"] && $valueMilage < $array_rangeMilageCategory[$key1]["maxRange"]){
-            $textToReturn = $array_rangeMilageCategory[$key1]["textRange"];
-          }
-        }
-      }
-    }
-  }
-  $textToReturn = str_replace(" ", "", $textToReturn);
-  return $textToReturn;
-}
-
 function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   $textToSend = "test";
   foreach ($array_pictures as $key => $value){
@@ -91,14 +71,14 @@ function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   return $textToSend;
 }
 
-function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$keyToGet){
+function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$keyToGet,$isIndex){
   global $array_rangeMilageCategory;
   $isThisBelong = false;
   foreach($array_pictures as $key => $value){
     if($key == $keyToGet){
       if($array_pictures[$key]["color1"] == $color || $array_pictures[$key]["color2"] == $color || $color == null){
         if($array_pictures[$key]["builtYear"] == $builtYear || $builtYear == null){
-          $textToCompare = determinateRangeMileageForACar($array_pictures,$array_rangeMilageCategory,$key);
+          $textToCompare = determinateRangeMileageForACar($array_pictures,$array_rangeMilageCategory,$key,$isIndex);
           if($textToCompare == $mileage || $mileage == null){
             $stateToCompare = sendTextWithoutWhiteSpaces($array_pictures,$key);
             if($stateToCompare == $state || $state == null){
@@ -112,13 +92,13 @@ function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$stat
   return $isThisBelong;
 }
 
-function createTable($array_pictures,$color,$builtYear,$mileage,$state){
+function createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex){
   global $array_rangeMilageCategory;
   foreach($array_pictures as $key => $value){
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key);
+    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key,$isIndex);
     if($isThisPicturesBelong){
       echo "<div class=\"row\" id=\"carDisplayRow\">";
       echo "<div class=\" col-3 carPicture\">";
@@ -135,7 +115,9 @@ function createTable($array_pictures,$color,$builtYear,$mileage,$state){
             "<div class=\"col-3\">".
             "<p class=\"carDescriptionTitle\"> Autres informations : </p>" . $array_pictures[$key]["description"] .
             " </div>";
-      echo "<div class=\"col-3\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
+      echo "<div class=\"col-3 anchorPicture\">" .
+            "(Cliquer pour obtenir les détails) <br>".
+              "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
       echo "</div>";
     }
   }

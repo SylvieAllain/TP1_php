@@ -33,7 +33,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
       <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
     </div>
     <div class="col-1 termCol">
-      <input type="submit" name="termsButton" value="Calculer"></input>
+      <input type="submit" class="btn btn-success" name="termsButton" value="Calculer"></input>
     </div>
   </div>
 </form>

@@ -81,3 +81,9 @@ padding-top: 1em;
   background-size: 100%;
   line-height: 0.5;
 }
+
+.btn-success{
+  box-shadow: 3px 3px rgba(236, 203, 48,0.5);
+  background-color: #384F34;
+  border:1px solid black;
+}

@@ -81,7 +81,9 @@ label {
 .btn-success{
   margin-left: 0.2rem;
   height: 55%;
-  box-shadow: 3px 3px rgba(236, 203, 48,0.5)
+  box-shadow: 3px 3px rgba(236, 203, 48,0.5);
+  background-color: #384F34;
+  border:1px solid black;
 }
 
 .searchButton{

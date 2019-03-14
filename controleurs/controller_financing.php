@@ -14,7 +14,7 @@ include "fonction.php";
 /*---Fonctions---*/
 
 //Pour le traitement de la page
-
+$isIndex = false;
 function determineInterestRate($price, $term) {
   if ($price <= MIN_FOR_BEST_RATE) {
     $interestRate =  FINANCING_RATE_INTEREST[$term][BEST_RATE_INDEX];
@@ -163,12 +163,12 @@ function validateDeposit($priceInDisplayWithTaxes, $deposit) {
     }
 }
 
-function validatePrice($price, $model){
+function validatePrice($price, $model,$isIndex){
   if (!is_Numeric($price)){
     throw new Exception ("Bravo! Tu as mis des lettres dans l'URL du prix");
   }
 
-  $carsInModel = determineCarsByModel(ucfirst($model));
+  $carsInModel = determineCarsByModel(ucfirst($model),$isIndex);
   $priceCheck = false;
   foreach ($carsInModel as $value => $key) {
     if ($price == $key["price"]) {
@@ -266,8 +266,8 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 }
 
 //Fonction principale appelant toutes les autres
-function createFinancingResume($priceInDisplay, $model,  $deposit) {
-  validatePrice($priceInDisplay, $model);
+function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
+  validatePrice($priceInDisplay, $model, $isIndex);
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
 
@@ -301,7 +301,7 @@ include_once "../vues/financing.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try{
-    createFinancingResume($priceInDisplay, $model, $deposit);
+    createFinancingResume($priceInDisplay, $model, $deposit, $isIndex);
     //echo $email . 'email';
     echo $submitCarToEmail . 'submit';
   }

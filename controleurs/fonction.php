@@ -7,8 +7,14 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
 <?php
 
-function determineCarsByModel($model){
-  include "../modeles/model_cars.php";
+function determineCarsByModel($model,$isIndex){
+  if($isIndex){
+    include "modeles/model_cars.php";
+  }
+  else {
+    include "../modeles/model_cars.php";
+  }
+
   $array_cars = [];
   switch ($model){
     case "Granta":
@@ -77,6 +83,28 @@ function determineCarsByModel($model){
     throw new Exception("Bravo! Tu as brisé le site...");
     */
   return $array_cars;
+}
+
+function determinateRangeMileageForACar ($array_pictures,$array_rangeMilageCategory,$keyToGet,$isIndex){
+  $textToReturn = "";
+  foreach($array_pictures[$keyToGet] as $key => $valueMilage){
+    if($key == "mileage"){
+      foreach ($array_rangeMilageCategory as $key1 => $value1){
+        foreach($array_rangeMilageCategory[$key1] as $valueRange){
+          if ($valueMilage >= $array_rangeMilageCategory[8]["minRange"]){
+            $textToReturn = $array_rangeMilageCategory[8]["textRange"];
+          }
+          elseif ($valueMilage >= $array_rangeMilageCategory[$key1]["minRange"] && $valueMilage < $array_rangeMilageCategory[$key1]["maxRange"]){
+            $textToReturn = $array_rangeMilageCategory[$key1]["textRange"];
+          }
+        }
+      }
+    }
+  }
+  if(!$isIndex){
+    $textToReturn = str_replace(" ", "", $textToReturn);
+  }
+  return $textToReturn;
 }
 
 ?>

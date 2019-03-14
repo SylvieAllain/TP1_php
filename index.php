@@ -6,10 +6,12 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-//TODO // réusiner le code pour qu'il ait moins de DRY. Tenter également de retirer tout les éléments globals.
+//TODO Tenter également de retirer tout les éléments globals. 
 $pageTitle = "Accueil";
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
+include "controleurs/fonction.php";
+$isIndex = true;
 //Attribution des variables "POST".
 $brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : "Lada";
 $submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : null;
@@ -55,134 +57,22 @@ function createSelectedCarModel($array_brandAndModel,$brand,$model){
   echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_model" . "\"". "class=\"btn btn-success\"" . "value=" . "\"" . "Ok". "\"". ">";
 }
 
-//Array buffer.
-$array_choosedModel = [
-  "car1" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null ],
-  "car2" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null],
-  "car3" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null]
-];
-
-//Ce switch permet de transférer les données du tableau du modèle de voiture sélectionnées dans le tableau buffer.
-switch($model){
-  case "Granta":
-    foreach($array_ladaGranta as $key1 => $value){
-      foreach($array_ladaGranta[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Largus":
-    foreach($array_ladaLargus as $key1 => $value){
-      foreach($array_ladaLargus[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Niva":
-    foreach($array_ladaNiva as $key1 => $value){
-      foreach($array_ladaNiva[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Firebird":
-    foreach($array_pontiacFirebird as $key1 => $value){
-      foreach($array_pontiacFirebird[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "GTO":
-    foreach($array_pontiacGTO as $key1 => $value){
-      foreach($array_pontiacGTO[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Sunfire":
-    foreach($array_pontiacSunfire as $key1 => $value){
-      foreach($array_pontiacSunfire[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Korando":
-    foreach($array_ssangyongKorando as $key1 => $value){
-      foreach($array_ssangyongKorando[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Musso":
-    foreach($array_ssangyongMusso as $key1 => $value){
-      foreach($array_ssangyongMusso[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Rexton":
-    foreach($array_ssangyongRexton as $key1 => $value){
-      foreach($array_ssangyongRexton[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Beetle":
-    foreach($array_volkswagenBeetle as $key1 => $value){
-      foreach($array_volkswagenBeetle[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Golf":
-    foreach($array_volkswagenGolf as $key1 => $value){
-      foreach($array_volkswagenGolf[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-  case "Jetta":
-    foreach($array_volkswagenJetta as $key1 => $value){
-      foreach($array_volkswagenJetta[$key1] as $key2 => $value){
-        $array_choosedModel[$key1][$key2] = $value;
-      }
-    }
-    break;
-}
+$array_choosedModel = determineCarsByModel($model,$isIndex);
 
 $array_modelColors = [];
 $array_modelBuiltYear = [];
 $array_rangedMilageCarsFromChoosedModel = [];
 $array_modelState = [];
 
-//Récolte les valeurs du kilométrage d'une voitures du modèle sélectionnés, puis les convertis en une catégorie.
-function determinateRangeMileageForACar ($array_choosedModel,$array_rangeMilageCategory,$keyToGet){
-  $textToReturn = "";
-  foreach($array_choosedModel[$keyToGet] as $key => $valueMilage){
-    if($key == "mileage"){
-      foreach ($array_rangeMilageCategory as $key1 => $value1){
-        foreach($array_rangeMilageCategory[$key1] as $valueRange){
-          if ($valueMilage >= $array_rangeMilageCategory[8]["minRange"]){
-            $textToReturn = $array_rangeMilageCategory[8]["textRange"];
-          }
-          elseif ($valueMilage >= $array_rangeMilageCategory[$key1]["minRange"] && $valueMilage < $array_rangeMilageCategory[$key1]["maxRange"]){
-            $textToReturn = $array_rangeMilageCategory[$key1]["textRange"];
-          }
-        }
-      }
-    }
-  }
-  return $textToReturn;
-}
 
 //Créer le tableau contenant les catégories de kilométrage selon le contenu des autres variables (année de construction,couleur et l'état du véhicule).
-function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_category,$array_rangedMilageCarsFromChoosedModel,$option1,$option2,$option3){
+function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_category,$array_rangedMilageCarsFromChoosedModel,$option1,$option2,$option3,$isIndex){
   global $array_rangedMilageCarsFromChoosedModel;
   if($option1 != null && $option2 != null && $option3 != null){
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if(($array_choosedModel[$key1]["color1"] == $option1 || $array_choosedModel[$key1]["color2"] == $option1) && $array_choosedModel[$key1]["builtYear"] == $option2 && $array_choosedModel[$key1]["state"] == $option3){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -194,7 +84,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
             if(($array_choosedModel[$key1]["color1"] == $option1 || $array_choosedModel[$key1]["color2"] == $option1) && $array_choosedModel[$key1]["state"] == $option3){
-              $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+              $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
               if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
                 $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
               }
@@ -206,7 +96,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if($array_choosedModel[$key1]["builtYear"] == $option2 && $array_choosedModel[$key1]["state"] == $option3){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -218,7 +108,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if(($array_choosedModel[$key1]["color1"] == $option1 || $array_choosedModel[$key1]["color2"]) == $option1 && $array_choosedModel[$key1]["builtYear"] == $option2 ){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -230,7 +120,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if($array_choosedModel[$key1]["color1"] == $option1 || $array_choosedModel[$key1]["color2"] == $option1){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -242,7 +132,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if($array_choosedModel[$key1]["builtYear"] == $option2){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -254,7 +144,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
     foreach($array_choosedModel as $key1 => $value){
       foreach($array_choosedModel[$key1] as $key2 => $value){
         if($array_choosedModel[$key1]["state"] == $option3){
-          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+          $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
           if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
             $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
           }
@@ -264,7 +154,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
   }
   else{
     foreach($array_choosedModel as $key1 => $value){
-      $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+      $textToAdd = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
       if(!in_array($textToAdd,$array_rangedMilageCarsFromChoosedModel) && $textToAdd != null){
         $array_rangedMilageCarsFromChoosedModel[] = $textToAdd;
       }
@@ -336,10 +226,10 @@ function addElementToDropDownMenu ($array_choosedModel, $keyToGet, $array_toDrop
   }
 }
 
-function createArrayForACarOption($array_choosedModel,$array_category,$array_toDropDownMenu, $option1, $option2, $option3, $keyName1, $keyName2, $keyName3, $mainValueName){
+function createArrayForACarOption($array_choosedModel,$array_category,$array_toDropDownMenu, $option1, $option2, $option3, $keyName1, $keyName2, $keyName3, $mainValueName,$isIndex){
   if ($option1 != null && $option2 != null && $option3 != null){
     foreach($array_choosedModel as $key1 => $value){
-    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
       if(($array_choosedModel[$key1][$keyName1] == $option1 || $array_choosedModel[$key1][$keyName3] == $option1) && $textToCompare == $option2 && $array_choosedModel[$key1][$keyName2] == $option3){
       addElementToDropDownMenu ($array_choosedModel,$key1,$array_toDropDownMenu, $mainValueName);
       }
@@ -354,7 +244,7 @@ function createArrayForACarOption($array_choosedModel,$array_category,$array_toD
   }
   elseif ($option1 == null && $option2 != null && $option3 != null){
     foreach($array_choosedModel as $key1 => $value){
-    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
       if($textToCompare == $option2 && $array_choosedModel[$key1][$keyName2] == $option3){
       addElementToDropDownMenu ($array_choosedModel,$key1,$array_toDropDownMenu, $mainValueName);
       }
@@ -362,7 +252,7 @@ function createArrayForACarOption($array_choosedModel,$array_category,$array_toD
   }
   elseif ($option1 != null && $option2 != null && $option3 == null){
     foreach($array_choosedModel as $key1 => $value){
-    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
       if(($array_choosedModel[$key1][$keyName1] == $option1 || $array_choosedModel[$key1][$keyName3] == $option1) && $textToCompare == $option2 ){
       addElementToDropDownMenu ($array_choosedModel,$key1,$array_toDropDownMenu, $mainValueName);
       }
@@ -377,7 +267,7 @@ function createArrayForACarOption($array_choosedModel,$array_category,$array_toD
   }
   elseif ($option1 == null && $option2 != null && $option3 == null){
     foreach($array_choosedModel as $key1 => $value){
-    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
+    $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1,$isIndex);
       if($textToCompare == $option2){
       addElementToDropDownMenu ($array_choosedModel,$key1,$array_toDropDownMenu,$mainValueName);
       }
@@ -397,10 +287,10 @@ function createArrayForACarOption($array_choosedModel,$array_category,$array_toD
   }
 }
 
-createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelColors,$builtYear,$mileage,$state,"builtYear","state", "builtYear", "color");
-createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelBuiltYear,$color,$mileage,$state,"color1","state","color2","builtYear");
-createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$color,$builtYear,$state);
-createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelState,$color,$mileage,$builtYear,"color1","builtYear","color2","state");
+createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelColors,$builtYear,$mileage,$state,"builtYear","state", "builtYear", "color",$isIndex);
+createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelBuiltYear,$color,$mileage,$state,"color1","state","color2","builtYear",$isIndex);
+createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$color,$builtYear,$state,$isIndex);
+createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelState,$color,$mileage,$builtYear,"color1","builtYear","color2","state",$isIndex);
 
 
 // Création du menu déroulang contenant les couleurs disponibles selon les choix de l'utilisateur.

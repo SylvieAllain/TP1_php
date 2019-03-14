@@ -9,7 +9,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 <?php
 //NOTE:Les test vont apparaitre tout en bas de la page du navigateur, soit sous les codes d'erreurs.
 include_once("controller_financing.php");
-
+$isIndex = false;
  ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -20,7 +20,7 @@ include_once("controller_financing.php");
   <body>
     <h1>Test de validation des fonctions</h1>
 
-    <h2>Fonction validatePrice($price, $model)</h2>
+    <h2>Fonction validatePrice($price, $model, $isIndex)</h2>
     <table border="1px solid black">
       <tr>
         <th>No. de test</th>
@@ -30,27 +30,27 @@ include_once("controller_financing.php");
       </tr>
       <tr>
         <td>1</td>
-        <td>(1000.00, "Granta")</td>
+        <td>(1000.00, "Granta", "false")</td>
         <td>Exception</td>
-        <td><?php try{validatePrice(1000.00, "Granta");} catch(Exception $e) {echo $e->getMessage();} ?></td>
+        <td><?php try{validatePrice(1000.00, "Granta",$isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
       </tr>
       <tr>
         <td>2</td>
-        <td>(999999.99, "Granta")</td>
+        <td>(999999.99, "Granta", "false")</td>
         <td>Aucune exception</td>
-        <td><?php try{validatePrice(999999.99, "Granta");} catch(Exception $e) {echo $e->getMessage();} ?></td>
+        <td><?php try{validatePrice(999999.99, "Granta",$isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
       </tr>
       <tr>
         <td>3</td>
-        <td>(29999.90, "Granta")</td>
+        <td>(29999.90, "Granta", "false")</td>
         <td>Aucune exception</td>
-        <td><?php try{validatePrice(29999.90, "Granta");} catch(Exception $e) {echo $e->getMessage();} ?></td>
+        <td><?php try{validatePrice(29999.90, "Granta", $isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
       </tr>
       <tr>
         <td>4</td>
-        <td>("Matt Damon!", "Granta")</td>
+        <td>("Matt Damon!", "Granta", "false")</td>
         <td>Exception</td>
-        <td><?php try{validatePrice("Matt Damon!", "Granta");} catch(Exception $e) {echo $e->getMessage();} ?></td>
+        <td><?php try{validatePrice("Matt Damon!", "Granta", $isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
       </tr>
     </table>
     <br>
