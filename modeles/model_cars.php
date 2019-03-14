@@ -74,7 +74,7 @@ $array_pontiacGTO = [
 $array_pontiacSunfire = [
   "car1" => ["imageSrc" => "../images/pontiac/sunfire/sunfire2005.jpg","miniSrc" =>"../images/pontiac/sunfire/mini-sunfire2005.jpg", "nameMini" => "mini-sunfire2005","brand" =>"pontiac", "model" =>"sunfire", "builtYear"=> "2005","color1"=>"Bleue", "color2" =>"Noire", "mileage" => 164239, "state"=> $array_stateOfCar[2], "description" =>"Bleu comme le ciel.", "price" => "5000.00$", ],
   "car2" => ["imageSrc" => "../images/pontiac/sunfire/sunfire1996.jpg","miniSrc" =>"../images/pontiac/sunfire/mini-sunfire1996.jpg", "nameMini" => "mini-sunfire1996","brand" =>"pontiac", "model" =>"sunfire", "builtYear"=> "1996","color1"=>"Noire", "color2" =>"Blanche","mileage" => 165842, "state"=> $array_stateOfCar[3], "description" =>"Bleu comme l'eau abreuvant les arbres.", "price" => "2000.0$", ],
-  "car3" => ["imageSrc" => "../images/pontiac/sunfire/sunfire1999.jpg","miniSrc" =>"../images/pontiac/sunfire/mini-sunfire1999.jpg", "nameMini" => "mini-sunfire1999","brand" =>"pontiac", "model" =>"sunfire", "builtYear"=> "1999","color1"=>"Bleue", "color2" => null, "mileage" => 130750, "state"=> $array_stateOfCar[3], "description" =>"Un char sport pour ceux qui ont pas d'argent.", "price" => "4000.0$", ],
+  "car3" => ["imageSrc" => "../images/pontiac/sunfire/sunfire1999.jpg","miniSrc" =>"../images/pontiac/sunfire/mini-sunfire1999.jpg", "nameMini" => "mini-sunfire1999","brand" =>"pontiac", "model" =>"sunfire", "builtYear"=> "1999","color1"=>"Noir", "color2" => null, "mileage" => 130750, "state"=> $array_stateOfCar[3], "description" =>"Un char sport pour ceux qui ont pas d'argent.", "price" => "4000.0$", ],
 ];
 
 

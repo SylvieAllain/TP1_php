@@ -65,18 +65,18 @@ if(!empty($search)){
     </div>
     <div class="row">
       <div class=" offset-3 col-3">
-        <label for="color">Couleur : </label> <?php createSelectedCarColors($array_choosedModel,$array_modelColors,$color,$builtYear,$mileage,$state);?>
+        <label for="color">Couleur : </label> <?php createSelectedList($array_modelColors,$color, "color", "submit_color");?>
       </div>
       <div class = "col-6">
-        <label for="builtYear"> Année : </label> <?php createSelectedCarBuiltYear($array_choosedModel,$array_modelBuiltYear,$color,$builtYear,$mileage,$state); ?>
+        <label for="builtYear"> Année : </label> <?php createSelectedList($array_modelBuiltYear,$builtYear, "builtYear", "submit_builtYear"); ?>
     </div>
   </div>
   <div class="row">
     <div class = "offset-1 col-5">
-      <label for="mileage"> Kilométrage : </label> <?php createSelectedCarRangedMileage($array_choosedModel,$array_rangedMilageCarsFromChoosedModel,$array_rangeMilageCategory,$color,$builtYear,$state); ?>
+      <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
     </div>
     <div class = "col-6">
-      <label for="state"> État du véhicule : </label> <?php createSelectedCarState($array_choosedModel,$array_modelState,$builtYear,$mileage,$color,$state); ?>
+      <label for="state"> État du véhicule : </label> <?php createSelectedList($array_modelState,$state, "state", "submit_state"); ?>
     </div>
   </div>
   <br>
