@@ -43,10 +43,21 @@ label {
   margin-bottom: 3em;
   background-color: #FBFCB5;
   margin-top: 2em;
-  width:70%;
+  width:60%;
 }
 
 .rowAccueil{
   border-style:hidden;
   box-shadow: none;
+  margin:auto;
+}
+
+#homeForm{
+  padding-top: 0.5em;
+  text-decoration:underline;
+  text-align: center;
+  font-family:"courier new";
+  font-weight: bold;
+  font-size: 48px;
+
 }

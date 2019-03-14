@@ -37,18 +37,18 @@ $rand_pictures = array_rand($array_randomPictures,3);
       </a>
     </div>
     <div class="container" id="containerAccueil">
-      <h2> Faites votre choix de véhicule </h2>
+      <h2 id="homeForm"> Faites votre choix de véhicule </h2>
     <form name="formulaire" action="" method="post">
       <div class="row rowAccueil">
-        <div class="col-3 offset-3">
-        <label for="brand">Marque: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
+        <div class="col-5 offset-1">
+        <label for="brand">Marque<span class="requiredFields">* </span>: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
       </div>
       <div class="col-6 ">
-        <label for="model">Modèle: </label><?php createSelectedCarModel($array_brandAndModel,$brand,$model)?>
+        <label for="model">Modèle<span class="requiredFields">* </span>: </label><?php createSelectedCarModel($array_brandAndModel,$brand,$model)?>
       </div>
     </div>
     <div class="row rowAccueil" >
-      <div class=" offset-3 col-3" >
+      <div class=" offset-1 col-5" >
         <label for="color">Couleur : </label> <?php createSelectedList($array_modelColors,$color, "color", "submit_color");?>
       </div>
       <div class = "col-6">
@@ -57,10 +57,10 @@ $rand_pictures = array_rand($array_randomPictures,3);
   </div>
   <div class="row rowAccueil ">
     <div class = "offset-1 col-5">
-      <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
+      <label for="state"> État du véhicule : </label> <?php createSelectedList($array_modelState,$state, "state", "submit_state"); ?>
     </div>
     <div class = "col-6">
-      <label for="state"> État du véhicule : </label> <?php createSelectedList($array_modelState,$state, "state", "submit_state"); ?>
+      <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
     </div>
   </div>
   <br>
@@ -68,6 +68,7 @@ $rand_pictures = array_rand($array_randomPictures,3);
     <div class="offset-5 col-7">
       <input type="submit" name="search" value="Rechercher"> </input>
     </div>
+    <p class="requiredFields"> *Ces champs doivent être remplis </p>
   </div>
     </form>
   </div>
