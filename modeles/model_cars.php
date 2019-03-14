@@ -19,14 +19,14 @@ $array_brandAndModel = [
  }
 
 $array_rangeMilageCategory = [
-  1 => ["minRange" => 0, "maxRange" => 20000, "textRange" => "De 0 km à moins de 20 000 km"],
-  2 => ["minRange" => 20000, "maxRange" => 50000, "textRange" => " De 20 000 km à moins de 50 000 km"],
-  3 => ["minRange" => 50000, "maxRange" => 100000, "textRange" => "De 50 000 km à moins de 100 000 km" ],
-  4 => ["minRange" => 100000, "maxRange" => 150000, "textRange" => "De 100 000 km à moins de 150 000 km"],
-  5 => ["minRange" => 150000, "maxRange" => 200000, "textRange" => "De 150 000 km à moins de 200 000 km"],
-  6 => ["minRange" => 200000, "maxRange" => 250000, "textRange" => "De 200 000 km à moins de 250 000 km"],
-  7 => ["minRange" => 250000, "maxRange" => 300000, "textRange" => "De 250 000 km à moins de 300 000 km"],
-  8 => ["minRange" => 300000, "maxRange" => null, "textRange" => "De 300 000 km à plus"],
+  1 => ["minRange" => 0, "maxRange" => 20000, "textRange" => "0 ≥ km < 20 000"],
+  2 => ["minRange" => 20000, "maxRange" => 50000, "textRange" => " 20 000 ≥ km < 50 000"],
+  3 => ["minRange" => 50000, "maxRange" => 100000, "textRange" => "50 000 ≥ km < 100 000" ],
+  4 => ["minRange" => 100000, "maxRange" => 150000, "textRange" => "100 000 ≥ km < 150 000"],
+  5 => ["minRange" => 150000, "maxRange" => 200000, "textRange" => "150 000 ≥ km < 200 000"],
+  6 => ["minRange" => 200000, "maxRange" => 250000, "textRange" => "200 000 ≥ km < 250 000"],
+  7 => ["minRange" => 250000, "maxRange" => 300000, "textRange" => "250 000 ≥ km < 300 000"],
+  8 => ["minRange" => 300000, "maxRange" => null, "textRange" => "300 000 ≥ km"],
 ];
 
 $array_stateOfCar = ["Neuf", "Comme neuf", "Bon" , "Avec dommages mineurs", "Endommagé"];

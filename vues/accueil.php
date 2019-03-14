@@ -62,13 +62,13 @@ $rand_pictures = array_rand($array_randomPictures,3);
     <div class = "col-6">
       <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
     </div>
+    <span id="instruction">Il est important de cliquer sur le bouton "Ok" à la suite du menu déroulant pour confirmer vos choix.</span>
   </div>
-  <br>
   <div class="row rowAccueil">
+    <p id="requiredFields"> *Ces champs doivent être remplis.</p>
     <div class="offset-5 col-7">
-      <input type="submit" name="search" value="Rechercher"> </input>
+      <input type="submit" name="search" class="btn btn-success searchButton" value="Rechercher"> </input>
     </div>
-    <p class="requiredFields"> *Ces champs doivent être remplis </p>
   </div>
     </form>
   </div>

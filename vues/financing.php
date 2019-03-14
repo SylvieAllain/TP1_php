@@ -26,5 +26,5 @@ Auteur: Sylvie Allain & Cyrice Paradis
         </select>
         <label for="$depositInput">Acompte (facultatif): $</label>
         <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
-        <input type="submit" name="termsButton" value="Calculer"></input>
+        <input type="submit" name="termsButton" class="btn btn-success" value="Calculer"></input>
       </form>

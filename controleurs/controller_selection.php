@@ -37,12 +37,12 @@ $array_pictures = determineCarsByModel($model);
 
 function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   $img_source = imagecreatefromjpeg($imageSrc);
-  $img_destination = imagecreatetruecolor(200,140);
+  $img_destination = imagecreatetruecolor(250,190);
 
   $largeur_src = imagesx($img_source);
   $hauteur_src = imagesy($img_source);
-  $largeur_destination = 200;
-  $hauteur_destination = 140;
+  $largeur_destination = 250;
+  $hauteur_destination = 190;
 
   //créer la miniature
   imagecopyresampled($img_destination,$img_source,0,0,0,0,$largeur_destination,$hauteur_destination,$largeur_src,$hauteur_src);
@@ -121,9 +121,9 @@ function createTable($array_pictures,$color,$builtYear,$mileage,$state){
     $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key);
     if($isThisPicturesBelong){
       echo "<div class=\"row\" id=\"carDisplayRow\">";
-      echo "<div class=\"offset-1 col-2\">";
+      echo "<div class=\" col-3 carPicture\">";
       echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
-      echo "<div class=\"offset-1 col-3\">" .
+      echo "<div class=\"col-3\">" .
             "<p class=\"carDescriptionTitle\">Année de fabrication : </p>" . $array_pictures[$key]["builtYear"]. "<br>".
             "<p class=\"carDescriptionTitle\"> Couleur(s) disponible(s) : </p>" . $array_pictures[$key]["color1"];
       if ($array_pictures[$key]["color2"] != null){
@@ -131,9 +131,11 @@ function createTable($array_pictures,$color,$builtYear,$mileage,$state){
       }
       echo  "<p class=\"carDescriptionTitle\"> Kilométrage : </p>" . $array_pictures[$key]["mileage"] . " km" .
             "<p class=\"carDescriptionTitle\"> État du véhicule : </p>" . $array_pictures[$key]["state"] .
+            "</div>".
+            "<div class=\"col-3\">".
             "<p class=\"carDescriptionTitle\"> Autres informations : </p>" . $array_pictures[$key]["description"] .
             " </div>";
-      echo "<div class=\"col-5\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
+      echo "<div class=\"col-3\">" . "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
       echo "</div>";
     }
   }

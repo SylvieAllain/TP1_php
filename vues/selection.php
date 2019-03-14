@@ -11,13 +11,13 @@ Auteur: Sylvie Allain & Cyrice Paradis
         <h3 id="thirdTitle">Nos modèles sont exempts de toutes garanties et viennent avec les meilleurs lots de problèmes de toute l'industrie !</h3>
         <div class="container">
           <div class="row">
-            <div class="col-3 offset-1">
+            <div class="col-3">
               <h4> Photos </h4>
             </div>
-            <div class="col-3">
+            <div class="col-6">
               <h4> Description <h4>
             </div>
-            <div class="col-5">
+            <div class="col-3">
               <h4> Prix (cliquer pour obtenir des détails) <h4>
             </div>
           </div>

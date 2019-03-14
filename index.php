@@ -36,7 +36,7 @@ function createSelectCategory($array_brandAndModel, $brand){
     }
   }
   echo "</select>";
-  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "value=" . "\"" . "Ok". "\"". ">";
+  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_brand" . "\"". "class=\"btn btn-success\"" . "value=" . "\"" . "Ok". "\"". ">";
 }
 
 //Crée le menu déroulant pour les modèles de voitures rattachés à la marque sélectionnée.
@@ -51,7 +51,7 @@ function createSelectedCarModel($array_brandAndModel,$brand,$model){
     }
   }
   echo "</select>";
-  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_model" . "\"". "value=" . "\"" . "Ok". "\"". ">";
+  echo "<input type=". "\"" . "submit" . "\"" . "name=" . "\"" . "submit_model" . "\"". "class=\"btn btn-success\"" . "value=" . "\"" . "Ok". "\"". ">";
 }
 
 //Array buffer.
@@ -420,7 +420,7 @@ function createSelectedList($array_toDropDownMenu, $mainValue, $nameOfSelectMenu
     }
   }
   echo "</select>";
-  echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . $nameOfSubmitButton . "\"". "value=" . "\"" . "Ok" . "\"" . ">";
+  echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . $nameOfSubmitButton . "\"". "class=\"btn btn-success\"" . "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
 include_once 'vues/accueil.php';
