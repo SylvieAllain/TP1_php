@@ -11,10 +11,6 @@ include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
 include "fonction.php";
 
-// TODO: - fiabilité des fonctions de financing
-// TODO: - Faire beau et intégrer le CSS
-// TODO: - Valider si prix et model corresponde
-
 /*---Fonctions---*/
 
 //Pour le traitement de la page
@@ -50,6 +46,76 @@ function createTermsSelector($priceInDisplay,$termsSelect){
     }
   }
 }
+
+
+//Pour envoyer un courriel contenant le résumé du financment
+function sendEmail($to, $model) {
+	$subject = "Votre soumission automobile!";
+
+	$message = "
+	<html>
+		<head>
+			<title>HTML email</title>
+		</head>
+		<body>
+			<h1>Voiture @Variée : la plus grande sélection de citron !</h1>
+				<h2>Votre soummission automobile</h2>
+					<h3>Ne réflechissez pas trop longtemps, nous avons le véhicule qu'il vous faut au prix qu'il nous faut. Ne cherchez pas plus longtemps.</h3>
+            <table>
+							<th><img src=\"\" alt=\"Votre voiture\"></th>
+							<th>$model</th>
+						</table>
+						<h4>Voici le le récapitulatif</h4>
+						<table>
+							<tr>
+								<th>Détail</th>
+								<th>Description</th>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+							<tr>
+								<td>John</td>
+								<td>Doe</td>
+							</tr>
+						</table>
+		</body>
+	</html>
+	";
+/*
+	// Always set content-type when sending HTML email
+	$headers = "MIME-Version: 1.0" . "\r\n";
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	// More headers
+	$headers .= 'From: <voitureavariee@citron.com>' . "\r\n";
+*/
+	if(!mail($to,$subject,$message)) {
+    echo "Shits failed";
+  };
+}
+
 
 //Pour calculer du financement
 
@@ -118,7 +184,7 @@ function validatePrice($price, $model){
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
   <div id=\"resumeFinancing\">
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <strong>Détails</strong>
       </div>
@@ -126,7 +192,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <strong>Montant</strong>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Prix de vente affiché: </p>
       </div>
@@ -134,7 +200,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$priceInDisplay</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Acompte: </p>
       </div>
@@ -142,7 +208,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$deposit</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Taxes: </p>
       </div>
@@ -150,7 +216,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$taxes</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Prix total: </p>
       </div>
@@ -158,7 +224,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$priceInDisplayWithTaxes</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Montant à financer: </p>
       </div>
@@ -166,7 +232,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$sumToFinance</p>
       </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Intérêts: </p>
     </div>
@@ -174,7 +240,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
       <p>$interest</p>
     </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Montant avec intérêts: </p>
     </div>
@@ -182,7 +248,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
       <p>$totalWithInterest</p>
     </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Paiement mensuel: </p>
     </div>
@@ -191,7 +257,10 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
     </div>
   </div>
 </div>
-
+<h2>Envoyer votre soummission via courriel!</h2>
+<label for=\"carToEmail\">Courriel: </label>
+<input type=\"email\" name=\"carToEmail\" value=\"\">
+<input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
 
   ";
 }
@@ -222,6 +291,9 @@ $model = $_GET["model"];
 $submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
+$email = (isset($_POST["carToEmail"])) ? ($_POST["carToEmail"]) : null;
+$submitCarToEmail = (isset($_POST["sumbitCarToEmail"])) ? ($_POST["sumbitCarToEmail"]) : null;
+
 //Affichages des différentes vues
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
@@ -229,11 +301,19 @@ include_once "../vues/financing.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   try{
     createFinancingResume($priceInDisplay, $model, $deposit);
+    //echo $email . 'email';
+    echo $submitCarToEmail . 'submit';
   }
   catch (Exception $e) {
     echo "Message : ",  $e->getMessage(), "\n";
   }
 }
+
+if(!empty($submitCarToEmail)) {
+    echo $submitCarToEmail . 'submit';
+  sendEmail('cyrice.paradis@gmail.com', $model);
+}
+
 
 include_once '../vues/footer.php';
 

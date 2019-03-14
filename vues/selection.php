@@ -5,16 +5,6 @@ Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/selection.css">
-    <title></title>
-  </head>
-  <body>
     <div id="almostBody">
     <h1 id="firstTitle">Nos voitures</h1>
       <h2 id="secondTitle">Faites votre choix</h2>
@@ -38,8 +28,6 @@ Auteur: Sylvie Allain & Cyrice Paradis
         ?>
       </div>
     </div>
-  </body>
-</html>
 
 <?php
 

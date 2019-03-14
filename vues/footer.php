@@ -5,18 +5,6 @@ Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style media="screen">
-      footer {
-        background-color: #384F34;
-      }
-    </style>
-  </head>
-  <body>
     <footer>
       <p class="footerFont"><span class="underline">Aucun retour ou garantie possible après achat</span> <br>
           Copyright © Sylvie Allain et Cyrice Paradis <br>

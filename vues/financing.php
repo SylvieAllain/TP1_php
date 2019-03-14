@@ -5,19 +5,9 @@ Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
-<!DOCTYPE html>
-<html lang="fr" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/financing.css">
-    <title></title>
-  </head>
-  <body>
     <h1>C'est le temps de passer aux choses sérieuses!</h1>
       <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
-      <div class="row" id="carDisplayRowFinancing">
+      <div class="row">
         <div class="col-2 offset-1">
           <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
         </div>
@@ -38,13 +28,3 @@ Auteur: Sylvie Allain & Cyrice Paradis
         <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
         <input type="submit" name="termsButton" value="Calculer"></input>
       </form>
-<!--
-    <footer>
-      <p class="footerFont"><span class="underline">Aucuns retours ou garanties possibles après achat</span> <br>
-        Copyright © Sylvie Allain et Cyrice Paradis <br>
-        2019
-      </p>
-    </footer>
-  -->
-  </body>
-</html>
