@@ -119,7 +119,7 @@ include_once("controller_financing.php");
     </table>
     <br>
 
-    <h2>Fonction deteriminepriceInDisplayWithTaxes($priceInDisplay, $taxes)</h2>
+    <h2>Fonction determinepriceInDisplayWithTaxes($priceInDisplay, $taxes)</h2>
     <table border="1px solid black">
       <tr>
         <th>No. de test</th>
@@ -131,13 +131,13 @@ include_once("controller_financing.php");
         <td>1</td>
         <td>(10.00,1.4975)</td>
         <td>11.4975</td>
-        <td><?php echo deteriminepriceInDisplayWithTaxes(10.00,1.4975); ?></td>
+        <td><?php echo determinePriceInDisplayWithTaxes(10.00,1.4975); ?></td>
       </tr>
       <tr>
         <td>2</td>
         <td>(100.00,14.975)</td>
         <td>114.975</td>
-        <td><?php echo deteriminepriceInDisplayWithTaxes(100.00,14.975); ?></td>
+        <td><?php echo determinePriceInDisplayWithTaxes(100.00,14.975); ?></td>
       </tr>
     </table>
     <br>

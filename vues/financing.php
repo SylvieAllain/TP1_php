@@ -31,9 +31,10 @@ Auteur: Sylvie Allain & Cyrice Paradis
       <form class="" action="" method="post">
         <label for="termsSelect">Intérêt: </label>
         <select name="termsSelect" required>
-          <?php  createTermsSelector($priceInDisplay); ?>
+          <?php $termsSelect = (!empty($_POST["termsSelect"]))? $_POST["termsSelect"] : null; ?>
+          <?php  createTermsSelector($priceInDisplay,$termsSelect); ?>
         </select>
-        <label for="$depositInput">Accompte (facultatif): $</label>
+        <label for="$depositInput">Acompte (facultatif): $</label>
         <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
         <input type="submit" name="termsButton" value="Calculer"></input>
       </form>

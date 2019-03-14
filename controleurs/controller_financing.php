@@ -29,14 +29,24 @@ function determineInterestRate($price, $term) {
   return $interestRate;
 }
 
-function createTermsSelector($priceInDisplay) {
+function createTermsSelector($priceInDisplay,$termsSelect){
   foreach (FINANCING_RATE_INTEREST as $key => $value) {
     $interestRate = determineInterestRate ($priceInDisplay, $key);
-    if ($key == DEFAULT_MONTHLY_RATE_ONLOAD) {
-      echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
+    if($termsSelect == null){
+      if ($key == DEFAULT_MONTHLY_RATE_ONLOAD) {
+        echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
+      }
+      else {
+        echo "<option value=\"$key\">" . $key . " mois - " . $interestRate . "%</option>";
+      }
     }
     else {
-      echo "<option value=\"$key\">" . $key . " mois - " . $interestRate . "%</option>";
+      if($termsSelect == $key){
+        echo "<option value=\"$key\" selected>" . $key . " mois - " . $interestRate . "%</option>";
+      }
+      else{
+        echo "<option value=\"$key\">" . $key . " mois - " . $interestRate . "%</option>";
+      }
     }
   }
 }
@@ -51,7 +61,7 @@ function determineTaxes($priceInDisplay) {
   return $priceInDisplay * (FED_TAXE/100) + $priceInDisplay * (PROV_TAXE/100);
 }
 
-function deteriminePriceInDisplayWithTaxes($priceInDisplayWithTaxes, $taxes) {
+function determinePriceInDisplayWithTaxes($priceInDisplayWithTaxes, $taxes) {
   return $priceInDisplayWithTaxes + $taxes;
 }
 
@@ -76,14 +86,14 @@ function determineMonthlyPayment($totalWithInterest, $periodicity) {
 function validateDeposit($priceInDisplayWithTaxes, $deposit) {
   if (is_Numeric($deposit)){
     if ($deposit > $priceInDisplayWithTaxes) {
-      throw new Exception("L'accompte est supérieur au montant du véhicule. Nous comme toutefois ouverts à augmenter le prix de vente si vous vous voulez payer plus.");
+      throw new Exception("L'acompte est supérieur au montant du véhicule. Nous sommes toutefois ouverts à augmenter le prix de vente si vous vous voulez payer plus.");
     }
     if ($deposit < 0) {
       throw new Exception("Pas question qu'on paye pour vous l'accompte !");
     }
   }
   else {
-    throw new Exception("Un accompte se compte en chiffre pas en lettre !");
+    throw new Exception("Un acompte se compte en chiffre pas en lettre !");
     }
 }
 
@@ -193,7 +203,7 @@ function createFinancingResume($priceInDisplay, $model,  $deposit) {
   $interestRate = determineInterestRate($priceInDisplay,$term);
 
   $taxes = round(determineTaxes($priceInDisplay),2);
-  $priceInDisplayWithTaxes = deteriminepriceInDisplayWithTaxes($priceInDisplay, $taxes);
+  $priceInDisplayWithTaxes = determinePriceInDisplayWithTaxes($priceInDisplay, $taxes);
   validateDeposit($priceInDisplayWithTaxes, $deposit);
 
   $sumToFinance = round(determineSumToFinance($deposit, $priceInDisplayWithTaxes),2);

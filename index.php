@@ -6,7 +6,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-//TODO // réusiner le code pour qu'il ait moins de DRY. Tenter également de retirer tout les éléments globals. Régler problème couleur/kilométrage.
+//TODO // réusiner le code pour qu'il ait moins de DRY. Tenter également de retirer tout les éléments globals.
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
 //Attribution des variables "POST".
@@ -26,7 +26,7 @@ $search = (!empty($_POST['search'])) ? ($_POST['search']) : null;
 
 //Crée le menu déroulant pour les marques de voiture.
 function createSelectCategory($array_brandAndModel, $brand){
-  echo '<select name='.'"'.'brand'.'"'.'>';
+  echo "<select name=brand>";
   foreach($array_brandAndModel as $key=>$value){
     if ($brand == $key){
       echo "<option selected value="."\""."$key"."\"".">" . "$key" . "</option>";
@@ -41,7 +41,7 @@ function createSelectCategory($array_brandAndModel, $brand){
 
 //Crée le menu déroulant pour les modèles de voitures rattachés à la marque sélectionnée.
 function createSelectedCarModel($array_brandAndModel,$brand,$model){
-  echo '<select name='.'"'.'model'.'"'.'>';
+  echo "<select name=model>";
   foreach($array_brandAndModel[$brand] as $key=> $value){
     if($array_brandAndModel[$brand][$key] == $model){
       echo "<option selected value="."\""."$value"."\"".">" . "$value" . "</option>";
@@ -60,8 +60,6 @@ $array_choosedModel = [
   "car2" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null],
   "car3" => ["imageSrc" => null ,"miniSrc" => null, "nameMini" => null,"brand" => null, "model" => null, "builtYear"=> null, "color1"=> null, "color2" => null, "description" => null, "price" => null]
 ];
-
-
 
 //Ce switch permet de transférer les données du tableau du modèle de voiture sélectionnées dans le tableau buffer.
 switch($model){
@@ -273,7 +271,7 @@ function createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_cate
   }
 }
 
-
+//R
 function getKeyName1($mainValue){
   $keyName1 = "";
   if ($mainValue == "color"){
@@ -364,7 +362,7 @@ function createArrayForACarOption($array_choosedModel,$array_category,$array_toD
   elseif ($option1 != null && $option2 != null && $option3 == null){
     foreach($array_choosedModel as $key1 => $value){
     $textToCompare = determinateRangeMileageForACar($array_choosedModel,$array_category,$key1);
-      if(($array_choosedModel[$key1][$keyName2] == $option1 || $array_choosedModel[$key1][$keyName3] == $option1) && $textToCompare == $option2 ){
+      if(($array_choosedModel[$key1][$keyName1] == $option1 || $array_choosedModel[$key1][$keyName3] == $option1) && $textToCompare == $option2 ){
       addElementToDropDownMenu ($array_choosedModel,$key1,$array_toDropDownMenu, $mainValueName);
       }
     }
@@ -403,7 +401,6 @@ createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_m
 createArrayMileageRangeFromChoosedModel($array_choosedModel,$array_rangeMilageCategory,$array_rangedMilageCarsFromChoosedModel,$color,$builtYear,$state);
 createArrayForACarOption($array_choosedModel,$array_rangeMilageCategory,$array_modelState,$color,$mileage,$builtYear,"color1","builtYear","color2","state");
 
-echo $color . $state . $builtYear . $mileage;
 
 // Création du menu déroulang contenant les couleurs disponibles selon les choix de l'utilisateur.
 function createSelectedList($array_toDropDownMenu, $mainValue, $nameOfSelectMenu, $nameOfSubmitButton){
