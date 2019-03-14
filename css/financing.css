@@ -23,6 +23,24 @@ strong {
   border: 1px solid black;
   margin-left: 0%;
   margin-right: 0%;
+  padding-top: 0.8em;
+}
+
+#carFinancingRecap {
+  font-size: 1.6em;
+  background-color: #FBFCB5;
+  background-image: url("../images/lemonsDrop_transparent.png");
+  background-size: 10%;
+  margin-top: 1%;
+  margin-right: 2em;
+  margin-left: 2em;
+  margin-bottom: 0%;
+  line-height: 4;
+}
+
+#termSelector {
+  padding:1%;
+  margin-bottom: 1%;
 }
 
 #resumeFinancing {
@@ -34,8 +52,10 @@ strong {
   font-weight: 400;
   vertical-align: bottom;
   margin-left: 25%;
-  margin-right: 35%;
+  margin-right: 25%;
+  margin-bottom: 2%;
   background-color: #FBFCB5;
   background-image: url("../images/lemonsDrop_transparent.png");
   background-size: 100%;
+  line-height: 0.5;
 }

@@ -7,18 +7,18 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
     <h1>C'est le temps de passer aux choses sérieuses!</h1>
       <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
-      <div class="row">
+      <div class="row" id="carFinancingRecap">
         <div class="col-2 offset-1">
           <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
         </div>
-        <div class="col-4">
+        <div class="col-4 align-middle">
           <?php echo strtoupper($_GET['model']); ?>
         </div>
-        <div class="col-1">
+        <div class="col-1 align-middle">
           <?php echo $_GET['price']; ?>
         </div>
       </div>
-      <form class="" action="" method="post">
+      <form class="" action="" method="post" id="termSelector">
         <label for="termsSelect">Intérêt: </label>
         <select name="termsSelect" required>
           <?php $termsSelect = (!empty($_POST["termsSelect"]))? $_POST["termsSelect"] : null; ?>
