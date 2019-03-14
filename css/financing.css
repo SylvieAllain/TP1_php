@@ -18,7 +18,8 @@ strong {
   line-height: 1.5em;
 }
 
-.row {
+.align-items-start {
+  margin: 0em;
   border: 1px solid black;
   margin-left: 0%;
   margin-right: 0%;

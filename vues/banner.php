@@ -19,23 +19,23 @@ Auteur: Sylvie Allain & Cyrice Paradis
     <link rel="stylesheet" href="../css/financing.css">
     <link rel="stylesheet" href="../css/accueil.css">
     <link rel="stylesheet" href="../css/selection.css">
-    <style media="screen">
-    </style>
   </head>
   <body>
-    <div class="row" id="carDisplayRowFinancing">
-      <div class="col-2">
-        <?php
-          if(empty($_GET["model"])) {
-            echo "<img src=\"images/banner.png\" alt=\"Belle auto citron.\">";
-          }
-          else {
-            echo "<img src=\"../images/banner.png\" alt=\"Belle auto citron.\">";
-          }
-         ?>
+    <div id="bannerContainer">
+      <div class="row" id="rowBanner">
+        <div class="col-2">
+          <?php
+            if(empty($_GET["model"])) {
+              echo "<img src=\"images/banner.png\" alt=\"Belle auto citron.\">";
+            }
+            else {
+              echo "<img src=\"../images/banner.png\" alt=\"Belle auto citron.\">";
+            }
+           ?>
+        </div>
+        <div class="col">
+          <h1>Voiture @Variée</h1>
+        </div>
       </div>
-      <div class="col">
-        <h1>Voiture @Variée</h1>
-      </div>
+      <h2>La plus grande sélection de citrons provenant de tous les continents, sauf de l'Afrique...</h2>
     </div>
-    <h2>La plus grande sélection de citrons provenant de tous les continents, sauf de l'Afrique...</h2>

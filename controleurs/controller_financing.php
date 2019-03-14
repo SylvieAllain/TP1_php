@@ -11,10 +11,6 @@ include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
 include "fonction.php";
 
-// TODO: - fiabilité des fonctions de financing
-// TODO: - Faire beau et intégrer le CSS
-// TODO: - Valider si prix et model corresponde
-
 /*---Fonctions---*/
 
 //Pour le traitement de la page
@@ -178,7 +174,7 @@ function validatePrice($price, $model){
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
   <div id=\"resumeFinancing\">
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <strong>Détails</strong>
       </div>
@@ -186,7 +182,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <strong>Montant</strong>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Prix de vente affiché: </p>
       </div>
@@ -194,7 +190,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$priceInDisplay</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Acompte: </p>
       </div>
@@ -202,7 +198,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$deposit</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Taxes: </p>
       </div>
@@ -210,7 +206,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$taxes</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Prix total: </p>
       </div>
@@ -218,7 +214,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$priceInDisplayWithTaxes</p>
       </div>
     </div>
-    <div class=\"row\">
+    <div class=\"row align-items-start\">
       <div class=\"col\">
         <p>Montant à financer: </p>
       </div>
@@ -226,7 +222,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
         <p>$sumToFinance</p>
       </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Intérêts: </p>
     </div>
@@ -234,7 +230,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
       <p>$interest</p>
     </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Montant avec intérêts: </p>
     </div>
@@ -242,7 +238,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
       <p>$totalWithInterest</p>
     </div>
   </div>
-  <div class=\"row\">
+  <div class=\"row align-items-start\">
     <div class=\"col\">
       <p>Paiement mensuel: </p>
     </div>

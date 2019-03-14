@@ -4,10 +4,14 @@ Projet : Voiture @Variée
 Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 */
-/*
-body {
-  background-color: #384F34;
-  font : #F0D237;
 
+#bannerContainer {
+  background-color: #384F34;
+  color : #F0D237;
+  border: 1px solid black !important;
 }
-*/
+
+#rowBanner {
+  border: #384F34;
+  box-shadow: 3px 3px rgb(56, 79, 52);
+}

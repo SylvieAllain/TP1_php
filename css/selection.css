@@ -18,18 +18,6 @@ Auteur: Sylvie Allain & Cyrice Paradis
   background-image: url("../images/lemonsDrop_transparent.png");
 }
 
-
-.row {
-  margin-bottom: 1em;
-  border: 0.2em solid black;
-  padding : .5em;
-  border-left-color: #7AA55E;
-  border-top-color: #7AA55E;
-  border-right-color: #AAC9A0;
-  border-bottom-color: #AAC9A0;
-  box-shadow: 3px 3px rgba(236, 203, 48,0.3);
-}
-
 #thirdTitle {
   font-size: 20px;
   text-align: center;

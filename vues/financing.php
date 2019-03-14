@@ -7,7 +7,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
     <h1>C'est le temps de passer aux choses sérieuses!</h1>
       <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
-      <div class="row" id="carDisplayRowFinancing">
+      <div class="row">
         <div class="col-2 offset-1">
           <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
         </div>
