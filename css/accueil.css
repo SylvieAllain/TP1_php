@@ -8,7 +8,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
 .carousel-inner{
   width: 45%;
-  height: 18em;
+  height: 20em;
   margin-left: auto;
 }
 
@@ -17,11 +17,15 @@ img{
 }
 
 .carousel-control-next{
-  width: 80%;
+  width: 5%;
+  background-color: rgba(56, 79, 52,0.5);
+  margin-right: 34%;
 }
 
 .carousel-control-prev{
-  width: 60%;
+  width: 5%;
+  background-color: rgba(56, 79, 52,0.5);
+  margin-left: 25%;
 }
 label {
   margin-top: 2em;
