@@ -6,7 +6,6 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-//TODO // réusiner le code pour qu'il ait moins de DRY. Tenter également de retirer tout les éléments globals.
 $pageTitle = "Accueil";
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
