@@ -52,16 +52,60 @@ function createTermsSelector($priceInDisplay,$termsSelect){
   }
 }
 
-
 //Pour envoyer un courriel contenant le résumé du financment
-function sendEmail($to, $model) {
+function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   $mail = new PHPMailer(TRUE);
-   $mail->setFrom('voiture.a.variee@gmail.com', 'Voiture AVariée');
-   $mail->addAddress($to);
-   $mail->Subject = 'Votre soumission automobile' . $model;
-   $mail->Body = $model;
+  $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
+  $mail->addAddress($to);
+  $mail->Subject = 'Votre soumission automobile ' . $model;
+  $body= "
+   <html>
+   <body>
+   <p>" . strtoupper($model) . "</p>
+   <table>
+    <tr>
+      <th>Détails</th>
+      <th>Montant</th>
+    </tr>
+    <tr>
+      <td>Prix de vente affiché: </td>
+      <td>$priceInDisplay</td>
+    </tr>
+    <tr>
+      <td>Acompte: </td>
+      <td>$deposit</td>
+    </tr>
+    <tr>
+      <td>Taxes: </td>
+      <td>$taxes</td>
+    </tr>
+    <tr>
+      <td>Prix total: </td>
+      <td>$priceInDisplayWithTaxes</td>
+    </tr>
+    <tr>
+      <td>Montant à financer: </td>
+      <td>$sumToFinance</td>
+    </tr>
+    <tr>
+      <td>Intérêts: </td>
+      <td>$interest</td>
+    </tr>
+    <tr>
+      <td>Montant avec intérêts: </td>
+      <td>$totalWithInterest</td>
+    </tr>
+    <tr>
+      <td>Paiement mensuel: </td>
+      <td>$monthlyPayment</td>
+    </tr>
+  </table>
+  </body>
+  </html>
+   ";
 
-   /* SMTP parameters. */
+  $mail->Body = $body;
+  $mail->IsHTML(true);
 
    /* Tells PHPMailer to use SMTP. */
    $mail->isSMTP();
@@ -79,7 +123,7 @@ function sendEmail($to, $model) {
    $mail->Username = 'voiture.a.variee@gmail.com';
 
    /* SMTP authentication password. */
-   $mail->Password = '123456789abcd';
+   $mail->Password = '123456789abcD';
 
    /* Set the SMTP port. */
    $mail->Port = 587;
@@ -253,6 +297,10 @@ function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
   $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
 
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
+
+if(empty($submitCarToEmail)) {
+  sendEmail('cyrice.paradis@gmail.com', $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
+}
 }
 
 /*---Affichage---*/
@@ -281,9 +329,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-if(empty($submitCarToEmail)) {
-  sendEmail('cyrice.paradis@gmail.com', $model);
-}
 
 
 include_once '../vues/footer.php';
