@@ -40,7 +40,7 @@ $rand_pictures = array_rand($array_randomPictures,3);
       <h2 id="homeForm"> Faites votre choix de véhicule </h2>
     <form name="formulaire" action="" method="post">
       <div class="row rowAccueil">
-        <div class="col-5 offset-1">
+        <div class="col-6">
         <label for="brand">Marque<span class="requiredFields">* </span>: </label> <?php createSelectCategory($array_brandAndModel, $brand);?>
       </div>
       <div class="col-6 ">
@@ -48,7 +48,7 @@ $rand_pictures = array_rand($array_randomPictures,3);
       </div>
     </div>
     <div class="row rowAccueil" >
-      <div class=" offset-1 col-5" >
+      <div class=" col-6" >
         <label for="color">Couleur : </label> <?php createSelectedList($array_modelColors,$color, "color", "submit_color");?>
       </div>
       <div class = "col-6">
@@ -56,11 +56,11 @@ $rand_pictures = array_rand($array_randomPictures,3);
     </div>
   </div>
   <div class="row rowAccueil ">
-    <div class = "offset-1 col-5">
+    <div class = "col-6">
       <label for="state"> État du véhicule : </label> <?php createSelectedList($array_modelState,$state, "state", "submit_state"); ?>
     </div>
     <div class = "col-6">
-      <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_rangedMilageCarsFromChoosedModel,$mileage, "mileage", "submit_mileage"); ?>
+      <label for="mileage"> Kilométrage : </label> <?php createSelectedList($array_modelRangedMileage,$mileage, "mileage", "submit_mileage"); ?>
     </div>
     <span id="instruction">Il est important de cliquer sur le bouton "Ok" à la suite du menu déroulant pour confirmer vos choix.</span>
   </div>
