@@ -128,7 +128,7 @@ function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDispl
    /* Set the SMTP port. */
    $mail->Port = 587;
 
-   /* Finally send the mail. */
+   /* Send the mail. */
    $mail->send();
 }
 
@@ -194,6 +194,12 @@ function validatePrice($price, $model,$isIndex){
   if (!$priceCheck){
     throw new Exception ("Tu te prends pour un hacker en modifiant les informations dans l'URL. Fais un retour.");
   }
+}
+
+function validateEmail () {
+		if (!filter_input(INPUT_POST, "carToEmail", FILTER_VALIDATE_EMAIL)) {
+			throw new Exception("Un courriel valide doit être entré<br>");
+	}
 }
 
 //Pour affichage des variables dans un tableau responsive
@@ -297,10 +303,6 @@ function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
   $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
 
 displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
-
-if(empty($submitCarToEmail)) {
-  sendEmail('cyrice.paradis@gmail.com', $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
-}
 }
 
 /*---Affichage---*/
@@ -329,6 +331,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
+if(!empty($submitCarToEmail)) {
+  try{
+    validateEmail();
+    sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
+  }
+  catch (Exception $e) {
+    echo "Message : ",  $e->getMessage(), "\n";
+  }
+}
 
 
 include_once '../vues/footer.php';
