@@ -28,7 +28,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
         <?php  createTermsSelector($priceInDisplay,$termsSelect); ?>
       </select>
     </div>
-    <div class="col-6 termCol">
+    <div class="col-7 termCol">
       <label for="$depositInput">Acompte (facultatif): $</label>
       <input type="number" name="depositInput" value="<?php echo $deposit; ?>" step="0.01">
     </div>
