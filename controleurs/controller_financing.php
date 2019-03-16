@@ -52,16 +52,60 @@ function createTermsSelector($priceInDisplay,$termsSelect){
   }
 }
 
-
 //Pour envoyer un courriel contenant le résumé du financment
-function sendEmail($to, $model) {
+function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   $mail = new PHPMailer(TRUE);
-   $mail->setFrom('voiture.a.variee@gmail.com', 'Voiture AVariée');
-   $mail->addAddress($to);
-   $mail->Subject = 'Votre soumission automobile' . $model;
-   $mail->Body = $model;
+  $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
+  $mail->addAddress($to);
+  $mail->Subject = 'Votre soumission automobile ' . $model;
+  $body= "
+   <html>
+   <body>
+   <p>" . strtoupper($model) . "</p>
+   <table>
+    <tr>
+      <th>Détails</th>
+      <th>Montant</th>
+    </tr>
+    <tr>
+      <td>Prix de vente affiché: </td>
+      <td>$priceInDisplay</td>
+    </tr>
+    <tr>
+      <td>Acompte: </td>
+      <td>$deposit</td>
+    </tr>
+    <tr>
+      <td>Taxes: </td>
+      <td>$taxes</td>
+    </tr>
+    <tr>
+      <td>Prix total: </td>
+      <td>$priceInDisplayWithTaxes</td>
+    </tr>
+    <tr>
+      <td>Montant à financer: </td>
+      <td>$sumToFinance</td>
+    </tr>
+    <tr>
+      <td>Intérêts: </td>
+      <td>$interest</td>
+    </tr>
+    <tr>
+      <td>Montant avec intérêts: </td>
+      <td>$totalWithInterest</td>
+    </tr>
+    <tr>
+      <td>Paiement mensuel: </td>
+      <td>$monthlyPayment</td>
+    </tr>
+  </table>
+  </body>
+  </html>
+   ";
 
-   /* SMTP parameters. */
+  $mail->Body = $body;
+  $mail->IsHTML(true);
 
    /* Tells PHPMailer to use SMTP. */
    $mail->isSMTP();
@@ -79,12 +123,12 @@ function sendEmail($to, $model) {
    $mail->Username = 'voiture.a.variee@gmail.com';
 
    /* SMTP authentication password. */
-   $mail->Password = '123456789abcd';
+   $mail->Password = '123456789abcD';
 
    /* Set the SMTP port. */
    $mail->Port = 587;
 
-   /* Finally send the mail. */
+   /* Send the mail. */
    $mail->send();
 }
 
@@ -150,6 +194,12 @@ function validatePrice($price, $model,$isIndex){
   if (!$priceCheck){
     throw new Exception ("Tu te prends pour un hacker en modifiant les informations dans l'URL. Fais un retour.");
   }
+}
+
+function validateEmail () {
+		if (!filter_input(INPUT_POST, "carToEmail", FILTER_VALIDATE_EMAIL)) {
+			throw new Exception("Un courriel valide doit être entré<br>");
+	}
 }
 
 //Pour affichage des variables dans un tableau responsive
@@ -229,11 +279,14 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
     </div>
   </div>
 </div>
+<div id=\"carToEmailForm\">
 <h2>Envoyer votre soummission via courriel!</h2>
-<label for=\"carToEmail\">Courriel: </label>
-<input type=\"email\" name=\"carToEmail\" value=\"\">
-<input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
-
+  <form class=\"\" action=\"\" method=\"post\">
+    <label for=\"carToEmail\">Courriel: </label>
+    <input type=\"email\" name=\"carToEmail\" value=\"\">
+    <input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
+  </form>
+</div>
   ";
 }
 
@@ -281,8 +334,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 
-if(empty($submitCarToEmail)) {
-  sendEmail('cyrice.paradis@gmail.com', $model);
+if(!empty($submitCarToEmail)) {
+  try{
+    validateEmail();
+    sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
+  }
+  catch (Exception $e) {
+    echo "Message : ",  $e->getMessage(), "\n";
+  }
 }
 
 
