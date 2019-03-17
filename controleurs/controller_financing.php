@@ -57,6 +57,7 @@ function createTermsSelector($priceInDisplay,$termsSelect){
 
 
 //Pour envoyer un courriel contenant le résumé du financment
+//Librairie disponible et exemple tiré de : https://github.com/PHPMailer/PHPMailer
 function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   $mail = new PHPMailer(TRUE);
   $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
@@ -111,28 +112,16 @@ function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDispl
   $mail->Body = $body;
   $mail->IsHTML(true);
 
-   /* Tells PHPMailer to use SMTP. */
+  //Server settings
    $mail->isSMTP();
-
-   /* SMTP server address. */
    $mail->Host = 'smtp.gmail.com';
-
-   /* Use SMTP authentication. */
    $mail->SMTPAuth = TRUE;
-
-   /* Set the encryption system. */
    $mail->SMTPSecure = 'tsl';
-
-   /* SMTP authentication username. */
+   $mail->Port = 587;
    $mail->Username = 'voiture.a.variee@gmail.com';
-
-   /* SMTP authentication password. */
    $mail->Password = '123456789abcD';
 
-   /* Set the SMTP port. */
-   $mail->Port = 587;
-
-   /* Send the mail. */
+   // Send mail
    $mail->send();
 }
 
@@ -200,8 +189,8 @@ function validatePrice($price, $model,$isIndex){
   }
 }
 
-function validateEmail () {
-		if (!filter_input(INPUT_POST, "carToEmail", FILTER_VALIDATE_EMAIL)) {
+function validateEmail ($email) {
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			throw new Exception("Un courriel valide doit être entré<br>");
 	}
 }
@@ -287,13 +276,12 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 <h2>Envoyer votre soummission via courriel!</h2>
   <form class=\"\" action=\"\" method=\"post\">
     <label for=\"carToEmail\">Courriel: </label>
-    <input type=\"email\" name=\"carToEmail\" value=\"\">
+    <input type=\"email\" name=\"carToEmail\" value=\"$email\">
     <input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
   </form>
 </div>
   ";
 }
-
 //Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
   validatePrice($priceInDisplay, $model, $isIndex);
@@ -317,7 +305,7 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 //Variables POST
 $priceInDisplay = (float)$_GET["price"];
 $model = $_GET["model"];
-$submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
+$submitFinancing = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
 $email = (isset($_POST["carToEmail"])) ? ($_POST["carToEmail"]) : null;
@@ -328,7 +316,7 @@ $pageTitle = "Financement";
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (!empty($submitFinancing)) {
   try{
     createFinancingResume($priceInDisplay, $model, $deposit, $isIndex);
 
@@ -340,7 +328,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if(!empty($submitCarToEmail)) {
   try{
-    validateEmail();
+    validateEmail($email);
     sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
   }
   catch (Exception $e) {
