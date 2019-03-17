@@ -52,6 +52,10 @@ function createTermsSelector($priceInDisplay,$termsSelect){
   }
 }
 
+//Pour création tableau contenant les variables nécessaires pour l'Affichage de la descriptions
+//Plutôt utiliser la fonction createTable???
+
+
 //Pour envoyer un courriel contenant le résumé du financment
 function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   $mail = new PHPMailer(TRUE);
@@ -202,7 +206,7 @@ function validateEmail () {
 	}
 }
 
-//Pour affichage des variables dans un tableau responsive
+//Pour affichage des variables dans un tableau résumant le financement
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
   <div id=\"resumeFinancing\">

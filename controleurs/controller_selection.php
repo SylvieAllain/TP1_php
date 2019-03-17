@@ -117,7 +117,7 @@ function createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex)
             " </div>";
       echo "<div class=\"col-3 anchorPicture\">" .
             "(Cliquer pour obtenir les détails) <br>".
-              "<a href=\"../controleurs/controller_financing?model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
+              "<a href=\"../controleurs/controller_financing?carKey=" . $key . "&model=" . $array_pictures[$key]["model"] . "&pic=" . $array_pictures[$key]["miniSrc"] . "&price=" . $array_pictures[$key]["price"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
       echo "</div>";
     }
   }
