@@ -16,7 +16,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
     <?php echo strtoupper($_GET['model']); ?>
   </div>
   <div class="col-1 align-middle">
-    <?php echo $_GET['price']; ?>
+    <?php echo $priceInDisplay; ?>
   </div>
 </div>
 <form class="" action="" method="post" id="termSelector">

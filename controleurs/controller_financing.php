@@ -54,6 +54,11 @@ function createTermsSelector($priceInDisplay,$termsSelect){
 
 //Pour création tableau contenant les variables nécessaires pour l'Affichage de la descriptions
 //Plutôt utiliser la fonction createTable???
+function getCarArrayByKey($model, $carKey) {
+  $arrayModel = determineCarsByModel(ucfirst($model),false);
+  $arrayCar = $arrayModel[$carKey];
+  return $arrayCar;
+}
 
 
 //Pour envoyer un courriel contenant le résumé du financment
@@ -283,7 +288,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
   ";
 }
 //Fonction principale appelant toutes les autres
-function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
+function createFinancingResume($priceInDisplay, $carKey, $model,  $deposit, $isIndex) {
   validatePrice($priceInDisplay, $model, $isIndex);
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
@@ -303,22 +308,30 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 /*---Affichage---*/
 
 //Variables POST
-$priceInDisplay = (float)$_GET["price"];
+$carKey = $_GET["carKey"];
 $model = $_GET["model"];
+$arrayCar = getCarArrayByKey($model, $carKey);
+
+$priceInDisplay = (float)$arrayCar["price"];
+echo $priceInDisplay;
+
 $submitFinancing = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
 $email = (isset($_POST["carToEmail"])) ? ($_POST["carToEmail"]) : null;
 $submitCarToEmail = (isset($_POST["sumbitCarToEmail"])) ? ($_POST["sumbitCarToEmail"]) : null;
 
+
 //Affichages des différentes vues
 $pageTitle = "Financement";
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 
+
+
 if (!empty($submitFinancing)) {
   try{
-    createFinancingResume($priceInDisplay, $model, $deposit, $isIndex);
+    createFinancingResume($priceInDisplay, $carKey, $model, $deposit, $isIndex);
 
   }
   catch (Exception $e) {
