@@ -23,7 +23,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
           </div>
         <?php
         if(isset($_GET["model"]) && isset($_GET["color"]) && isset($_GET["builtYear"]) && isset($_GET["mileage"]) && isset($_GET["state"])){
-        createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex);
+        createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex,$array_rangeMilageCategory);
       }
         ?>
       </div>

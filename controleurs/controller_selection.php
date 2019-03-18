@@ -71,8 +71,7 @@ function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   return $textToSend;
 }
 
-function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$keyToGet,$isIndex){
-  global $array_rangeMilageCategory;
+function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$keyToGet,$isIndex,$array_rangeMilageCategory){
   $isThisBelong = false;
   foreach($array_pictures as $key => $value){
     if($key == $keyToGet){
@@ -92,13 +91,12 @@ function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$stat
   return $isThisBelong;
 }
 
-function createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex){
-  global $array_rangeMilageCategory;
+function createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex,$array_rangeMilageCategory){
   foreach($array_pictures as $key => $value){
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key,$isIndex);
+    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key,$isIndex,$array_rangeMilageCategory);
     if($isThisPicturesBelong){
       echo "<div class=\"row\" id=\"carDisplayRow\">";
       echo "<div class=\" col-3 carPicture\">";
