@@ -10,13 +10,13 @@ Auteur: Sylvie Allain & Cyrice Paradis
 </div>
 <div class="row" id="carFinancingRecap">
   <div class="col-2 offset-1">
-    <img src="<?php echo $_GET['pic']; ?>" alt="automobile">
+    <img src="<?php echo $arrayCar["imageSrc"]; ?>" alt="automobile">
   </div>
   <div class="col-4 align-middle">
     <?php echo strtoupper($_GET['model']); ?>
   </div>
   <div class="col-1 align-middle">
-    <?php echo $priceInDisplay; ?>
+    <?php echo number_format($priceInDisplay, 2, ",", " "); ?>
   </div>
 </div>
 <form class="" action="" method="post" id="termSelector">

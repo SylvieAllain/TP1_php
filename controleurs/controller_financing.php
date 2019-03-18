@@ -281,8 +281,8 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 <h2>Envoyer votre soummission via courriel!</h2>
   <form class=\"\" action=\"\" method=\"post\">
     <label for=\"carToEmail\">Courriel: </label>
-    <input type=\"email\" name=\"carToEmail\" value=\"$email\">
-    <input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
+    <input type=\"email\" name=\"carToEmail\" value=\"\" class=\"input-group-text\" id=\"inputGroup-sizing-default\">
+    <input type=\"submit\" name=\"sumbitCarToEmail\" class=\"btn btn-success\" value=\"Envoyer\">
   </form>
 </div>
   ";
@@ -312,8 +312,7 @@ $carKey = $_GET["carKey"];
 $model = $_GET["model"];
 $arrayCar = getCarArrayByKey($model, $carKey);
 
-$priceInDisplay = (float)$arrayCar["price"];
-echo $priceInDisplay;
+$priceInDisplay = round((float)$arrayCar["price"],2);
 
 $submitFinancing = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
