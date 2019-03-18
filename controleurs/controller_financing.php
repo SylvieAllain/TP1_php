@@ -183,23 +183,6 @@ function validateDeposit($priceInDisplayWithTaxes, $deposit) {
     }
 }
 
-function validatePrice($price, $model,$isIndex){
-  if (!is_Numeric($price)){
-    throw new Exception ("Bravo! Tu as mis des lettres dans l'URL du prix");
-  }
-
-  $carsInModel = determineCarsByModel(ucfirst($model),$isIndex);
-  $priceCheck = false;
-  foreach ($carsInModel as $value => $key) {
-    if ($price == $key["price"]) {
-      $priceCheck = true;
-    }
-  }
-  if (!$priceCheck){
-    throw new Exception ("Tu te prends pour un hacker en modifiant les informations dans l'URL. Fais un retour.");
-  }
-}
-
 function validateEmail ($email) {
 		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			throw new Exception("Un courriel valide doit être entré<br>");
@@ -300,7 +283,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 //Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $carKey, $model,  $deposit, $isIndex) {
   global $term;
-  validatePrice($priceInDisplay, $model, $isIndex);
+
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
 
