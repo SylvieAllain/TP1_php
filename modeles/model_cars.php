@@ -65,7 +65,7 @@ $array_pontiacFirebird = [
 
 //GTO
 $array_pontiacGTO = [
-  "car1" => ["imageSrc" => "../images/pontiac/gto/gto1966.jpg","miniSrc" =>"../images/pontiac/gto/mini-gto1966.jpg", "nameMini" => "mini-gto1966","brand" =>"pontiac", "model" =>"GTO", "builtYear"=> "1966","color1"=>"Noire", "color2" =>"Bleue", "mileage" => 480320, "state"=> $array_stateOfCar[4], "description" =>"Style «Low Rider». Faire attention aux dos d\'âne", "price" => "1575.50$", ],
+  "car1" => ["imageSrc" => "../images/pontiac/gto/gto1966.jpg","miniSrc" =>"../images/pontiac/gto/mini-gto1966.jpg", "nameMini" => "mini-gto1966","brand" =>"pontiac", "model" =>"GTO", "builtYear"=> "1966","color1"=>"Noire", "color2" =>"Bleue", "mileage" => 480320, "state"=> $array_stateOfCar[4], "description" =>"Style «Low Rider». Faire attention aux dos d'âne", "price" => "1575.50$", ],
   "car2" => ["imageSrc" => "../images/pontiac/gto/gto1967.jpg","miniSrc" =>"../images/pontiac/gto/mini-gto1967.jpg", "nameMini" => "mini-gto1967","brand" =>"pontiac", "model" =>"GTO", "builtYear"=> "1967","color1"=>"Rouge", "color2" =>"Jaune", "mileage" => 480749, "state"=> $array_stateOfCar[4],"description" =>"Un beau rouge vif pour faire tourner toutes les têtes.", "price" => "25500.30$", ],
   "car3" => ["imageSrc" => "../images/pontiac/gto/gto1968.jpg","miniSrc" =>"../images/pontiac/gto/mini-gto1968.jpg", "nameMini" => "mini-gto1968","brand" =>"pontiac", "model" =>"GTO", "builtYear"=> "1968","color1"=>"Orange", "color2" => null, "mileage" => 260781, "state"=> $array_stateOfCar[3], "description" =>"Le plus jeune de la lignée et clairement le moins mature d'entre-eux." , "price" => "85501.99$", ],
 ];
