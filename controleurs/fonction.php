@@ -172,7 +172,7 @@ function createTable ($array_cars,$keyToGet, $imageSrc,$miniSrc,$nameMini, $need
   }
   else{
     echo "<div class=\"col-3\">" .
-            "<p class=\"carDescriptionTitle\"> Prix : </p>". "<span class=\"anchorPicture\">" . $array_cars[$keyToGet]["price"] . "</span>" ;
+            "<p class=\"carDescriptionTitle anchorPicture\"> Prix : </p>". "<span class=\"anchorPicture\">" . $array_cars[$keyToGet]["price"] . "</span>" ;
     echo "</div>";
   }
   echo "</div>";
