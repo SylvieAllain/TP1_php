@@ -34,7 +34,7 @@ if(isset($_GET["state"])){
 
 
 include_once "../modeles/model_cars.php";
-include_once "fonction.php";
+include_once "controller_function.php";
 $array_pictures = determineCarsByModel($model,$isIndex);
 
 $array_usingKey = [

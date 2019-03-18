@@ -14,7 +14,7 @@ require 'C:\wamp64\vendor\phpmailer\phpmailer\src\PHPMailer.php';
 
 include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
-include "fonction.php";
+include "controller_function.php";
 
 /*---Fonctions---*/
 
@@ -209,87 +209,91 @@ function validateEmail ($email) {
 //Pour affichage des variables dans un tableau résumant le financement
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
-  <div id=\"resumeFinancing\">
+  <div class=\"container containerFinancing2\">
+    <div id=\"resumeFinancing\">
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <strong>Détails</strong>
+        </div>
+        <div class=\"col\">
+          <strong>Montant</strong>
+        </div>
+      </div>
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <p>Prix de vente affiché: </p>
+        </div>
+        <div class=\"col\">
+          <p>$priceInDisplay</p>
+        </div>
+      </div>
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <p>Acompte: </p>
+        </div>
+        <div class=\"col\">
+          <p>$deposit</p>
+        </div>
+      </div>
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <p>Taxes: </p>
+        </div>
+        <div class=\"col\">
+          <p>$taxes</p>
+        </div>
+      </div>
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <p>Prix total: </p>
+        </div>
+        <div class=\"col\">
+          <p>$priceInDisplayWithTaxes</p>
+        </div>
+      </div>
+      <div class=\"row align-items-start\">
+        <div class=\"col\">
+          <p>Montant à financer: </p>
+        </div>
+        <div class=\"col\">
+          <p>$sumToFinance</p>
+        </div>
+    </div>
     <div class=\"row align-items-start\">
       <div class=\"col\">
-        <strong>Détails</strong>
+        <p>Intérêts: </p>
       </div>
       <div class=\"col\">
-        <strong>Montant</strong>
+        <p>$interest</p>
       </div>
     </div>
     <div class=\"row align-items-start\">
       <div class=\"col\">
-        <p>Prix de vente affiché: </p>
+        <p>Montant avec intérêts: </p>
       </div>
       <div class=\"col\">
-        <p>$priceInDisplay</p>
+        <p>$totalWithInterest</p>
       </div>
     </div>
     <div class=\"row align-items-start\">
       <div class=\"col\">
-        <p>Acompte: </p>
+        <p>Paiement mensuel: </p>
       </div>
       <div class=\"col\">
-        <p>$deposit</p>
+        <p>$monthlyPayment</p>
       </div>
     </div>
-    <div class=\"row align-items-start\">
-      <div class=\"col\">
-        <p>Taxes: </p>
-      </div>
-      <div class=\"col\">
-        <p>$taxes</p>
-      </div>
-    </div>
-    <div class=\"row align-items-start\">
-      <div class=\"col\">
-        <p>Prix total: </p>
-      </div>
-      <div class=\"col\">
-        <p>$priceInDisplayWithTaxes</p>
-      </div>
-    </div>
-    <div class=\"row align-items-start\">
-      <div class=\"col\">
-        <p>Montant à financer: </p>
-      </div>
-      <div class=\"col\">
-        <p>$sumToFinance</p>
-      </div>
   </div>
-  <div class=\"row align-items-start\">
-    <div class=\"col\">
-      <p>Intérêts: </p>
-    </div>
-    <div class=\"col\">
-      <p>$interest</p>
-    </div>
-  </div>
-  <div class=\"row align-items-start\">
-    <div class=\"col\">
-      <p>Montant avec intérêts: </p>
-    </div>
-    <div class=\"col\">
-      <p>$totalWithInterest</p>
+  <div id=\"carToEmailForm\" class=\"row\">
+  <div class=\"col-10 offset-2\">
+  <h2>Envoyer votre soumission via courriel!</h2>
+    <form class=\"\" action=\"\" method=\"post\">
+      <label for=\"carToEmail\">Courriel: </label>
+      <input type=\"email\" name=\"carToEmail\" value=\"\" class=\"input-group-text\" id=\"inputGroup-sizing-default\">
+      <input type=\"submit\" name=\"sumbitCarToEmail\" class=\"btn btn-success\" value=\"Envoyer\">
+    </form>
     </div>
   </div>
-  <div class=\"row align-items-start\">
-    <div class=\"col\">
-      <p>Paiement mensuel: </p>
-    </div>
-    <div class=\"col\">
-      <p>$monthlyPayment</p>
-    </div>
-  </div>
-</div>
-<div id=\"carToEmailForm\">
-<h2>Envoyer votre soummission via courriel!</h2>
-  <form class=\"\" action=\"\" method=\"post\">
-    <label for=\"carToEmail\">Courriel: </label>
-    <input type=\"email\" name=\"carToEmail\" value=\"\" class=\"input-group-text\" id=\"inputGroup-sizing-default\">
-    <input type=\"submit\" name=\"sumbitCarToEmail\" class=\"btn btn-success\" value=\"Envoyer\">
-  </form>
 </div>
   ";
 }

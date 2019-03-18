@@ -10,7 +10,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 $pageTitle = "Accueil";
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
-include "controleurs/fonction.php";
+include "controleurs/controller_function.php";
 $isIndex = true;
 //Attribution des variables "POST".
 $brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : "Lada";
@@ -170,5 +170,5 @@ function createSelectedList($array_toDropDownMenu, $mainValue, $nameOfSelectMenu
   echo "<input type =". "\"" . "submit" . "\"". "name=" . "\"" . $nameOfSubmitButton . "\"". "class=\"btn btn-success\"" . "value=" . "\"" . "Ok" . "\"" . ">";
 }
 
-include_once 'vues/accueil.php';
+include_once 'vues/home.php';
 ?>

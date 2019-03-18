@@ -4,6 +4,21 @@ Projet : Voiture @Variée
 Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 */
+.containerFinancing{
+  background-color: #FBFCB5;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  padding: 1.5em;
+}
+
+.containerFinancing2{
+  background-color: #FBFCB5;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 1.5em;
+}
 
 strong {
   font-size: 1.5em;
@@ -26,17 +41,6 @@ strong {
   padding-left: 3%;
 }
 
-/* #carFinancingRecap {
-  font-size: 1.6em;
-  background-color: #FBFCB5;
-  background-image: url("../images/lemonsDrop_transparent.png");
-  background-size: 10%;
-  margin-top: 1%;
-  margin-right: 2em;
-  margin-left: 2em;
-  margin-bottom: 0%;
-  line-height: 4;
-} */
 
 #termSelector {
   text-align: center;
@@ -86,6 +90,10 @@ padding-top: 1em;
 
 #carToEmailForm{
   margin-left:5%;
+  margin-right: 5%;
+  background-color: #FBFCB5;
+  background-image: url("../images/lemonsDrop_transparent.png");
+  background-size: 20%;
 }
 
 #carDisplayRow{
@@ -95,8 +103,6 @@ padding-top: 1em;
 }
 
 .anchorPicture{
-  display:flex;
   flex-flow:wrap;
-  align-items: space-between;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
