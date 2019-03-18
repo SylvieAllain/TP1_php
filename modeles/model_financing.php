@@ -28,5 +28,4 @@ define('FINANCING_RATE_INTEREST', [
   60 => [6.00, 5.85],
 ]);
 
-
  ?>
