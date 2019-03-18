@@ -65,70 +65,75 @@ function getCarArrayByKey($model, $carKey) {
 //Pour envoyer un courriel contenant le résumé du financment
 //Librairie disponible et exemple tiré de : https://github.com/PHPMailer/PHPMailer
 function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
-  $mail = new PHPMailer(TRUE);
-  $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
-  $mail->addAddress($to);
-  $mail->Subject = 'Votre soumission automobile ' . $model;
-  $body= "
-   <html>
-   <body>
-   <p>" . strtoupper($model) . "</p>
-   <table>
-    <tr>
-      <th>Détails</th>
-      <th>Montant</th>
-    </tr>
-    <tr>
-      <td>Prix de vente affiché: </td>
-      <td>$priceInDisplay</td>
-    </tr>
-    <tr>
-      <td>Acompte: </td>
-      <td>$deposit</td>
-    </tr>
-    <tr>
-      <td>Taxes: </td>
-      <td>$taxes</td>
-    </tr>
-    <tr>
-      <td>Prix total: </td>
-      <td>$priceInDisplayWithTaxes</td>
-    </tr>
-    <tr>
-      <td>Montant à financer: </td>
-      <td>$sumToFinance</td>
-    </tr>
-    <tr>
-      <td>Intérêts: </td>
-      <td>$interest</td>
-    </tr>
-    <tr>
-      <td>Montant avec intérêts: </td>
-      <td>$totalWithInterest</td>
-    </tr>
-    <tr>
-      <td>Paiement mensuel: </td>
-      <td>$monthlyPayment</td>
-    </tr>
-  </table>
-  </body>
-  </html>
-   ";
+  try{
+    $mail = new PHPMailer(TRUE);
+    $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
+    $mail->addAddress($to);
+    $mail->Subject = 'Votre soumission automobile ' . $model;
+    $body= "
+     <html>
+     <body>
+     <p>" . strtoupper($model) . "</p>
+     <table>
+      <tr>
+        <th>Détails</th>
+        <th>Montant</th>
+      </tr>
+      <tr>
+        <td>Prix de vente affiché: </td>
+        <td>$priceInDisplay</td>
+      </tr>
+      <tr>
+        <td>Acompte: </td>
+        <td>$deposit</td>
+      </tr>
+      <tr>
+        <td>Taxes: </td>
+        <td>$taxes</td>
+      </tr>
+      <tr>
+        <td>Prix total: </td>
+        <td>$priceInDisplayWithTaxes</td>
+      </tr>
+      <tr>
+        <td>Montant à financer: </td>
+        <td>$sumToFinance</td>
+      </tr>
+      <tr>
+        <td>Intérêts: </td>
+        <td>$interest</td>
+      </tr>
+      <tr>
+        <td>Montant avec intérêts: </td>
+        <td>$totalWithInterest</td>
+      </tr>
+      <tr>
+        <td>Paiement mensuel: </td>
+        <td>$monthlyPayment</td>
+      </tr>
+    </table>
+    </body>
+    </html>
+     ";
 
-  $mail->Body = $body;
-  $mail->IsHTML(true);
+    $mail->Body = $body;
+    $mail->IsHTML(true);
 
-  //Server settings
-   $mail->isSMTP();
-   $mail->Host = 'smtp.gmail.com';
-   $mail->SMTPAuth = TRUE;
-   $mail->SMTPSecure = 'tsl';
-   $mail->Port = 587;
-   $mail->Username = 'voiture.a.variee@gmail.com';
-   $mail->Password = '123456789abcD';
+    //Server settings
+     $mail->isSMTP();
+     $mail->Host = 'smtp.gmail.com';
+     $mail->SMTPAuth = TRUE;
+     $mail->SMTPSecure = 'tsl';
+     $mail->Port = 587;
+     $mail->Username = 'voiture.a.variee@gmail.com';
+     $mail->Password = '123456789abcD';
 
-   // Send mail
-   $mail->send();
+     // Send mail
+     $mail->send();
+   }
+   catch (Exception $e) {
+    echo "Le courriel n'a pu être envoyé en raison que PHPMailer n'a pas été installé ou l'authentification SMTP est mal configuré.";
+  }
 }
 
 
@@ -290,6 +295,7 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 }
 //Fonction principale appelant toutes les autres
 function createFinancingResume($priceInDisplay, $carKey, $model,  $deposit, $isIndex) {
+  global $term;
   validatePrice($priceInDisplay, $model, $isIndex);
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
@@ -312,6 +318,7 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 $carKey = $_GET["carKey"];
 $model = $_GET["model"];
 $arrayCar = getCarArrayByKey($model, $carKey);
+$term = null;
 $imageSrc = $arrayCar["imageSrc"];
 $miniSrc = $arrayCar["miniSrc"];
 $nameMini = $arrayCar["nameMini"];
@@ -345,6 +352,15 @@ if (!empty($submitFinancing)) {
 if(!empty($submitCarToEmail)) {
   try{
     validateEmail($email);
+
+    $interestRate = determineInterestRate($priceInDisplay,$term);
+    $taxes = round(determineTaxes($priceInDisplay),2);
+    $priceInDisplayWithTaxes = determinePriceInDisplayWithTaxes($priceInDisplay, $taxes);
+    $sumToFinance = round(determineSumToFinance($deposit, $priceInDisplayWithTaxes),2);
+    $interest = round(determineInterest($sumToFinance, $interestRate),2);
+    $totalWithInterest = determineTotalWithInterest($sumToFinance, $interest);
+    $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
+
     sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
   }
   catch (Exception $e) {
