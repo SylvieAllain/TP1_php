@@ -167,15 +167,15 @@ function createTable ($array_cars,$keyToGet, $imageSrc,$miniSrc,$nameMini, $need
   if($needHref){
   echo "<div class=\"col-3 anchorPicture\">" .
         "(Cliquer pour obtenir les détails) <br>".
-          "<a href=\"../controleurs/controller_financing?carKey=" . $keyToGet . "&model=" . $array_cars[$keyToGet]["model"] . "\">" . $array_cars[$keyToGet]["price"] . "</a> </div>";
-  echo "</div>";
+          "<a href=\"../controleurs/controller_financing?carKey=" . $keyToGet . "&model=" . $array_cars[$keyToGet]["model"] . "\">" . $array_cars[$keyToGet]["price"] . "</a>".
+           "</div>";
   }
   else{
     echo "<div class=\"col-3\">" .
-
-            "<p class=\"carDescriptionTitle\"> Prix : </p>". $array_cars[$keyToGet]["price"] . "</div>";
+            "<p class=\"carDescriptionTitle\"> Prix : </p>". "<span class=\"anchorPicture\">" . $array_cars[$keyToGet]["price"] . "</span>" ;
     echo "</div>";
   }
+  echo "</div>";
 }
 
 ?>

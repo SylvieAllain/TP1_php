@@ -26,7 +26,7 @@ strong {
   padding-left: 3%;
 }
 
-#carFinancingRecap {
+/* #carFinancingRecap {
   font-size: 1.6em;
   background-color: #FBFCB5;
   background-image: url("../images/lemonsDrop_transparent.png");
@@ -36,7 +36,7 @@ strong {
   margin-left: 2em;
   margin-bottom: 0%;
   line-height: 4;
-}
+} */
 
 #termSelector {
   text-align: center;
@@ -86,4 +86,17 @@ padding-top: 1em;
 
 #carToEmailForm{
   margin-left:5%;
+}
+
+#carDisplayRow{
+  background-color: #FBFCB5;
+  background-image: url("../images/lemonsDrop_transparent.png");
+  background-size: 10%;
+}
+
+.anchorPicture{
+  display:flex;
+  flex-flow:wrap;
+  align-items: space-between;
+  justify-content: flex-end;
 }
