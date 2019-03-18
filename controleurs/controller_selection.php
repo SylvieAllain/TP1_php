@@ -13,6 +13,7 @@ $builtYear = null;
 $mileage = null;
 $state = null;
 $isIndex = false;
+$needHref = true;
 
 if(isset($_GET["model"])){
   $model = $_GET["model"];
@@ -36,26 +37,12 @@ include_once "../modeles/model_cars.php";
 include_once "fonction.php";
 $array_pictures = determineCarsByModel($model,$isIndex);
 
-function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
-  $img_source = imagecreatefromjpeg($imageSrc);
-  $img_destination = imagecreatetruecolor(250,190);
-
-  $largeur_src = imagesx($img_source);
-  $hauteur_src = imagesy($img_source);
-  $largeur_destination = 250;
-  $hauteur_destination = 190;
-
-  //créer la miniature
-  imagecopyresampled($img_destination,$img_source,0,0,0,0,$largeur_destination,$hauteur_destination,$largeur_src,$hauteur_src);
-
-  //enregistrement
-  imagejpeg($img_destination,$miniSrc);
-  echo "<div>";
-  echo "<div ><a href=\"$imageSrc\"> <img class=\"picture\" src=\"$miniSrc\" name=\"$nameMini\" /></a></div>";
-  echo "</div>";
-  imagedestroy($img_source);
-  imagedestroy($img_destination);
-}
+$array_usingKey = [
+  "color" => $color,
+  "builtYear" => $builtYear,
+  "mileage" => $mileage,
+  "state" => $state
+];
 
 function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   $textToSend = "test";
@@ -71,52 +58,15 @@ function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   return $textToSend;
 }
 
-function isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$keyToGet,$isIndex,$array_rangeMilageCategory){
-  $isThisBelong = false;
-  foreach($array_pictures as $key => $value){
-    if($key == $keyToGet){
-      if($array_pictures[$key]["color1"] == $color || $array_pictures[$key]["color2"] == $color || $color == null){
-        if($array_pictures[$key]["builtYear"] == $builtYear || $builtYear == null){
-          $textToCompare = determinateRangeMileageForACar($array_pictures,$array_rangeMilageCategory,$key,$isIndex);
-          if($textToCompare == $mileage || $mileage == null){
-            $stateToCompare = sendTextWithoutWhiteSpaces($array_pictures,$key);
-            if($stateToCompare == $state || $state == null){
-              $isThisBelong = true;
-            }
-          }
-        }
-      }
-    }
-  }
-  return $isThisBelong;
-}
 
-function createTable($array_pictures,$color,$builtYear,$mileage,$state,$isIndex,$array_rangeMilageCategory){
+function insertCarThatFitWithUserChoice($array_pictures,$array_usingKey,$isIndex,$array_rangeMilageCategory,$needHref){
   foreach($array_pictures as $key => $value){
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];
     $nameMini = $array_pictures[$key]["nameMini"];
-    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$color,$builtYear,$mileage,$state,$key,$isIndex,$array_rangeMilageCategory);
+    $isThisPicturesBelong = isPictureBelongToTable($array_pictures,$array_usingKey,$key,$isIndex,$array_rangeMilageCategory);
     if($isThisPicturesBelong){
-      echo "<div class=\"row\" id=\"carDisplayRow\">";
-      echo "<div class=\" col-3 carPicture\">";
-      echo createMiniPhoto($imageSrc,$miniSrc,$nameMini) . "</div>";
-      echo "<div class=\"col-3\">" .
-            "<p class=\"carDescriptionTitle\">Année de fabrication : </p>" . $array_pictures[$key]["builtYear"]. "<br>".
-            "<p class=\"carDescriptionTitle\"> Couleur(s) disponible(s) : </p>" . $array_pictures[$key]["color1"];
-      if ($array_pictures[$key]["color2"] != null){
-        echo ", " . $array_pictures[$key]["color2"];
-      }
-      echo  "<p class=\"carDescriptionTitle\"> Kilométrage : </p>" . $array_pictures[$key]["mileage"] . " km" .
-            "<p class=\"carDescriptionTitle\"> État du véhicule : </p>" . $array_pictures[$key]["state"] .
-            "</div>".
-            "<div class=\"col-3\">".
-            "<p class=\"carDescriptionTitle\"> Autres informations : </p>" . $array_pictures[$key]["description"] .
-            " </div>";
-      echo "<div class=\"col-3 anchorPicture\">" .
-            "(Cliquer pour obtenir les détails) <br>".
-              "<a href=\"../controleurs/controller_financing?carKey=" . $key . "&model=" . $array_pictures[$key]["model"] . "\">" . $array_pictures[$key]["price"] . "</a> </div>";
-      echo "</div>";
+      createTable($array_pictures,$key, $imageSrc,$miniSrc,$nameMini, $needHref);
     }
   }
 }

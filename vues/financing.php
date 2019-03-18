@@ -5,18 +5,12 @@ Hiver 2019
 Auteur: Sylvie Allain & Cyrice Paradis
 -->
 <div id="financingDescription">
+  <?php $array_cars = determineCarsByModel(ucfirst($model),$isIndex);?>
   <h1>C'est le temps de passer aux choses sérieuses!</h1>
     <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
 </div>
 <div class="row" id="carFinancingRecap">
-  <div class="col-2 offset-1">
-    <img src="<?php echo $arrayCar["imageSrc"]; ?>" alt="automobile">
-  </div>
-  <div class="col-4 align-middle">
-    <?php echo strtoupper($_GET['model']); ?>
-  </div>
-  <div class="col-1 align-middle">
-    <?php echo number_format($priceInDisplay, 2, ",", " "); ?>
+  <?php createTable ($array_cars,$carKey,$imageSrc,$miniSrc,$nameMini,$needHref)?>
   </div>
 </div>
 <form class="" action="" method="post" id="termSelector">

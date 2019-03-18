@@ -20,6 +20,7 @@ include "fonction.php";
 
 //Pour le traitement de la page
 $isIndex = false;
+$needHref = false;
 function determineInterestRate($price, $term) {
   if ($price <= MIN_FOR_BEST_RATE) {
     $interestRate =  FINANCING_RATE_INTEREST[$term][BEST_RATE_INDEX];
@@ -183,6 +184,9 @@ function validatePrice($price, $model,$isIndex){
   }
 
   $carsInModel = determineCarsByModel(ucfirst($model),$isIndex);
+  print_r($carsInModel);
+  $array_modelCars = determineCarsByModel($model,$isIndex);
+  print_r($array_modelCars);
   $priceCheck = false;
   foreach ($carsInModel as $value => $key) {
     if ($price == $key["price"]) {
@@ -311,6 +315,9 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 $carKey = $_GET["carKey"];
 $model = $_GET["model"];
 $arrayCar = getCarArrayByKey($model, $carKey);
+$imageSrc = $arrayCar["imageSrc"];
+$miniSrc = $arrayCar["miniSrc"];
+$nameMini = $arrayCar["nameMini"];
 
 $priceInDisplay = round((float)$arrayCar["price"],2);
 
