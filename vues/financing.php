@@ -9,10 +9,8 @@ Auteur: Sylvie Allain & Cyrice Paradis
   <h1>C'est le temps de passer aux choses sérieuses!</h1>
     <h2>Avec nous, soyez assurer que nous ferons tout en notre possible pour vous offrir le prix le plus en notre faveur !</h2>
 </div>
-<div class="row" id="carFinancingRecap">
+<div class="container">
   <?php createTable ($array_cars,$carKey,$imageSrc,$miniSrc,$nameMini,$needHref)?>
-  </div>
-</div>
 <form class="" action="" method="post" id="termSelector">
   <div class="row" id=termRow>
     <div class="col-4 termCol">
@@ -29,5 +27,6 @@ Auteur: Sylvie Allain & Cyrice Paradis
     <div class="col-1 termCol">
       <input type="submit" class="btn btn-success" name="termsButton" value="Calculer"></input>
     </div>
+  </div>
   </div>
 </form>
