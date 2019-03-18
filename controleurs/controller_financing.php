@@ -184,9 +184,6 @@ function validatePrice($price, $model,$isIndex){
   }
 
   $carsInModel = determineCarsByModel(ucfirst($model),$isIndex);
-  print_r($carsInModel);
-  $array_modelCars = determineCarsByModel($model,$isIndex);
-  print_r($array_modelCars);
   $priceCheck = false;
   foreach ($carsInModel as $value => $key) {
     if ($price == $key["price"]) {
