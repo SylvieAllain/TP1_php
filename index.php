@@ -6,12 +6,12 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-//TODO Tenter également de retirer tout les éléments globals.
 $pageTitle = "Accueil";
 include_once 'vues/banner.php';
 include "modeles/model_cars.php";
 include "controleurs/controller_function.php";
 $isIndex = true;
+
 //Attribution des variables "POST".
 $brand = (!empty($_POST['brand'])) ? ($_POST['brand']) : "Lada";
 $submit_brand = (!empty($_POST['submit_brand'])) ? ($_POST['submit_brand']) : null;
@@ -67,6 +67,7 @@ $array_choosedModel = determineCarsByModel($model,$isIndex);
     "state" => $state
   ];
 
+//Fonction qui retourne un tableau contenant les clés qui correspondent aux choix de l'utilisateur.
 function createArrayOfKeyNeeded ($array_choosedModel,$array_usingKey,$array_rangeMilageCategory,$isIndex){
   $array_toReturn = [];
   foreach($array_choosedModel as $keyModel => $valueModel){
@@ -110,6 +111,7 @@ function createArrayOfKeyNeeded ($array_choosedModel,$array_usingKey,$array_rang
 
 $array_keyNeeded = createArrayOfKeyNeeded ($array_choosedModel,$array_usingKey,$array_rangeMilageCategory,$isIndex);
 
+//Fonction qui renvoi un tableau contenant les éléments se trouvant dans un menu déroulant, selon l'option du véhicule sélectionné.
 function createArrayOptionAvailable($array_choosedModel,$array_keyNeeded,$array_rangeMilageCategory,$isIndex,$optionName){
   $array_toDropDownList = [];
   foreach($array_choosedModel as $key1 => $value1){
@@ -144,6 +146,7 @@ function createArrayOptionAvailable($array_choosedModel,$array_keyNeeded,$array_
   return $array_toDropDownList;
 }
 
+//Création des tableaux qui contiendront les possibilités disponibles selon les options.
 $array_modelColors = createArrayOptionAvailable($array_choosedModel,$array_keyNeeded,$array_rangeMilageCategory, $isIndex,"color");
 $array_modelBuiltYear = createArrayOptionAvailable($array_choosedModel,$array_keyNeeded,$array_rangeMilageCategory, $isIndex,"builtYear");
 $array_modelRangedMileage = createArrayOptionAvailable($array_choosedModel,$array_keyNeeded,$array_rangeMilageCategory, $isIndex,"mileage");

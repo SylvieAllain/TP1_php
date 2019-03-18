@@ -6,7 +6,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
 -->
 
 <?php
-
+//fonction switch qui retourne le tableau correspondant au modèle de voiture sélectionné par l'utilisateur.
 function determineCarsByModel($model,$isIndex){
   if($isIndex){
     include "modeles/model_cars.php";
@@ -14,7 +14,6 @@ function determineCarsByModel($model,$isIndex){
   else {
     include "../modeles/model_cars.php";
   }
-
   $array_cars = [];
   switch ($model){
     case "Granta":
@@ -85,6 +84,7 @@ function determineCarsByModel($model,$isIndex){
   return $array_cars;
 }
 
+//Fonction qui retourne un texte qui correspond au écart de kilométrage selon le kilométrage du véhicule.
 function determinateRangeMileageForACar ($array_cars,$array_rangeMilageCategory,$keyToGet,$isIndex){
   $textToReturn = "";
   foreach($array_cars[$keyToGet] as $key => $valueMilage){
@@ -107,6 +107,7 @@ function determinateRangeMileageForACar ($array_cars,$array_rangeMilageCategory,
   return $textToReturn;
 }
 
+//fonction qui crée une mini-photo.
 function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   $img_source = imagecreatefromjpeg($imageSrc);
   $img_destination = imagecreatetruecolor(250,190);
@@ -128,6 +129,7 @@ function createMiniPhoto($imageSrc,$miniSrc,$nameMini){
   imagedestroy($img_destination);
 }
 
+//Fonction qui détermine si la photo et la voiture répond aux choix de l'utilisateur.
 function isPictureBelongToTable($array_cars,$array_usingKey,$keyToGet,$isIndex,$array_rangeMilageCategory){
   $isThisBelong = false;
   foreach($array_cars as $key => $value){
@@ -148,6 +150,7 @@ function isPictureBelongToTable($array_cars,$array_usingKey,$keyToGet,$isIndex,$
   return $isThisBelong;
 }
 
+//fonction création du tableau contenant la photo, la description et le prix du véhicule.
 function createTable ($array_cars,$keyToGet, $imageSrc,$miniSrc,$nameMini, $needHref){
   echo "<div class=\"row\" id=\"carDisplayRow\">";
   echo "<div class=\" col-3 carPicture\">";

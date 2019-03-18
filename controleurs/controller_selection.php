@@ -44,6 +44,7 @@ $array_usingKey = [
   "state" => $state
 ];
 
+//fonction qui permet de retirer les espaces entre les mots. Comparant le kilométrage se trouvant dans le url.
 function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   $textToSend = "test";
   foreach ($array_pictures as $key => $value){
@@ -58,8 +59,8 @@ function sendTextWithoutWhiteSpaces($array_pictures,$keyToGet){
   return $textToSend;
 }
 
-
-function insertCarThatFitWithUserChoice($array_pictures,$array_usingKey,$isIndex,$array_rangeMilageCategory,$needHref){
+//fonction qui permet de générer les autos qui répondent aux choix de l'utilisateur.
+function insertCarsThatFitWithUserChoice($array_pictures,$array_usingKey,$isIndex,$array_rangeMilageCategory,$needHref){
   foreach($array_pictures as $key => $value){
     $imageSrc = $array_pictures[$key]["imageSrc"];
     $miniSrc = $array_pictures[$key]["miniSrc"];

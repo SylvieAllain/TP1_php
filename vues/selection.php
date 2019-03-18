@@ -23,7 +23,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
           </div>
         <?php
         if(isset($_GET["model"]) && isset($_GET["color"]) && isset($_GET["builtYear"]) && isset($_GET["mileage"]) && isset($_GET["state"])){
-        insertCarThatFitWithUserChoice($array_pictures,$array_usingKey,$isIndex,$array_rangeMilageCategory,$needHref);
+        insertCarsThatFitWithUserChoice($array_pictures,$array_usingKey,$isIndex,$array_rangeMilageCategory,$needHref);
       }
         ?>
       </div>

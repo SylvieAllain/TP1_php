@@ -106,3 +106,12 @@ padding-top: 1em;
   flex-flow:wrap;
   justify-content: flex-start;
 }
+
+.carToEmail{
+  float:left;
+}
+
+.emailRow{
+  border:hidden;
+  box-shadow:5px 5px #FBFCB5;
+}

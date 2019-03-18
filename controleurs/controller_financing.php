@@ -271,9 +271,15 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
   <div class=\"col-10 offset-2\">
   <h2>Envoyer votre soumission via courriel!</h2>
     <form class=\"\" action=\"\" method=\"post\">
-      <label for=\"carToEmail\">Courriel: </label>
-      <input type=\"email\" name=\"carToEmail\" value=\"\" class=\"input-group-text\" id=\"inputGroup-sizing-default\">
-      <input type=\"submit\" name=\"sumbitCarToEmail\" class=\"btn btn-success\" value=\"Envoyer\">
+      <div class=\"row emailRow\">
+        <div class=\"col-5\">
+        <label for=\"carToEmail\" class=\"carToEmail\">Courriel: </label>
+          <input type=\"email\" name=\"carToEmail\" value=\"\" class=\"input-group-text\" id=\"inputGroup-sizing-default\">
+        </div>
+        <div class=\"col-7\">
+          <input type=\"submit\" name=\"sumbitCarToEmail\" class=\"btn btn-success carToEmail\" value=\"Envoyer\">
+        </div>
+      </div>
     </form>
     </div>
   </div>
