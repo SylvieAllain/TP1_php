@@ -20,41 +20,6 @@ $isIndex = false;
   <body>
     <h1>Test de validation des fonctions</h1>
 
-    <h2>Fonction validatePrice($price, $model, $isIndex)</h2>
-    <table border="1px solid black">
-      <tr>
-        <th>No. de test</th>
-        <th>Valeurs en entrée</th>
-        <th>Résultat attendu</th>
-        <th>Résultat obtenu</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>(1000.00, "Granta", "false")</td>
-        <td>Exception</td>
-        <td><?php try{validatePrice(1000.00, "Granta",$isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>(999999.99, "Granta", "false")</td>
-        <td>Aucune exception</td>
-        <td><?php try{validatePrice(999999.99, "Granta",$isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>(29999.90, "Granta", "false")</td>
-        <td>Aucune exception</td>
-        <td><?php try{validatePrice(29999.90, "Granta", $isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>("Matt Damon!", "Granta", "false")</td>
-        <td>Exception</td>
-        <td><?php try{validatePrice("Matt Damon!", "Granta", $isIndex);} catch(Exception $e) {echo $e->getMessage();} ?></td>
-      </tr>
-    </table>
-    <br>
-
     <h2>Fonction determineInterestRate($price, $value)</h2>
     <table border="1px solid black">
       <tr>
