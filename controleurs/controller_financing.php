@@ -52,7 +52,17 @@ function createTermsSelector($priceInDisplay,$termsSelect){
   }
 }
 
+//Pour création tableau contenant les variables nécessaires pour l'Affichage de la descriptions
+//Plutôt utiliser la fonction createTable???
+function getCarArrayByKey($model, $carKey) {
+  $arrayModel = determineCarsByModel(ucfirst($model),false);
+  $arrayCar = $arrayModel[$carKey];
+  return $arrayCar;
+}
+
+
 //Pour envoyer un courriel contenant le résumé du financment
+//Librairie disponible et exemple tiré de : https://github.com/PHPMailer/PHPMailer
 function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   $mail = new PHPMailer(TRUE);
   $mail->setFrom('voiture.a.variee@gmail.com', utf8_decode('Voiture AVariée'));
@@ -107,28 +117,16 @@ function sendEmail($to, $model, $priceInDisplay, $deposit, $taxes, $priceInDispl
   $mail->Body = $body;
   $mail->IsHTML(true);
 
-   /* Tells PHPMailer to use SMTP. */
+  //Server settings
    $mail->isSMTP();
-
-   /* SMTP server address. */
    $mail->Host = 'smtp.gmail.com';
-
-   /* Use SMTP authentication. */
    $mail->SMTPAuth = TRUE;
-
-   /* Set the encryption system. */
    $mail->SMTPSecure = 'tsl';
-
-   /* SMTP authentication username. */
+   $mail->Port = 587;
    $mail->Username = 'voiture.a.variee@gmail.com';
-
-   /* SMTP authentication password. */
    $mail->Password = '123456789abcD';
 
-   /* Set the SMTP port. */
-   $mail->Port = 587;
-
-   /* Send the mail. */
+   // Send mail
    $mail->send();
 }
 
@@ -196,13 +194,13 @@ function validatePrice($price, $model,$isIndex){
   }
 }
 
-function validateEmail () {
-		if (!filter_input(INPUT_POST, "carToEmail", FILTER_VALIDATE_EMAIL)) {
+function validateEmail ($email) {
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 			throw new Exception("Un courriel valide doit être entré<br>");
 	}
 }
 
-//Pour affichage des variables dans un tableau responsive
+//Pour affichage des variables dans un tableau résumant le financement
 function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment) {
   echo "
   <div id=\"resumeFinancing\">
@@ -283,15 +281,14 @@ function displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDispl
 <h2>Envoyer votre soummission via courriel!</h2>
   <form class=\"\" action=\"\" method=\"post\">
     <label for=\"carToEmail\">Courriel: </label>
-    <input type=\"email\" name=\"carToEmail\" value=\"\">
+    <input type=\"email\" name=\"carToEmail\" value=\"$email\">
     <input type=\"submit\" name=\"sumbitCarToEmail\" value=\"Envoyer\">
   </form>
 </div>
   ";
 }
-
 //Fonction principale appelant toutes les autres
-function createFinancingResume($priceInDisplay, $model,  $deposit, $isIndex) {
+function createFinancingResume($priceInDisplay, $carKey, $model,  $deposit, $isIndex) {
   validatePrice($priceInDisplay, $model, $isIndex);
   $term = $_POST["termsSelect"];
   $interestRate = determineInterestRate($priceInDisplay,$term);
@@ -311,22 +308,30 @@ displayFinancingResume($priceInDisplay, $deposit, $taxes, $priceInDisplayWithTax
 /*---Affichage---*/
 
 //Variables POST
-$priceInDisplay = (float)$_GET["price"];
+$carKey = $_GET["carKey"];
 $model = $_GET["model"];
-$submit = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
+$arrayCar = getCarArrayByKey($model, $carKey);
+
+$priceInDisplay = (float)$arrayCar["price"];
+echo $priceInDisplay;
+
+$submitFinancing = (isset($_POST["termsButton"])) ? ($_POST["termsButton"]) : null;
 $deposit = (isset($_POST["depositInput"])) ? round(trim($_POST["depositInput"]),2) : (float)0.00;
 
 $email = (isset($_POST["carToEmail"])) ? ($_POST["carToEmail"]) : null;
 $submitCarToEmail = (isset($_POST["sumbitCarToEmail"])) ? ($_POST["sumbitCarToEmail"]) : null;
+
 
 //Affichages des différentes vues
 $pageTitle = "Financement";
 include_once '../vues/banner.php';
 include_once "../vues/financing.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+if (!empty($submitFinancing)) {
   try{
-    createFinancingResume($priceInDisplay, $model, $deposit, $isIndex);
+    createFinancingResume($priceInDisplay, $carKey, $model, $deposit, $isIndex);
 
   }
   catch (Exception $e) {
@@ -336,7 +341,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if(!empty($submitCarToEmail)) {
   try{
-    validateEmail();
+    validateEmail($email);
     sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
   }
   catch (Exception $e) {
