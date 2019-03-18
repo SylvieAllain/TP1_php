@@ -11,6 +11,7 @@ Auteur: Sylvie Allain & Cyrice Paradis
           2019
       </p>
       <a href="http://www.tinytuba.com/">Mentions légales</a>
+      &nbsp&nbsp
       <a href="http://www.perdu.com/">Pour nous poursuivre</a>
     </footer>
   </body>
