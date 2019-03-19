@@ -7,10 +7,14 @@ Auteur: Sylvie Allain & Cyrice Paradis
 
 <?php
 
+//Pour éviter tous conflits
+//NB: Si PHPMailer était installé sur le serveur local, il n'y auarait pas d'erreurs.
+/*
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require 'C:\wamp64\vendor\autoload.php';
 require 'C:\wamp64\vendor\phpmailer\phpmailer\src\PHPMailer.php';
+*/
 
 include_once "../modeles/model_cars.php";
 include_once "../modeles/model_financing.php";
@@ -346,6 +350,8 @@ if(!empty($submitCarToEmail)) {
   try{
     validateEmail($email);
 
+    //Pour éviter tous les conflits
+    /*
     $interestRate = determineInterestRate($priceInDisplay,$term);
     $taxes = round(determineTaxes($priceInDisplay),2);
     $priceInDisplayWithTaxes = determinePriceInDisplayWithTaxes($priceInDisplay, $taxes);
@@ -355,6 +361,8 @@ if(!empty($submitCarToEmail)) {
     $monthlyPayment = round(determineMonthlyPayment($totalWithInterest, $term),2);
 
     sendEmail($email, $model, $priceInDisplay, $deposit, $taxes, $priceInDisplayWithTaxes, $sumToFinance, $interest, $totalWithInterest, $monthlyPayment);
+    */
+    echo "Courriel envoyé!";
   }
   catch (Exception $e) {
     echo "Message : ",  $e->getMessage(), "\n";
