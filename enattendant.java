@@ -68,19 +68,9 @@ public class PathFinderClockwise {
                 	}
                 }
                 if(!isMovedFromRoom){
-                	
-                	if(this.path.peek().type == Room.Type.Start) {
-                		room = this.path.peek();
-                	}
-                	else {
-                		Room bannedRoom = this.path.pop();
-                		this.listOfDoomedRooms.add(bannedRoom);
-                		room = this.path.peek();
-                		lastRoomVisited = this.path.peek();
-                		if(room.equals(lastRoomVisited)) {
-                			this.path.pop();
-                		}
-            		}
+	        		this.listOfDoomedRooms.add(room);
+	        		room = this.path.peek();
+	        		this.path.pop();
             	}
             }
             
