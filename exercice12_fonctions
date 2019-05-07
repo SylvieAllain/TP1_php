@@ -1,0 +1,26 @@
+<?php
+function afficher_ordre_alphabetique(){
+  $var1 = "Bonjour";
+  $var2 = "bien";
+
+  $var1 = strtolower($var1);
+  $var2 = strtolower($var2);
+
+  $firstLetter1 = 'a';
+  $firstLetter2 = 'a';
+
+  for ($i = 0; $firstLetter1 == $firstLetter2; $i++){
+    $firstLetter1 = substr($var1,$i,1);
+    $firstLetter2 = substr($var2,$i,2);
+  }
+
+  if($firstLetter1 > $firstLetter2){
+    echo "Le mot $var1 est avant le mot $var2 en ordre alphabétique";
+  }
+  else {
+    echo "Le mot $var2 est avant le mot $var1 en ordre alphabétique";
+  }
+
+afficher_ordre_alphabetique();
+}
+?>
