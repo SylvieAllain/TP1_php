@@ -1,100 +1,123 @@
-package TP2;
-import TP2_MAZE_SERVICES.*;
+@Test
+	public void GIVEN_Software_WHEN_mazeWithoutEnding_THEN_properErrorMessagesAreDisplayed()
+	{ 
+		//Arrange
+
+		FileReaderFake fileReaderFake = new FileReaderFake();
+		ConsoleFake consoleFake = new ConsoleFake();
+		KeyboardFake keyboardFake = new KeyboardFake(); 
+		
+		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
+		
+		keyboardFake.add("mauvaisFichier.txt");
+		keyboardFake.add(Software.SENTINEL_VALUE);
+		fileReaderFake.isMazeUnsolvable = true;
+		
+		//Act
+		
+		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE);
+		
+		//Assert
+		String firstExpectedMessage = Software.PATHFINDER_NO_SOLUTION_MESSAGE.replace("$pathfinderName", ANY_PATH_FINDER_CLOCKWISE.getClass().getSimpleName());
+		String secondExpectedMessage = Software.PATHFINDER_NO_SOLUTION_MESSAGE.replace("$pathfinderName", ANY_PATH_FINDER_COUNTER_CLOCKWISE.getClass().getSimpleName());
+		final String[] EXPECTED_VALUE = {firstExpectedMessage, secondExpectedMessage};
+		int[] indexesToGet = {consoleFake.linesDisplayed.size() - 2, consoleFake.linesDisplayed.size() - 3};;// -1 car, size débute à 1, tandis que les index commencent à 0, -1 car le message Welcome_message est toujours affiché à la fin. Donc -2. 
+		
+		String firstMessage = consoleFake.linesDisplayed.get(indexesToGet[0]);
+		String secondMessage = consoleFake.linesDisplayed.get(indexesToGet[1]);
+		final String[] ACTUAL_VALUE = {firstMessage, secondMessage};
+		
+		assertArrayEquals(EXPECTED_VALUE, ACTUAL_VALUE);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	package TP2;
+import TP2_READ_WRITES_SERVICES.IFileInput;
 
 import java.io.IOException;
 
-import TP2_READ_WRITES_SERVICES.*;
-import TP2_MAZE_SERVICES.*;
-
-/**
- * Reprï¿½sente le logiciel ï¿½ implï¿½menter
- *
- * @author 
- * @version 2019
- */
-public class Software implements ISoftware {
-	private static final String ROOT_PATH = "./";
+public class FileReaderFake implements IFileInput  {
 	
-	public static void main(String[] args){
+	public boolean isFileNameEmpty = false;
+	public boolean isFileContentIsAMaze = false;
+	public boolean isMazeUnsolvable = false;	
+	
+	final String FIRST_ROW =             "XXXXXXXXXXXXXXXXXXXX";
+    final String SECOND_ROW =            "XS                 X";
+    final String THIRD_ROW =             "X XXXXXXXXXXXXXXXXXX";
+    final String FOURTH_ROW =            "X         XXXXXXXXXX";
+    final String FIFTH_ROW =             "X XXXXXXX XXXX XXXXX";
+    final String SIXTH_ROW =             "X XXXXXXX XXXX     X";
+    final String SEVENTH_ROW =           "X XX         X XX XX";
+    final String EIGHT_ROW =             "X XXXXXXXXXX X  X XX";
+    final String NINETH_ROW =            "X       XXXX XX X XX";
+    final String TENTH_ROW =             "XXXXX XXXXXX    X XX";
+    final String ELEVENTH_ROW =		     "XX    X    X XXXX XX";
+    final String TWELVETH_ROW =          "XX XXXX XX XXXXXX XX";
+    final String THIRDTEENTH_ROW =       "XX      X          X";
+    final String FOURTEENTH_ROW =        "XXXXXXXXXXXXX XXXXXX";
+    final String FIFTHEENTH_ROW =        "XXXXXXXXXXXXX     EX";
+    final String SIXTEENTH_ROW =         "XXXXXXXXXXXXXXXXXXXX";
+    final String SEVENTEENTH_ROW =       "XXXXXXXXXXXXXXXXXX X";
+    final String EIGHTEENTH_ROW =        "XXXXXXXXXXXXXXXXXX X";
+    final String NINETEENTH_ROW =        "XXXXXXXXXXXXXXXXXX X";
+    final String TWENTYTH_ROW =          "XXXXXXXXXXXXXXXXXXXX";
+    final String[] ARRAY_ROWS = {FIRST_ROW,
+								SECOND_ROW,
+								THIRD_ROW,
+								FOURTH_ROW,
+								FIFTH_ROW,
+								SIXTH_ROW,
+								SEVENTH_ROW,
+								EIGHT_ROW,
+								NINETH_ROW,
+								TENTH_ROW,
+								ELEVENTH_ROW,
+								TWELVETH_ROW,
+								THIRDTEENTH_ROW,
+								FOURTEENTH_ROW,
+								FIFTHEENTH_ROW,
+								SIXTEENTH_ROW,
+								SEVENTEENTH_ROW,
+								EIGHTEENTH_ROW,
+								NINETEENTH_ROW,
+								TWENTYTH_ROW};
+	 	
+	public String read(String fileName) throws IOException {
 		
-		IKeyboardInput keyboardInput = new Keyboard();
-		IFileInput fileInput = new FileReader();
-		IScreenOutput screenOutput = new Console();
-		IPathFinder pathFinderCounterClockwise = new PathFinderCounterClockwise();
-		IPathFinder pathFinderClockwise = new PathFinderClockwise();
+		if (isFileNameEmpty) throw new FileNameEmpty();
 		
-		ISoftware software = new Software(keyboardInput, screenOutput, fileInput);
-		software.start(pathFinderCounterClockwise,pathFinderClockwise);	
-	}
-	
-	public static final String SENTINEL_VALUE = "0";
-	
-	public static final String WELCOME_MESSAGE_= "Entrer le nom du fichier (entrer SENTINEL_VALUE pour quitter le programme):";
-	public static final String ERROR_FILE_MESSAGE = "Erreur lors de la lecture du fichier $fileName.";
-	public static final String MAZE_MESSAGE = "Voici le labyrinthe lu depuis le fichier $fileName.";
-	public static final String NOT_A_MAZE_MESSAGE = "Le fichier $fileName ne contient pas un labyrinthe de " + MazeCreator.NUMBER_OF_ROWS + " rangées et de " + MazeCreator.NUMBER_OF_COLUMNS + " colonnes.";
-	public static final String PATHFINDER_SOLVED_MESSAGE  = "Solution du pathfinder $pathfinderName.";
-	public static final String PATHFINDER_NO_SOLUTION_MESSAGE  = "Le pathfinder $pathfinderName n'a pas réussi à solutionner le problème.";
-	
-	private IKeyboardInput keyboardInput;
-	private IFileInput fileInput;
-	private IScreenOutput screenOutput;
-	
-	public Software(IKeyboardInput keyboardInput, IScreenOutput screenOutput, IFileInput fileInput)
-	{	
-		this.keyboardInput = keyboardInput;
-		this.screenOutput = screenOutput;
-		this.fileInput = fileInput;
-	}
-	
-	public void start(IPathFinder pathFinderCounterClockwise, IPathFinder pathFinderClockwise) {	
-		final String WELCOME_MESSAGE = WELCOME_MESSAGE_.replace("SENTINEL_VALUE", Software.SENTINEL_VALUE);
-		this.screenOutput.write(WELCOME_MESSAGE);
-		String lineRead = this.keyboardInput.read();
+		String fileContentFake = "";
 		
-		while(!lineRead.equals(Software.SENTINEL_VALUE)) {
-			
-			String fileContent = null;
-
-			try {
-				fileContent = this.fileInput.read(lineRead);
-				MazeCreator.validateDimensions(fileContent);
-				String solvedClockMaze = pathFinderClockwise.pathToExit(fileContent);
-				String solvedCounterClockMaze = pathFinderCounterClockwise.pathToExit(fileContent);
-				
-				this.screenOutput.writeLine(MAZE_MESSAGE.replace("$fileName", lineRead));
-				this.screenOutput.writeLine("");
-				
-				this.screenOutput.writeLine(PATHFINDER_SOLVED_MESSAGE.replace("$pathfinderName", pathFinderClockwise.getClass().getSimpleName()));
-				String[] lines = solvedClockMaze.split("(?<=\\G.{" + MazeCreator.NUMBER_OF_COLUMNS + "})");
-                for (String line : lines) {
-                    this.screenOutput.writeLine(line);
-                }
-                this.screenOutput.writeLine("");
-                
-                this.screenOutput.writeLine(PATHFINDER_SOLVED_MESSAGE.replace("$pathfinderName", pathFinderCounterClockwise.getClass().getSimpleName()));
-                lines = solvedCounterClockMaze.split("(?<=\\G.{" + MazeCreator.NUMBER_OF_COLUMNS + "})");
-                for (String line : lines) {
-                    this.screenOutput.writeLine(line);
-                }
-                this.screenOutput.writeLine("");
-                
-                 this.screenOutput.write(WELCOME_MESSAGE);
-			}
-			catch (MazeLengthNotEqualToExpectedValuesException ex) {
-				this.screenOutput.writeLine(NOT_A_MAZE_MESSAGE.replace("$fileName", lineRead));
-			}
-			catch (IOException ex) {
-				this.screenOutput.writeLine(ERROR_FILE_MESSAGE.replace("$fileName", lineRead));
-			}
-			catch(UnsolvableMaze ex) {
-				this.screenOutput.writeLine(PATHFINDER_NO_SOLUTION_MESSAGE.replace("$pathfinderName", pathFinderClockwise.getClass().getSimpleName()));
-				this.screenOutput.writeLine(PATHFINDER_NO_SOLUTION_MESSAGE.replace("$pathfinderName", pathFinderCounterClockwise.getClass().getSimpleName()));
-			}
-			finally {
-				this.screenOutput.write(WELCOME_MESSAGE);
-				lineRead = this.keyboardInput.read();
-			}
+		if (isFileContentIsAMaze) {
+			fileContentFake = createMaze();
 		}
+		
+		if(isMazeUnsolvable) throw new UnsolvableMaze();
+		
+		return fileContentFake;
+	}	
+	
+	private String createMaze() {
+		
+		String fileContentFake = "";
+		
+		for(String row : ARRAY_ROWS) {
+			fileContentFake += row;
+		}
+		
+		return fileContentFake;
 	}
+
+
+	
 }
+@SuppressWarnings("serial")
+class FileNameEmpty extends IOException{};
+
