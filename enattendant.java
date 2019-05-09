@@ -1,6 +1,9 @@
 package TP2;
 
 import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+import java.util.ArrayList;
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
@@ -17,6 +20,8 @@ public class SoftwareTest {
 	
 	private final static IPathFinder ANY_PATH_FINDER_CLOCKWISE = new PathFinderClockwise();
 	private final static IPathFinder ANY_PATH_FINDER_COUNTER_CLOCKWISE = new PathFinderCounterClockwise();
+	private final static List<IPathFinder> listOfPathFinder = new ArrayList<IPathFinder>();
+	
 	
 	@Test
 	public void GIVEN_StartedSoftware_WHEN_SENTINEL_VALUE_isEntered_THEN_SoftwareShutsDown()
@@ -26,6 +31,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake();
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add(Software.SENTINEL_VALUE);
@@ -33,7 +40,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE);
+		software.start(listOfPathFinder);
 		
 		//Assert
 		keyboardFake.add(Software.SENTINEL_VALUE);
@@ -51,13 +58,15 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake(); 
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add(Software.SENTINEL_VALUE);
 		
 		//Act
 
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder); 
 		
 		//Assert
 		
@@ -78,6 +87,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake(); 
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		
@@ -87,7 +98,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE);
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -108,6 +119,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake(); 
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add("mauvaisFichier2.txt");
@@ -115,7 +128,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -135,6 +148,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake();
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add("maze.txt");
@@ -143,7 +158,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -163,6 +178,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake(); 
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add("maze.txt");
@@ -171,7 +188,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -193,6 +210,8 @@ public class SoftwareTest {
        FileReaderFake fileReaderFake = new FileReaderFake();
        ConsoleFake consoleFake = new ConsoleFake();
        KeyboardFake keyboardFake = new KeyboardFake(); 
+       listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
        final String FIRST_ROW =             "XXXXXXXXXXXXXXXXXXXX";
        final String SECOND_ROW =            "XS                 X";
        final String THIRD_ROW =             "X XXXXXXXXXXXXXXXXXX";
@@ -242,7 +261,7 @@ public class SoftwareTest {
        
        //Act 
        
-       software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+       software.start(listOfPathFinder);
    
        //Assert
        
@@ -269,6 +288,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake();
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add("maze.txt");
@@ -277,7 +298,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -297,6 +318,8 @@ public class SoftwareTest {
         FileReaderFake fileReaderFake = new FileReaderFake();
         ConsoleFake consoleFake = new ConsoleFake();
         KeyboardFake keyboardFake = new KeyboardFake(); 
+        listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 
         final String EXPECTED_FIRST_ROW =             "XXXXXXXXXXXXXXXXXXXX";
         final String EXPECTED_SECOND_ROW =            "XS                 X";
@@ -347,7 +370,7 @@ public class SoftwareTest {
         
         //Act 
         
-        software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+        software.start(listOfPathFinder);
     
         //Assert
         
@@ -374,6 +397,8 @@ public class SoftwareTest {
    		FileReaderFake fileReaderFake = new FileReaderFake();
    		ConsoleFake consoleFake = new ConsoleFake();
    		KeyboardFake keyboardFake = new KeyboardFake();
+   		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
    		
    		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
    		keyboardFake.add("maze.txt");
@@ -382,7 +407,7 @@ public class SoftwareTest {
    		
    		//Act
    		
-   		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+   		software.start(listOfPathFinder);
    		
    		//Assert
    		
@@ -401,6 +426,8 @@ public class SoftwareTest {
         FileReaderFake fileReaderFake = new FileReaderFake();
         ConsoleFake consoleFake = new ConsoleFake();
         KeyboardFake keyboardFake = new KeyboardFake(); 
+        listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 
         final String EXPECTED_FIRST_ROW =             "XXXXXXXXXXXXXXXXXXXX";
         final String EXPECTED_SECOND_ROW =            "XS                 X";
@@ -451,7 +478,7 @@ public class SoftwareTest {
         
         //Act 
         
-        software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+        software.start(listOfPathFinder); 
     
         //Assert
         
@@ -479,6 +506,8 @@ public class SoftwareTest {
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
 		KeyboardFake keyboardFake = new KeyboardFake(); 
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		keyboardFake.add("maze.txt");
@@ -487,7 +516,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE); 
+		software.start(listOfPathFinder);
 		
 		//Assert
 		
@@ -507,7 +536,9 @@ public class SoftwareTest {
 
 		FileReaderFake fileReaderFake = new FileReaderFake();
 		ConsoleFake consoleFake = new ConsoleFake();
-		KeyboardFake keyboardFake = new KeyboardFake(); 
+		KeyboardFake keyboardFake = new KeyboardFake();
+		listOfPathFinder.add(ANY_PATH_FINDER_CLOCKWISE);
+		listOfPathFinder.add(ANY_PATH_FINDER_COUNTER_CLOCKWISE);
 		
 		ISoftware software = new Software(keyboardFake, consoleFake, fileReaderFake);
 		
@@ -517,7 +548,7 @@ public class SoftwareTest {
 		
 		//Act
 		
-		software.start(ANY_PATH_FINDER_CLOCKWISE,ANY_PATH_FINDER_COUNTER_CLOCKWISE);
+		software.start(listOfPathFinder);
 		
 		//Assert
 		String firstExpectedMessage = Software.PATHFINDER_NO_SOLUTION_MESSAGE.replace("$pathfinderName", ANY_PATH_FINDER_CLOCKWISE.getClass().getSimpleName());
@@ -532,4 +563,5 @@ public class SoftwareTest {
 		assertArrayEquals(EXPECTED_VALUE, ACTUAL_VALUE);
 	}
    
+    
 }
